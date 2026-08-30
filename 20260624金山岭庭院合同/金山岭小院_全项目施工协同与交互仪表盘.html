@@ -27,6 +27,13 @@
     color: var(--text-main);
   }
 
+  /* Single Line Truncate Utility */
+  .truncate-1 {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
   .card-zen {
     background: var(--card-bg);
     border-radius: 16px;
@@ -64,6 +71,7 @@
     padding: 8px 16px; border-radius: 999px;
     font-size: 12px; font-weight: 600;
     border: 1px solid #E0DAD0; background: #FFFFFF; color: #706B63;
+    white-space: nowrap !important;
     transition: all .2s ease;
   }
   .pill.active {
@@ -71,17 +79,18 @@
     box-shadow: 0 2px 10px rgba(35,32,30,0.15);
   }
 
-  /* Status Badges - Muted Natural Pigments */
+  /* Status Badges */
   .badge-zen {
     padding: 4px 10px; border-radius: 999px;
     font-size: 11px; font-weight: 700; letter-spacing: 0.02em;
+    white-space: nowrap !important;
   }
   .st-pending { background: #EFECE6; color: #8C857B; }
   .st-pass { background: #E8F5E9; color: #2E6B38; border: 1px solid #C8E6C9; }
   .st-progress { background: #FEF8EA; color: #9E6B18; border: 1px solid #F3E5AB; }
   .st-risk { background: #FDF2F2; color: #A83232; border: 1px solid #F8D7D7; }
 
-  /* Navigation Visual Grid Cards (High-End Stone Texture Aesthetic) */
+  /* Navigation Visual Grid Cards */
   .nav-grid-card {
     position: relative;
     border-radius: 16px;
@@ -97,7 +106,7 @@
   }
 
   .acc-body { overflow: hidden; transition: max-height .3s cubic-bezier(0.4, 0, 0.2, 1); }
-  .field-label { font-size: 11px; color: #A39B90; font-weight: 700; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .field-label { font-size: 11px; color: #A39B90; font-weight: 700; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -105,15 +114,15 @@
 <!-- ===== Header (Wabi-Sabi Dark Charcoal) ===== -->
 <header class="sticky top-0 z-40 bg-[#1C1A19] text-[#F4F1EA] shadow-md border-b border-[#2C2927]">
   <div class="px-4 pt-3.5 pb-2.5">
-    <div class="flex items-center justify-between">
-      <div class="flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-lg bg-[#B89355]/20 border border-[#B89355]/40 flex items-center justify-center text-[#B89355] font-bold text-sm">金</div>
-        <div>
-          <div class="text-[15px] font-bold text-[#F4F1EA] tracking-wide">金山岭小院 · 施工协同</div>
-          <div class="text-[10px] text-[#A39B90] mt-0.5 tracking-wider">9月3日现场交底 · 雅奢静谧质感</div>
+    <div class="flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="w-8 h-8 rounded-lg bg-[#B89355]/20 border border-[#B89355]/40 flex-shrink-0 flex items-center justify-center text-[#B89355] font-bold text-sm">金</div>
+        <div class="min-w-0">
+          <div class="text-[15px] font-bold text-[#F4F1EA] tracking-wide truncate-1">金山岭小院 · 施工协同</div>
+          <div class="text-[10px] text-[#A39B90] mt-0.5 tracking-wider truncate-1">9月3日现场交底 · 单行极简雅奢</div>
         </div>
       </div>
-      <select id="userRole" class="bg-[#2A2725] text-[#E0DAD0] text-xs font-semibold rounded-lg px-2.5 py-2 border border-[#44403C] focus:outline-none focus:border-[#B89355] max-w-[135px]">
+      <select id="userRole" class="bg-[#2A2725] text-[#E0DAD0] text-xs font-semibold rounded-lg px-2.5 py-2 border border-[#44403C] focus:outline-none focus:border-[#B89355] max-w-[135px] truncate-1 flex-shrink-0">
         <option value="业主代表">业主代表</option>
         <option value="建筑设计(MINOR lab)">建筑设计</option>
         <option value="石材厂(里山墨石)">石材厂·汤</option>
@@ -126,98 +135,98 @@
 
 <main class="px-3.5 pt-4 space-y-4">
 
-  <!-- ===== Visual Grid Navigation Cards (高级雅奢材质色系) ===== -->
+  <!-- ===== Visual Grid Navigation Cards (所有文字单行截断) ===== -->
   <div class="space-y-2">
-    <div class="text-xs font-bold text-[#706B63] px-1 flex justify-between items-center">
-      <span>🖼️ 模块视觉导航（点击展开对应功能）</span>
-      <span class="text-[10px] text-[#B89355]" id="activeTabName">当前展开：交底清单</span>
+    <div class="text-xs font-bold text-[#706B63] px-1 flex justify-between items-center gap-2">
+      <span class="truncate-1">🖼️ 模块视觉导航（点击展开对应功能）</span>
+      <span class="text-[10px] text-[#B89355] flex-shrink-0 truncate-1" id="activeTabName">当前展开：交底清单</span>
     </div>
     
     <div class="grid grid-cols-2 gap-2.5">
-      <!-- Card 1: 交底清单 (松烟墨色) -->
+      <!-- Card 1: 交底清单 -->
       <div onclick="toggleModule('tab1')" id="gc1" class="nav-grid-card active h-24 bg-gradient-to-br from-[#1C1A19] to-[#2C2927] text-[#F4F1EA] p-3 flex flex-col justify-between">
-        <div class="flex justify-between items-start">
+        <div class="flex justify-between items-center">
           <span class="text-xl">📋</span>
-          <span class="text-[10px] bg-[#B89355] text-black font-bold px-1.5 py-0.5 rounded">主卡口</span>
+          <span class="text-[10px] bg-[#B89355] text-black font-bold px-1.5 py-0.5 rounded truncate-1">主卡口</span>
         </div>
-        <div>
-          <div class="text-xs font-bold text-[#F4F1EA]">9月3日现场交底</div>
-          <div class="text-[10px] text-[#A39B90]">测量 / 石材 / 钢构 / 逻辑</div>
+        <div class="min-w-0">
+          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">9月3日现场交底</div>
+          <div class="text-[10px] text-[#A39B90] truncate-1">测量/石材/钢构/逻辑</div>
         </div>
       </div>
 
-      <!-- Card 2: 现场确认样品清单 (苔绿封样) -->
+      <!-- Card 2: 现场确认样品清单 -->
       <div onclick="toggleModule('tabSample')" id="gcSample" class="nav-grid-card h-24 bg-gradient-to-br from-[#2E3B32] to-[#1E2821] text-[#F4F1EA] p-3 flex flex-col justify-between">
-        <div class="flex justify-between items-start">
+        <div class="flex justify-between items-center">
           <span class="text-xl">🪵</span>
-          <span class="text-[10px] bg-[#4E7A59] text-white font-bold px-1.5 py-0.5 rounded">新增</span>
+          <span class="text-[10px] bg-[#4E7A59] text-white font-bold px-1.5 py-0.5 rounded truncate-1">新增封样</span>
         </div>
-        <div>
-          <div class="text-xs font-bold text-[#F4F1EA]">现场确认样品清单</div>
-          <div class="text-[10px] text-[#A3B8A8]">石材小样 / 漆面 / 封样</div>
+        <div class="min-w-0">
+          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">现场确认样品清单</div>
+          <div class="text-[10px] text-[#A3B8A8] truncate-1">石材小样/漆面/封样</div>
         </div>
       </div>
 
-      <!-- Card 3: 完整施工工程量 (暖沙金色) -->
+      <!-- Card 3: 完整施工工程量 -->
       <div onclick="toggleModule('tab3')" id="gc3" class="nav-grid-card h-24 bg-gradient-to-br from-[#3D3226] to-[#2B231B] text-[#F4F1EA] p-3 flex flex-col justify-between">
-        <div class="flex justify-between items-start">
+        <div class="flex justify-between items-center">
           <span class="text-xl">🧱</span>
-          <span class="text-[10px] bg-[#B89355] text-black font-bold px-1.5 py-0.5 rounded">34.38t</span>
+          <span class="text-[10px] bg-[#B89355] text-black font-bold px-1.5 py-0.5 rounded truncate-1">34.38t</span>
         </div>
-        <div>
-          <div class="text-xs font-bold text-[#F4F1EA]">工程量与技术规格</div>
-          <div class="text-[10px] text-[#D8C29D]">56项石材 / 钢构 / 基础</div>
+        <div class="min-w-0">
+          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">工程量与技术规格</div>
+          <div class="text-[10px] text-[#D8C29D] truncate-1">56项石材/钢构/基础</div>
         </div>
       </div>
 
-      <!-- Card 4: 工序交叉碰撞 (朱砂赭石色) -->
+      <!-- Card 4: 工序交叉碰撞 -->
       <div onclick="toggleModule('tab4')" id="gc4" class="nav-grid-card h-24 bg-gradient-to-br from-[#4A2424] to-[#331818] text-[#F4F1EA] p-3 flex flex-col justify-between">
-        <div class="flex justify-between items-start">
+        <div class="flex justify-between items-center">
           <span class="text-xl">🔀</span>
-          <span class="text-[10px] bg-[#A83232] text-white font-bold px-1.5 py-0.5 rounded">5大节点</span>
+          <span class="text-[10px] bg-[#A83232] text-white font-bold px-1.5 py-0.5 rounded truncate-1">5大节点</span>
         </div>
-        <div>
-          <div class="text-xs font-bold text-[#F4F1EA]">工序交叉碰撞控制</div>
-          <div class="text-[10px] text-[#E0A8A8]">防破损 / 数据互锁</div>
+        <div class="min-w-0">
+          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">工序交叉碰撞控制</div>
+          <div class="text-[10px] text-[#E0A8A8] truncate-1">防破损/数据互锁</div>
         </div>
       </div>
 
-      <!-- Card 5: 25米大吊车起重计算 (黛蓝灰色) -->
+      <!-- Card 5: 25米大吊车起重计算 -->
       <div onclick="toggleModule('tab5')" id="gc5" class="nav-grid-card h-24 bg-gradient-to-br from-[#273238] to-[#1A2328] text-[#F4F1EA] p-3 flex flex-col justify-between">
-        <div class="flex justify-between items-start">
+        <div class="flex justify-between items-center">
           <span class="text-xl">🏗️</span>
-          <span class="text-[10px] bg-[#456878] text-white font-bold px-1.5 py-0.5 rounded">25m/100t</span>
+          <span class="text-[10px] bg-[#456878] text-white font-bold px-1.5 py-0.5 rounded truncate-1">25m/100t</span>
         </div>
-        <div>
-          <div class="text-xs font-bold text-[#F4F1EA]">大吊车起重力矩计算</div>
-          <div class="text-[10px] text-[#9CB5C4]">4.54t单件大石吊装选型</div>
+        <div class="min-w-0">
+          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">大吊车起重力矩计算</div>
+          <div class="text-[10px] text-[#9CB5C4] truncate-1">4.54t单件大石吊装</div>
         </div>
       </div>
 
-      <!-- Card 6: 施工关键里程碑 (竹青黛色) -->
+      <!-- Card 6: 施工关键里程碑 -->
       <div onclick="toggleModule('tab6')" id="gc6" class="nav-grid-card h-24 bg-gradient-to-br from-[#253636] to-[#172626] text-[#F4F1EA] p-3 flex flex-col justify-between">
-        <div class="flex justify-between items-start">
+        <div class="flex justify-between items-center">
           <span class="text-xl">⏳</span>
-          <span class="text-[10px] bg-[#3E6B6B] text-white font-bold px-1.5 py-0.5 rounded">10节点</span>
+          <span class="text-[10px] bg-[#3E6B6B] text-white font-bold px-1.5 py-0.5 rounded truncate-1">10节点</span>
         </div>
-        <div>
-          <div class="text-xs font-bold text-[#F4F1EA]">施工关键里程碑</div>
-          <div class="text-[10px] text-[#93C2C2]">WBS 施工排期与节点</div>
+        <div class="min-w-0">
+          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">施工关键里程碑</div>
+          <div class="text-[10px] text-[#93C2C2] truncate-1">WBS 施工排期与节点</div>
         </div>
       </div>
     </div>
 
     <!-- Card 7: 修改日志 (重磅置底·玄铁色) -->
     <div onclick="toggleModule('tab2')" id="gc2" class="nav-grid-card h-20 bg-gradient-to-r from-[#1C1A19] via-[#2A2725] to-[#1C1A19] text-[#F4F1EA] p-3.5 flex items-center justify-between border-l-4 border-l-[#B89355]">
-      <div class="flex items-center gap-3">
-        <span class="text-2xl">📜</span>
-        <div>
-          <div class="text-xs font-bold text-[#F4F1EA]">多方修改痕迹与审计日志 (Audit Log)</div>
-          <div class="text-[10px] text-[#A39B90] mt-0.5">记录谁在何时修改了何值 · 权责留痕防扯皮</div>
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="text-2xl flex-shrink-0">📜</span>
+        <div class="min-w-0">
+          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">多方修改痕迹与审计日志 (Audit Log)</div>
+          <div class="text-[10px] text-[#A39B90] mt-0.5 truncate-1">记录修改时间与新旧对比值 · 权责留痕防扯皮</div>
         </div>
       </div>
-      <div class="text-right">
-        <span class="text-xs font-bold bg-[#B89355] text-black px-2.5 py-0.5 rounded-full" id="logCnt">0 条</span>
+      <div class="text-right flex-shrink-0 ml-2">
+        <span class="text-xs font-bold bg-[#B89355] text-black px-2.5 py-0.5 rounded-full truncate-1" id="logCnt">0 条</span>
       </div>
     </div>
   </div>
@@ -227,17 +236,17 @@
     <!-- Progress & KPI Card -->
     <div class="card-zen p-4">
       <div class="flex items-center justify-between mb-2">
-        <div class="text-xs font-bold text-[#23201E] tracking-wider">交底核对总进度</div>
-        <div class="text-sm font-extrabold text-[#B89355]" id="overallPct">0%</div>
+        <div class="text-xs font-bold text-[#23201E] tracking-wider truncate-1">交底核对总进度</div>
+        <div class="text-sm font-extrabold text-[#B89355] flex-shrink-0 ml-2" id="overallPct">0%</div>
       </div>
       <div class="h-1.5 bg-[#EFECE6] rounded-full overflow-hidden">
         <div id="overallBar" class="h-full bg-[#B89355] rounded-full transition-all duration-500" style="width:0%"></div>
       </div>
       <div class="grid grid-cols-4 gap-2 mt-4 text-center border-t border-[#EFECE6] pt-3">
-        <div><div class="text-base font-bold text-[#23201E]" id="kpiTotal">17</div><div class="text-[10px] text-[#8C857B] mt-0.5">总项</div></div>
-        <div><div class="text-base font-bold text-[#2E6B38]" id="kpiPass">0</div><div class="text-[10px] text-[#8C857B] mt-0.5">已通过</div></div>
-        <div><div class="text-base font-bold text-[#9E6B18]" id="kpiProgress">0</div><div class="text-[10px] text-[#8C857B] mt-0.5">处理中</div></div>
-        <div><div class="text-base font-bold text-[#8C857B]" id="kpiPending">17</div><div class="text-[10px] text-[#8C857B] mt-0.5">未复核</div></div>
+        <div><div class="text-base font-bold text-[#23201E] truncate-1" id="kpiTotal">17</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">总项</div></div>
+        <div><div class="text-base font-bold text-[#2E6B38] truncate-1" id="kpiPass">0</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">已通过</div></div>
+        <div><div class="text-base font-bold text-[#9E6B18] truncate-1" id="kpiProgress">0</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">处理中</div></div>
+        <div><div class="text-base font-bold text-[#8C857B] truncate-1" id="kpiPending">17</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">未复核</div></div>
       </div>
     </div>
 
@@ -257,12 +266,12 @@
   <!-- ============ MODULE SAMPLE : 现场确认样品清单 ============ -->
   <section id="tabSample" class="hidden space-y-3.5 pt-2">
     <div class="card-zen p-4">
-      <div class="flex justify-between items-center border-b border-[#EFECE6] pb-3">
-        <div>
-          <div class="text-xs font-bold text-[#23201E]">🪵 现场确认样品与材质封样清单</div>
-          <div class="text-[11px] text-[#706B63] mt-0.5">现场实物对色、防护涂层及材质签样封存</div>
+      <div class="flex justify-between items-center border-b border-[#EFECE6] pb-3 gap-2">
+        <div class="min-w-0">
+          <div class="text-xs font-bold text-[#23201E] truncate-1">🪵 现场确认样品与材质封样清单</div>
+          <div class="text-[11px] text-[#706B63] mt-0.5 truncate-1">现场实物对色、防护涂层及材质签样封存</div>
         </div>
-        <button onclick="addSampleItem()" class="text-xs bg-[#23201E] text-[#B89355] font-bold px-3 py-1.5 rounded-lg border border-[#B89355]/40">+ 新增封样</button>
+        <button onclick="addSampleItem()" class="text-xs bg-[#23201E] text-[#B89355] font-bold px-3 py-1.5 rounded-lg border border-[#B89355]/40 flex-shrink-0">+ 新增封样</button>
       </div>
       <div id="sampleCardsContainer" class="space-y-3 mt-3"></div>
     </div>
@@ -271,12 +280,12 @@
   <!-- ============ MODULE 3 : MANIFEST ============ -->
   <section id="tab3" class="hidden space-y-3.5 pt-2">
     <div class="card-zen p-4 bg-gradient-to-br from-[#1C1A19] to-[#2A2725] text-[#F4F1EA]">
-      <div class="text-xs text-[#B89355] font-semibold tracking-widest uppercase">构件预估总重量</div>
-      <div class="text-3xl font-bold text-[#FFFFFF] mt-1">34.38 <span class="text-base font-normal text-[#E0DAD0]">吨</span></div>
+      <div class="text-xs text-[#B89355] font-semibold tracking-widest uppercase truncate-1">构件预估总重量</div>
+      <div class="text-3xl font-bold text-[#FFFFFF] mt-1 truncate-1">34.38 <span class="text-base font-normal text-[#E0DAD0]">吨</span></div>
       <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-[#383533] text-center">
-        <div class="bg-[#2A2725] rounded-xl p-2 border border-[#383533]"><div class="text-sm font-bold text-[#B89355]">24.34t</div><div class="text-[10px] text-[#A39B90] mt-0.5">石材 (里山墨石)</div></div>
-        <div class="bg-[#2A2725] rounded-xl p-2 border border-[#383533]"><div class="text-sm font-bold text-[#E0DAD0]">1.70t</div><div class="text-[10px] text-[#A39B90] mt-0.5">钢结构平台</div></div>
-        <div class="bg-[#2A2725] rounded-xl p-2 border border-[#383533]"><div class="text-sm font-bold text-[#E0DAD0]">8.50t</div><div class="text-[10px] text-[#A39B90] mt-0.5">C25混凝土基础</div></div>
+        <div class="bg-[#2A2725] rounded-xl p-2 border border-[#383533] min-w-0"><div class="text-sm font-bold text-[#B89355] truncate-1">24.34t</div><div class="text-[10px] text-[#A39B90] mt-0.5 truncate-1">石材(里山墨石)</div></div>
+        <div class="bg-[#2A2725] rounded-xl p-2 border border-[#383533] min-w-0"><div class="text-sm font-bold text-[#E0DAD0] truncate-1">1.70t</div><div class="text-[10px] text-[#A39B90] mt-0.5 truncate-1">钢结构平台</div></div>
+        <div class="bg-[#2A2725] rounded-xl p-2 border border-[#383533] min-w-0"><div class="text-sm font-bold text-[#E0DAD0] truncate-1">8.50t</div><div class="text-[10px] text-[#A39B90] mt-0.5 truncate-1">C25混凝土基础</div></div>
       </div>
     </div>
     <div id="manifestContainer" class="space-y-3"></div>
@@ -285,8 +294,8 @@
   <!-- ============ MODULE 4 : CROSS POINTS ============ -->
   <section id="tab4" class="hidden space-y-3.5 pt-2">
     <div class="card-zen p-4">
-      <div class="text-xs font-bold text-[#23201E]">6 大主工序 · 5 处关键交叉碰撞控制</div>
-      <div class="text-[11px] text-[#706B63] mt-1">防止基础受损、螺栓眼错位及电焊火花烧伤艺术石材</div>
+      <div class="text-xs font-bold text-[#23201E] truncate-1">6 大主工序 · 5 处关键交叉碰撞控制</div>
+      <div class="text-[11px] text-[#706B63] mt-1 truncate-1">防止基础受损、螺栓眼错位及电焊火花烧伤艺术石材</div>
     </div>
     <div id="crossContainer" class="space-y-3"></div>
   </section>
@@ -299,17 +308,17 @@
   <!-- ============ MODULE 6 : WBS ============ -->
   <section id="tab6" class="hidden space-y-3.5 pt-2">
     <div class="card-zen p-4">
-      <div class="text-xs font-bold text-[#23201E]">施工进度排期与关键里程碑</div>
-      <div class="text-[11px] text-[#706B63] mt-1">10 大 WBS 节点 · 现场验收与交接卡口</div>
+      <div class="text-xs font-bold text-[#23201E] truncate-1">施工进度排期与关键里程碑</div>
+      <div class="text-[11px] text-[#706B63] mt-1 truncate-1">10 大 WBS 节点 · 现场验收与交接卡口</div>
     </div>
     <div id="wbsContainer" class="space-y-2.5"></div>
   </section>
 
   <!-- ============ MODULE 2 : AUDIT LOG (最后置底显示) ============ -->
   <section id="tab2" class="hidden space-y-3.5 pt-2">
-    <div class="card-zen p-3.5 flex items-center justify-between">
-      <div class="text-xs font-bold text-[#23201E]">📜 多方修改痕迹与审计日志 (Audit Trail)</div>
-      <button onclick="clearAuditLogs()" class="text-xs bg-[#FDF2F2] text-[#A83232] font-semibold px-3 py-1.5 rounded-lg border border-[#F8D7D7]">清空日志</button>
+    <div class="card-zen p-3.5 flex items-center justify-between gap-2">
+      <div class="text-xs font-bold text-[#23201E] truncate-1">📜 多方修改痕迹与审计日志 (Audit Trail)</div>
+      <button onclick="clearAuditLogs()" class="text-xs bg-[#FDF2F2] text-[#A83232] font-semibold px-3 py-1.5 rounded-lg border border-[#F8D7D7] flex-shrink-0">清空日志</button>
     </div>
     <div id="auditContainer" class="space-y-2.5"></div>
   </section>
@@ -319,9 +328,9 @@
 <!-- ===== Elegant Bottom Bar ===== -->
 <footer class="fixed bottom-0 left-0 right-0 z-40 bg-[#FFFFFF]/95 backdrop-blur-md border-t border-[#E8E3D9] px-4 py-2.5">
   <div class="flex gap-2.5 max-w-md mx-auto">
-    <button onclick="saveData()" class="flex-1 tap bg-[#23201E] active:bg-[#2A2725] text-[#F4F1EA] rounded-xl py-3 text-xs font-bold tracking-wider shadow-sm transition">💾 保存改动</button>
-    <button onclick="exportJSON()" class="flex-1 tap bg-[#F4F1EA] active:bg-[#E8E3D9] text-[#423D38] rounded-xl py-3 text-xs font-bold border border-[#E0DAD0] transition">📤 导出</button>
-    <button onclick="document.getElementById('importFile').click()" class="flex-1 tap bg-[#F4F1EA] active:bg-[#E8E3D9] text-[#423D38] rounded-xl py-3 text-xs font-bold border border-[#E0DAD0] transition">📥 导入</button>
+    <button onclick="saveData()" class="flex-1 tap bg-[#23201E] active:bg-[#2A2725] text-[#F4F1EA] rounded-xl py-3 text-xs font-bold tracking-wider shadow-sm transition truncate-1">💾 保存改动</button>
+    <button onclick="exportJSON()" class="flex-1 tap bg-[#F4F1EA] active:bg-[#E8E3D9] text-[#423D38] rounded-xl py-3 text-xs font-bold border border-[#E0DAD0] transition truncate-1">📤 导出</button>
+    <button onclick="document.getElementById('importFile').click()" class="flex-1 tap bg-[#F4F1EA] active:bg-[#E8E3D9] text-[#423D38] rounded-xl py-3 text-xs font-bold border border-[#E0DAD0] transition truncate-1">📥 导入</button>
     <input type="file" id="importFile" onchange="importJSON(event)" class="hidden">
   </div>
 </footer>
@@ -454,9 +463,9 @@ function renderChecklist(){
     const secCard = document.createElement('div');
     secCard.className = 'card-zen p-3.5';
     secCard.innerHTML = `
-      <div class="flex items-center justify-between">
-        <div class="text-[13px] font-bold text-[#23201E]">${sec.section}</div>
-        <div class="text-[11px] font-semibold ${sPass===sTotal ? 'text-[#2E6B38]' : 'text-[#8C857B]'}">${sPass}/${sTotal}</div>
+      <div class="flex items-center justify-between gap-2">
+        <div class="text-[13px] font-bold text-[#23201E] truncate-1">${sec.section}</div>
+        <div class="text-[11px] font-semibold flex-shrink-0 ${sPass===sTotal ? 'text-[#2E6B38]' : 'text-[#8C857B]'}">${sPass}/${sTotal}</div>
       </div>
       <div class="h-1 bg-[#EFECE6] rounded-full mt-2 overflow-hidden">
         <div class="h-full bg-[#B89355] rounded-full" style="width:${sPass/sTotal*100}%"></div>
@@ -476,29 +485,31 @@ function renderChecklist(){
       const card = document.createElement('div');
       card.className = 'card-zen overflow-hidden';
       card.innerHTML = `
-        <div class="tap p-3.5 flex items-start gap-3" onclick="toggleCard('${key}')">
-          <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-[#FAF6F0] text-[#B89355] flex items-center justify-center text-xs font-bold border border-[#EFE8DE]">${item.id}</div>
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center justify-between gap-2">
-              <div class="text-[13px] font-bold text-[#23201E] leading-tight">${escapeHtml(item.name)}</div>
-              <span class="badge-zen ${stClass(item.status)} flex-shrink-0">${stLabel(item.status)}</span>
+        <div class="tap p-3.5 flex items-center justify-between gap-2" onclick="toggleCard('${key}')">
+          <div class="flex items-center gap-2.5 min-w-0 flex-1">
+            <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-[#FAF6F0] text-[#B89355] flex items-center justify-center text-xs font-bold border border-[#EFE8DE]">${item.id}</div>
+            <div class="min-w-0 flex-1">
+              <div class="text-[13px] font-bold text-[#23201E] truncate-1">${escapeHtml(item.name)}</div>
+              <div class="text-[11px] text-[#706B63] mt-0.5 truncate-1">${escapeHtml(item.desc)}</div>
             </div>
-            <div class="text-[11px] text-[#706B63] mt-1 line-clamp-2 leading-relaxed">${escapeHtml(item.desc)}</div>
           </div>
-          <svg class="flex-shrink-0 w-4 h-4 text-[#8C857B] transition-transform duration-300 ${isOpen?'rotate-180':''}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <span class="badge-zen ${stClass(item.status)}">${stLabel(item.status)}</span>
+            <svg class="w-4 h-4 text-[#8C857B] transition-transform duration-300 ${isOpen?'rotate-180':''}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
         </div>
         <div class="acc-body" style="max-height:${isOpen?'1000px':'0px'}">
           <div class="px-3.5 pb-3.5 space-y-3 border-t border-[#EFECE6] pt-3">
-            <div class="flex items-center justify-between text-[11px] text-[#8C857B]">
-              <span class="font-mono">📐 ${escapeHtml(item.ref)}</span>
-              <span>👥 ${escapeHtml(item.owner)}</span>
+            <div class="flex items-center justify-between text-[11px] text-[#8C857B] gap-2">
+              <span class="font-mono truncate-1">📐 ${escapeHtml(item.ref)}</span>
+              <span class="truncate-1 flex-shrink-0">👥 ${escapeHtml(item.owner)}</span>
             </div>
 
             <div>
               <div class="field-label">评估状态</div>
               <div class="grid grid-cols-4 gap-1.5">
                 ${['未复核','已通过(无误差)','处理中','存疑/需整改'].map(st=>`
-                  <button onclick="setStatus(${si},${gi},'${st}')" class="tap py-2 rounded-xl text-[11px] font-bold border transition ${item.status===st?stClass(st):'bg-[#FAF8F5] text-[#706B63] border-[#E0DAD0]'}">${stLabel(st).replace('⚪ ','').replace('🟢 ','').replace('🟡 ','').replace('🔴 ','')}</button>
+                  <button onclick="setStatus(${si},${gi},'${st}')" class="tap py-2 rounded-xl text-[11px] font-bold border transition truncate-1 ${item.status===st?stClass(st):'bg-[#FAF8F5] text-[#706B63] border-[#E0DAD0]'}">${stLabel(st).replace('⚪ ','').replace('🟢 ','').replace('🟡 ','').replace('🔴 ','')}</button>
                 `).join('')}
               </div>
             </div>
@@ -547,41 +558,34 @@ function renderSamples(){
     const card = document.createElement('div');
     card.className = 'card-zen p-3.5 space-y-2 border-l-4 border-l-[#B89355]';
     card.innerHTML = `
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-md bg-[#FAF6F0] text-[#B89355] font-bold text-[10px] flex items-center justify-center border border-[#EFE8DE]">${s.id}</span>
-          <span class="text-[13px] font-bold text-[#23201E]">${escapeHtml(s.name)}</span>
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="w-6 h-6 rounded-md bg-[#FAF6F0] text-[#B89355] font-bold text-[10px] flex items-center justify-center border border-[#EFE8DE] flex-shrink-0">${s.id}</span>
+          <span class="text-[13px] font-bold text-[#23201E] truncate-1">${escapeHtml(s.name)}</span>
         </div>
-        <span class="badge-zen ${stClass(s.status)}">${stLabel(s.status)}</span>
+        <span class="badge-zen ${stClass(s.status)} flex-shrink-0">${stLabel(s.status)}</span>
       </div>
 
       <div class="text-[11px] text-[#706B63] space-y-1">
-        <div>提供方：<strong class="text-[#23201E]">${escapeHtml(s.supplier)}</strong></div>
-        <div>规格标准：<span class="font-mono text-[#57534E]">${escapeHtml(s.spec)}</span></div>
+        <div class="truncate-1">提供方：<strong class="text-[#23201E]">${escapeHtml(s.supplier)}</strong></div>
+        <div class="truncate-1">规格标准：<span class="font-mono text-[#57534E]">${escapeHtml(s.spec)}</span></div>
         <div>对色/对样备注：<input type="text" class="input-zen mt-1 text-xs" value="${escapeHtml(s.note)}" onchange="updateSampleNote(${idx}, this.value)"></div>
       </div>
 
-      <div class="flex items-center justify-between pt-2 border-t border-[#EFECE6] text-[11px]">
-        <div class="flex gap-1">
+      <div class="flex items-center justify-between pt-2 border-t border-[#EFECE6] text-[11px] gap-2">
+        <div class="flex gap-1 overflow-x-auto no-scrollbar">
           ${['未确认','打样中','已封样确认','封样退回'].map(st=>`
-            <button onclick="setSampleStatus(${idx},'${st}')" class="px-2 py-1 rounded text-[10px] font-bold border ${s.status===st?stClass(st):'bg-[#FAF8F5] text-[#8C857B] border-[#E0DAD0]'}">${st.replace('确认','').replace('封样','')}</button>
+            <button onclick="setSampleStatus(${idx},'${st}')" class="px-2 py-1 rounded text-[10px] font-bold border transition truncate-1 ${s.status===st?stClass(st):'bg-[#FAF8F5] text-[#8C857B] border-[#E0DAD0]'}">${st.replace('确认','').replace('封样','')}</button>
           `).join('')}
         </div>
-        <input type="date" class="input-zen text-center max-w-[110px] py-1 text-[10px]" value="${s.date}" onchange="updateSampleDate(${idx}, this.value)">
+        <input type="date" class="input-zen text-center max-w-[110px] py-1 text-[10px] flex-shrink-0" value="${s.date}" onchange="updateSampleDate(${idx}, this.value)">
       </div>`;
     cont.appendChild(card);
   });
 }
 
-function updateSampleNote(idx, val){
-  sampleData[idx].note = val;
-  saveLocal();
-}
-
-function updateSampleDate(idx, val){
-  sampleData[idx].date = val;
-  saveLocal();
-}
+function updateSampleNote(idx, val){ sampleData[idx].note = val; saveLocal(); }
+function updateSampleDate(idx, val){ sampleData[idx].date = val; saveLocal(); }
 
 function setSampleStatus(idx, st){
   const old = sampleData[idx].status;
@@ -646,16 +650,16 @@ function renderAudit(){
     const div = document.createElement('div');
     div.className = 'card-zen p-3.5 space-y-1.5';
     div.innerHTML = `
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-md bg-[#FAF6F0] text-[#B89355] flex items-center justify-center text-[10px] font-bold border border-[#EFE8DE]">${escapeHtml(log.id)}</span>
-          <span class="text-xs font-bold text-[#23201E]">${escapeHtml(log.user)}</span>
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="w-6 h-6 rounded-md bg-[#FAF6F0] text-[#B89355] flex items-center justify-center text-[10px] font-bold border border-[#EFE8DE] flex-shrink-0">${escapeHtml(log.id)}</span>
+          <span class="text-xs font-bold text-[#23201E] truncate-1">${escapeHtml(log.user)}</span>
         </div>
-        <span class="text-[10px] text-[#8C857B]">${log.time}</span>
+        <span class="text-[10px] text-[#8C857B] flex-shrink-0 font-mono">${log.time}</span>
       </div>
       <div class="text-[12px] space-y-0.5 pt-1 border-t border-[#EFECE6]">
-        <div class="text-[#A83232] line-through decoration-[#F8D7D7]"><span class="text-[10px] text-[#8C857B]">旧：</span>${escapeHtml(log.oldVal)}</div>
-        <div class="text-[#2E6B38] font-semibold"><span class="text-[10px] text-[#8C857B]">新：</span>${escapeHtml(log.newVal)}</div>
+        <div class="text-[#A83232] line-through decoration-[#F8D7D7] truncate-1"><span class="text-[10px] text-[#8C857B]">旧：</span>${escapeHtml(log.oldVal)}</div>
+        <div class="text-[#2E6B38] font-semibold truncate-1"><span class="text-[10px] text-[#8C857B]">新：</span>${escapeHtml(log.newVal)}</div>
       </div>`;
     cont.appendChild(div);
   });
@@ -677,7 +681,7 @@ function renderManifest(){
   cats.forEach(cat=>{
     const items = manifestData.filter(m=>m.cat===cat);
     const secDiv = document.createElement('div');
-    secDiv.className = 'text-[12px] font-bold text-[#706B63] px-1 mt-2';
+    secDiv.className = 'text-[12px] font-bold text-[#706B63] px-1 mt-2 truncate-1';
     secDiv.innerText = cat==='石材' ? '一 · 石材供货（里山墨石）' : cat==='钢构' ? '二 · 钢结构平台' : cat==='隐蔽' ? '三 · 混凝土基础' : cat==='物流' ? '四 · 长途运输' : cat==='吊装' ? '五 · 现场吊装' : '六 · 成品保护';
     cont.appendChild(secDiv);
     items.forEach(m=>{
@@ -685,13 +689,13 @@ function renderManifest(){
       div.className = 'card-zen p-3.5 flex items-start gap-3';
       div.innerHTML = `
         <div class="flex-shrink-0 min-w-[50px] text-center">
-          <div class="text-base font-bold ${m.weight==='-'?'text-[#A39B90]':'text-[#B89355]'}">${m.weight}</div>
+          <div class="text-base font-bold ${m.weight==='-'?'text-[#A39B90]':'text-[#B89355]'} truncate-1">${m.weight}</div>
           <div class="text-[9px] text-[#8C857B]">吨</div>
         </div>
         <div class="flex-1 min-w-0">
-          <div class="text-[13px] font-bold text-[#23201E]">${escapeHtml(m.name)}</div>
-          <div class="text-[11px] font-mono text-[#706B63] mt-0.5">${escapeHtml(m.param)}</div>
-          <div class="text-[11px] text-[#8C857B] mt-1">${escapeHtml(m.desc)}</div>
+          <div class="text-[13px] font-bold text-[#23201E] truncate-1">${escapeHtml(m.name)}</div>
+          <div class="text-[11px] font-mono text-[#706B63] mt-0.5 truncate-1">${escapeHtml(m.param)}</div>
+          <div class="text-[11px] text-[#8C857B] mt-1 truncate-1">${escapeHtml(m.desc)}</div>
         </div>`;
       cont.appendChild(div);
     });
@@ -707,13 +711,13 @@ function renderCross(){
     div.className = 'card-zen p-4 border-l-4';
     div.style.borderLeftColor = c.c;
     div.innerHTML = `
-      <div class="flex items-center gap-2 mb-1">
-        <span class="w-2 h-2 rounded-full" style="background:${c.c}"></span>
-        <span class="text-[13px] font-bold text-[#23201E]">${c.title}</span>
+      <div class="flex items-center gap-2 mb-1 min-w-0">
+        <span class="w-2 h-2 rounded-full flex-shrink-0" style="background:${c.c}"></span>
+        <span class="text-[13px] font-bold text-[#23201E] truncate-1">${c.title}</span>
       </div>
-      <div class="text-[11px] font-mono text-[#8C857B] mb-2.5">${c.sub}</div>
-      <div class="text-[12px] text-[#57534E] mb-2.5 leading-relaxed"><span class="font-bold text-[#A83232]">⚠ 冲突隐患：</span>${c.risk}</div>
-      <div class="text-[12px] bg-[#E8F5E9] text-[#2E6B38] border border-[#C8E6C9] rounded-xl p-2.5 leading-relaxed"><span class="font-bold">✅ 强卡口动作：</span>${c.act}</div>`;
+      <div class="text-[11px] font-mono text-[#8C857B] mb-2.5 truncate-1">${c.sub}</div>
+      <div class="text-[12px] text-[#57534E] mb-2.5 leading-relaxed truncate-1"><span class="font-bold text-[#A83232]">⚠ 冲突隐患：</span>${c.risk}</div>
+      <div class="text-[12px] bg-[#E8F5E9] text-[#2E6B38] border border-[#C8E6C9] rounded-xl p-2.5 leading-relaxed truncate-1"><span class="font-bold">✅ 强卡口动作：</span>${c.act}</div>`;
     cont.appendChild(div);
   });
 }
@@ -723,29 +727,29 @@ function renderCrane(){
   if(!cont) return;
   cont.innerHTML = `
     <div class="card-zen p-4 bg-gradient-to-br from-[#1C1A19] to-[#2A2725] text-[#F4F1EA]">
-      <div class="text-xs text-[#B89355] font-bold">📐 起重力矩物理计算</div>
-      <div class="text-[11px] text-[#A39B90] mt-0.5">现场距离路面 25 米 · 最重单件水波纹石 4.54 吨</div>
+      <div class="text-xs text-[#B89355] font-bold truncate-1">📐 起重力矩物理计算</div>
+      <div class="text-[11px] text-[#A39B90] mt-0.5 truncate-1">现场距离路面 25 米 · 最重单件水波纹石 4.54 吨</div>
       <div class="bg-[#2A2725] rounded-xl p-3.5 mt-3 space-y-1.5 text-xs font-mono border border-[#383533]">
-        <p>• 工作幅度 R = <span class="text-[#B89355] font-bold">25 米</span></p>
-        <p>• 水波纹石 #8 = <span class="text-[#B89355] font-bold">4.54 吨</span></p>
-        <p>• 柔性吊具预留 = <span class="text-[#B89355] font-bold">0.30 吨</span></p>
-        <p>• 额定荷载 P = <span class="text-[#B89355] font-bold">4.84 吨</span></p>
-        <p class="pt-2 border-t border-[#383533] text-[#A7F3D0] font-bold">最小起重力矩 = 4.84 × 25 = 121.0 吨·米</p>
+        <p class="truncate-1">• 工作幅度 R = <span class="text-[#B89355] font-bold">25 米</span></p>
+        <p class="truncate-1">• 水波纹石 #8 = <span class="text-[#B89355] font-bold">4.54 吨</span></p>
+        <p class="truncate-1">• 柔性吊具预留 = <span class="text-[#B89355] font-bold">0.30 吨</span></p>
+        <p class="truncate-1">• 额定荷载 P = <span class="text-[#B89355] font-bold">4.84 吨</span></p>
+        <p class="pt-2 border-t border-[#383533] text-[#A7F3D0] font-bold truncate-1">最小起重力矩 = 4.84 × 25 = 121.0 吨·米</p>
       </div>
     </div>
 
     <div class="card-zen p-4">
-      <div class="text-xs font-bold text-[#23201E]">🚚 长途卡车运输选型</div>
-      <div class="text-[11px] text-[#706B63] mt-0.5">石材总重 24.34 吨 · 总体积 9.01 m³</div>
+      <div class="text-xs font-bold text-[#23201E] truncate-1">🚚 长途卡车运输选型</div>
+      <div class="text-[11px] text-[#706B63] mt-0.5 truncate-1">石材总重 24.34 吨 · 总体积 9.01 m³</div>
       <div class="bg-[#FAF6F0] rounded-xl p-3 mt-2.5 text-xs text-[#57534E] space-y-1 border border-[#EFE8DE]">
-        <p>• 推荐：<strong class="text-[#23201E]">13.5米高栏/平板卡车</strong>（可一车运达）</p>
-        <p>• 4.54t大石置于车厢中央轴线平衡重心</p>
-        <p>• 石板竖放，垫珍珠棉与木托盘固定</p>
+        <p class="truncate-1">• 推荐：<strong class="text-[#23201E]">13.5米高栏/平板卡车</strong>（可一车运达）</p>
+        <p class="truncate-1">• 4.54t大石置于车厢中央轴线平衡重心</p>
+        <p class="truncate-1">• 石板竖放，垫珍珠棉与木托盘固定</p>
       </div>
     </div>
 
     <div class="card-zen p-4 space-y-2.5">
-      <div class="text-xs font-bold text-[#23201E]">吊车吨位可行性对比</div>
+      <div class="text-xs font-bold text-[#23201E] truncate-1">吊车吨位可行性对比</div>
       ${[
         {t:'25吨汽车吊', load:'0.8~1.2吨', coef:'0.25', v:'❌ 绝对不可用', cls:'bg-[#FDF2F2] border-[#F8D7D7]', vcls:'text-[#A83232]', r:'主臂不足，远低于荷载'},
         {t:'50吨汽车吊', load:'2.0~2.5吨', coef:'0.51', v:'❌ 无法吊装大石', cls:'bg-[#FDF2F2] border-[#F8D7D7]', vcls:'text-[#A83232]', r:'25m半径下无法起吊4.54t'},
@@ -753,15 +757,15 @@ function renderCrane(){
         {t:'100吨汽车吊', load:'5.5~7.5吨', coef:'1.35+', v:'✅ 推荐主吊车型', cls:'bg-[#E8F5E9] border-[#C8E6C9]', vcls:'text-[#2E6B38]', r:'力矩安全充裕，可一次吊装到位'}
       ].map(c=>`
         <div class="${c.cls} border rounded-xl p-3">
-          <div class="flex items-center justify-between">
-            <span class="text-[13px] font-bold text-[#23201E]">${c.t}</span>
-            <span class="text-[11px] font-bold ${c.vcls}">${c.v}</span>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[13px] font-bold text-[#23201E] truncate-1">${c.t}</span>
+            <span class="text-[11px] font-bold ${c.vcls} flex-shrink-0">${c.v}</span>
           </div>
-          <div class="flex justify-between text-[11px] text-[#706B63] mt-1 font-mono">
-            <span>25m额定: ${c.load}</span>
-            <span>安全系数: ${c.coef}</span>
+          <div class="flex justify-between text-[11px] text-[#706B63] mt-1 font-mono gap-2">
+            <span class="truncate-1">25m额定: ${c.load}</span>
+            <span class="truncate-1">安全系数: ${c.coef}</span>
           </div>
-          <div class="text-[11px] text-[#706B63] mt-0.5">${c.r}</div>
+          <div class="text-[11px] text-[#706B63] mt-0.5 truncate-1">${c.r}</div>
         </div>`).join('')}
     </div>`;
 }
@@ -774,18 +778,18 @@ function renderWbs(){
     const div = document.createElement('div');
     div.className = 'card-zen p-3.5 flex items-center gap-3';
     div.innerHTML = `
-      <div class="flex flex-col items-center">
+      <div class="flex flex-col items-center flex-shrink-0">
         <div class="w-7 h-7 rounded-lg bg-[#23201E] text-[#B89355] flex items-center justify-center text-[11px] font-bold">${i+1}</div>
         ${i<wbsData.length-1?'<div class="w-px flex-1 bg-[#E0DAD0] my-1"></div>':''}
       </div>
       <div class="flex-1 min-w-0">
-        <div class="flex items-center justify-between">
-          <span class="text-[11px] font-mono font-bold text-[#B89355]">${w.code}</span>
-          <span class="text-[10px] bg-[#EFECE6] text-[#706B63] px-2 py-0.5 rounded font-semibold">${w.days}天</span>
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-[11px] font-mono font-bold text-[#B89355] truncate-1">${w.code}</span>
+          <span class="text-[10px] bg-[#EFECE6] text-[#706B63] px-2 py-0.5 rounded font-semibold flex-shrink-0">${w.days}天</span>
         </div>
-        <div class="text-[13px] font-bold text-[#23201E] mt-0.5">${w.name}</div>
-        <div class="text-[11px] text-[#8C857B] mt-0.5">${w.owner} · ${w.start} → ${w.end}</div>
-        <div class="text-[10px] mt-1.5 inline-flex bg-[#FAF6F0] text-[#9E6B18] border border-[#EFE8DE] px-2 py-0.5 rounded-md font-medium">📍 ${w.ms}</div>
+        <div class="text-[13px] font-bold text-[#23201E] mt-0.5 truncate-1">${w.name}</div>
+        <div class="text-[11px] text-[#8C857B] mt-0.5 truncate-1">${w.owner} · ${w.start} → ${w.end}</div>
+        <div class="text-[10px] mt-1.5 inline-flex bg-[#FAF6F0] text-[#9E6B18] border border-[#EFE8DE] px-2 py-0.5 rounded-md font-medium truncate-1">📍 ${w.ms}</div>
       </div>`;
     cont.appendChild(div);
   });
