@@ -6,7 +6,8 @@
 <title>金山岭小院 · 施工协同</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&display=swap');
+  /* Import Source Han Serif / Noto Serif SC from Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap');
   
   :root {
     --bg-main: #FAF8F5;          /* 暖米白/宣纸色 */
@@ -19,15 +20,13 @@
   }
 
   * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
-  body {
+  
+  /* Apply Source Han Serif (Noto Serif SC) to entire document */
+  body, input, textarea, select, button {
     background: var(--bg-main);
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Heiti SC", sans-serif;
+    font-family: 'Noto Serif SC', "Source Han Serif SC", "Source Han Serif CN", "Songti SC", STSong, "Noto Serif", serif !important;
     padding-bottom: 84px;
     color: var(--text-primary);
-  }
-
-  .font-serif-title {
-    font-family: 'Noto Serif SC', "Songti SC", STSong, serif;
   }
 
   .card-luxury {
@@ -52,6 +51,7 @@
     font-size: 13px;
     background: #FAFAFA;
     color: #1C1917;
+    font-family: 'Noto Serif SC', "Source Han Serif SC", serif !important;
     transition: all .2s ease;
   }
   .input-luxury:focus {
@@ -115,7 +115,7 @@
       <div class="flex items-center gap-2.5">
         <div class="w-8 h-8 rounded-lg bg-[#C5A059]/20 border border-[#C5A059]/40 flex items-center justify-center text-[#C5A059] font-bold text-sm">金</div>
         <div>
-          <div class="text-[15px] font-serif-title font-bold text-[#F5F5F4] tracking-wide">金山岭小院 · 施工协同</div>
+          <div class="text-[15px] font-bold text-[#F5F5F4] tracking-wide">金山岭小院 · 施工协同</div>
           <div class="text-[10px] text-[#A8A29E] mt-0.5 tracking-wider">9月3日现场交底 · 雅奢庭院与装置</div>
         </div>
       </div>
@@ -147,7 +147,7 @@
     <!-- Progress & KPI Card -->
     <div class="card-luxury p-4">
       <div class="flex items-center justify-between mb-2">
-        <div class="text-xs font-serif-title font-bold text-[#1C1917] tracking-wider">交底核对总进度</div>
+        <div class="text-xs font-bold text-[#1C1917] tracking-wider">交底核对总进度</div>
         <div class="text-sm font-extrabold text-[#C5A059]" id="overallPct">0%</div>
       </div>
       <div class="h-1.5 bg-[#F5F5F4] rounded-full overflow-hidden">
@@ -177,7 +177,7 @@
   <!-- ============ TAB 2 : AUDIT LOG ============ -->
   <section id="tab2" class="hidden space-y-3">
     <div class="card-luxury p-3.5 flex items-center justify-between">
-      <div class="text-xs font-serif-title font-bold text-[#1C1917]">📜 修改痕迹与审计日志</div>
+      <div class="text-xs font-bold text-[#1C1917]">📜 修改痕迹与审计日志</div>
       <button onclick="clearAuditLogs()" class="text-xs bg-[#FEF2F2] text-[#B91C1C] font-semibold px-3 py-1.5 rounded-lg border border-[#FECACA]">清空日志</button>
     </div>
     <div id="auditContainer" class="space-y-2.5"></div>
@@ -187,7 +187,7 @@
   <section id="tab3" class="hidden space-y-3.5">
     <div class="card-luxury p-4 bg-gradient-to-br from-[#1C1917] to-[#2A2725] text-[#F5F5F4]">
       <div class="text-xs text-[#C5A059] font-semibold tracking-widest uppercase">构件预估总重量</div>
-      <div class="text-3xl font-serif-title font-bold text-[#FFFFFF] mt-1">34.38 <span class="text-base font-sans font-normal text-[#D6D3D1]">吨</span></div>
+      <div class="text-3xl font-bold text-[#FFFFFF] mt-1">34.38 <span class="text-base font-normal text-[#D6D3D1]">吨</span></div>
       <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-[#383533] text-center">
         <div class="bg-[#2A2725] rounded-xl p-2 border border-[#383533]"><div class="text-sm font-bold text-[#C5A059]">24.34t</div><div class="text-[10px] text-[#A8A29E] mt-0.5">石材 (里山墨石)</div></div>
         <div class="bg-[#2A2725] rounded-xl p-2 border border-[#383533]"><div class="text-sm font-bold text-[#E7E5E4]">1.70t</div><div class="text-[10px] text-[#A8A29E] mt-0.5">钢结构平台</div></div>
@@ -200,7 +200,7 @@
   <!-- ============ TAB 4 : CROSS POINTS ============ -->
   <section id="tab4" class="hidden space-y-3.5">
     <div class="card-luxury p-4">
-      <div class="text-xs font-serif-title font-bold text-[#1C1917]">6 大主工序 · 5 处关键交叉碰撞控制</div>
+      <div class="text-xs font-bold text-[#1C1917]">6 大主工序 · 5 处关键交叉碰撞控制</div>
       <div class="text-[11px] text-[#78716C] mt-1">防止基础受损、螺栓眼错位及电焊火花烧伤艺术石材</div>
     </div>
     <div id="crossContainer" class="space-y-3"></div>
@@ -214,7 +214,7 @@
   <!-- ============ TAB 6 : WBS ============ -->
   <section id="tab6" class="hidden space-y-3.5">
     <div class="card-luxury p-4">
-      <div class="text-xs font-serif-title font-bold text-[#1C1917]">施工进度排期与关键里程碑</div>
+      <div class="text-xs font-bold text-[#1C1917]">施工进度排期与关键里程碑</div>
       <div class="text-[11px] text-[#78716C] mt-1">10 大 WBS 节点 · 现场验收与交接卡口</div>
     </div>
     <div id="wbsContainer" class="space-y-2.5"></div>
@@ -352,7 +352,7 @@ function renderChecklist(){
     secCard.className = 'card-luxury p-3.5';
     secCard.innerHTML = `
       <div class="flex items-center justify-between">
-        <div class="text-[13px] font-serif-title font-bold text-[#1C1917]">${sec.section}</div>
+        <div class="text-[13px] font-bold text-[#1C1917]">${sec.section}</div>
         <div class="text-[11px] font-semibold ${sPass===sTotal ? 'text-[#047857]' : 'text-[#A8A29E]'}">${sPass}/${sTotal}</div>
       </div>
       <div class="h-1 bg-[#F5F5F4] rounded-full mt-2 overflow-hidden">
@@ -374,7 +374,7 @@ function renderChecklist(){
       card.className = 'card-luxury overflow-hidden';
       card.innerHTML = `
         <div class="tap p-3.5 flex items-start gap-3" onclick="toggleCard('${key}')">
-          <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-[#FAF6F0] text-[#C5A059] flex items-center justify-center text-xs font-bold font-serif-title border border-[#EFE8DE]">${item.id}</div>
+          <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-[#FAF6F0] text-[#C5A059] flex items-center justify-center text-xs font-bold border border-[#EFE8DE]">${item.id}</div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between gap-2">
               <div class="text-[13px] font-bold text-[#1C1917] leading-tight">${escapeHtml(item.name)}</div>
@@ -469,7 +469,7 @@ function renderAudit(){
   if(!cont) return;
   cont.innerHTML = '';
   if(auditLogs.length===0){
-    cont.innerHTML = '<div class="card-luxury p-8 text-center text-[#A8A29E] text-xs font-serif-title">暂无修改历史记录</div>';
+    cont.innerHTML = '<div class="card-luxury p-8 text-center text-[#A8A29E] text-xs">暂无修改历史记录</div>';
     return;
   }
   auditLogs.forEach(log=>{
@@ -478,7 +478,7 @@ function renderAudit(){
     div.innerHTML = `
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-md bg-[#FAF6F0] text-[#C5A059] flex items-center justify-center text-[10px] font-bold font-serif-title border border-[#EFE8DE]">${escapeHtml(log.id)}</span>
+          <span class="w-6 h-6 rounded-md bg-[#FAF6F0] text-[#C5A059] flex items-center justify-center text-[10px] font-bold border border-[#EFE8DE]">${escapeHtml(log.id)}</span>
           <span class="text-xs font-bold text-[#1C1917]">${escapeHtml(log.user)}</span>
         </div>
         <span class="text-[10px] text-[#A8A29E]">${log.time}</span>
@@ -507,7 +507,7 @@ function renderManifest(){
   cats.forEach(cat=>{
     const items = manifestData.filter(m=>m.cat===cat);
     const secDiv = document.createElement('div');
-    secDiv.className = 'text-[12px] font-serif-title font-bold text-[#78716C] px-1 mt-2';
+    secDiv.className = 'text-[12px] font-bold text-[#78716C] px-1 mt-2';
     secDiv.innerText = cat==='石材' ? '一 · 石材供货（里山墨石）' : cat==='钢构' ? '二 · 钢结构平台' : cat==='隐蔽' ? '三 · 混凝土基础' : cat==='物流' ? '四 · 长途运输' : cat==='吊装' ? '五 · 现场吊装' : '六 · 成品保护';
     cont.appendChild(secDiv);
     items.forEach(m=>{
@@ -515,7 +515,7 @@ function renderManifest(){
       div.className = 'card-luxury p-3.5 flex items-start gap-3';
       div.innerHTML = `
         <div class="flex-shrink-0 min-w-[50px] text-center">
-          <div class="text-base font-serif-title font-bold ${m.weight==='-'?'text-[#D6D3D1]':'text-[#C5A059]'}">${m.weight}</div>
+          <div class="text-base font-bold ${m.weight==='-'?'text-[#D6D3D1]':'text-[#C5A059]'}">${m.weight}</div>
           <div class="text-[9px] text-[#A8A29E]">吨</div>
         </div>
         <div class="flex-1 min-w-0">
@@ -539,7 +539,7 @@ function renderCross(){
     div.innerHTML = `
       <div class="flex items-center gap-2 mb-1">
         <span class="w-2 h-2 rounded-full" style="background:${c.c}"></span>
-        <span class="text-[13px] font-serif-title font-bold text-[#1C1917]">${c.title}</span>
+        <span class="text-[13px] font-bold text-[#1C1917]">${c.title}</span>
       </div>
       <div class="text-[11px] font-mono text-[#A8A29E] mb-2.5">${c.sub}</div>
       <div class="text-[12px] text-[#57534E] mb-2.5 leading-relaxed"><span class="font-bold text-[#B91C1C]">⚠ 冲突隐患：</span>${c.risk}</div>
@@ -553,7 +553,7 @@ function renderCrane(){
   if(!cont) return;
   cont.innerHTML = `
     <div class="card-luxury p-4 bg-gradient-to-br from-[#1C1917] to-[#2A2725] text-[#F5F5F4]">
-      <div class="text-xs text-[#C5A059] font-serif-title font-bold">📐 起重力矩物理计算</div>
+      <div class="text-xs text-[#C5A059] font-bold">📐 起重力矩物理计算</div>
       <div class="text-[11px] text-[#A8A29E] mt-0.5">现场距离路面 25 米 · 最重单件水波纹石 4.54 吨</div>
       <div class="bg-[#2A2725] rounded-xl p-3.5 mt-3 space-y-1.5 text-xs font-mono border border-[#383533]">
         <p>• 工作幅度 R = <span class="text-[#C5A059] font-bold">25 米</span></p>
@@ -565,7 +565,7 @@ function renderCrane(){
     </div>
 
     <div class="card-luxury p-4">
-      <div class="text-xs font-serif-title font-bold text-[#1C1917]">🚚 长途卡车运输选型</div>
+      <div class="text-xs font-bold text-[#1C1917]">🚚 长途卡车运输选型</div>
       <div class="text-[11px] text-[#78716C] mt-0.5">石材总重 24.34 吨 · 总体积 9.01 m³</div>
       <div class="bg-[#FAF6F0] rounded-xl p-3 mt-2.5 text-xs text-[#57534E] space-y-1 border border-[#EFE8DE]">
         <p>• 推荐：<strong class="text-[#1C1917]">13.5米高栏/平板卡车</strong>（可一车运达）</p>
@@ -575,7 +575,7 @@ function renderCrane(){
     </div>
 
     <div class="card-luxury p-4 space-y-2.5">
-      <div class="text-xs font-serif-title font-bold text-[#1C1917]">吊车吨位可行性对比</div>
+      <div class="text-xs font-bold text-[#1C1917]">吊车吨位可行性对比</div>
       ${[
         {t:'25吨汽车吊', load:'0.8~1.2吨', coef:'0.25', v:'❌ 绝对不可用', cls:'bg-[#FEF2F2] border-[#FECACA]', vcls:'text-[#B91C1C]', r:'主臂不足，远低于荷载'},
         {t:'50吨汽车吊', load:'2.0~2.5吨', coef:'0.51', v:'❌ 无法吊装大石', cls:'bg-[#FEF2F2] border-[#FECACA]', vcls:'text-[#B91C1C]', r:'25m半径下无法起吊4.54t'},
@@ -605,7 +605,7 @@ function renderWbs(){
     div.className = 'card-luxury p-3.5 flex items-center gap-3';
     div.innerHTML = `
       <div class="flex flex-col items-center">
-        <div class="w-7 h-7 rounded-lg bg-[#1C1917] text-[#C5A059] font-serif-title flex items-center justify-center text-[11px] font-bold">${i+1}</div>
+        <div class="w-7 h-7 rounded-lg bg-[#1C1917] text-[#C5A059] flex items-center justify-center text-[11px] font-bold">${i+1}</div>
         ${i<wbsData.length-1?'<div class="w-px flex-1 bg-[#E7E5E4] my-1"></div>':''}
       </div>
       <div class="flex-1 min-w-0">
