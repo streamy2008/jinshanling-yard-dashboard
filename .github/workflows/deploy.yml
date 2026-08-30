@@ -1,0 +1,23 @@
+name: Validate and Deploy Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Verify Dashboard HTML & Config
+        run: |
+          echo "Checking essential files..."
+          test -f "20260624金山岭庭院合同/金山岭小院_全项目施工协同与交互仪表盘.html"
+          test -f "netlify.toml"
+          echo "All required files verified successfully!"
