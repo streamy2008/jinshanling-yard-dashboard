@@ -134,7 +134,7 @@
 
         <div class="min-w-0">
           <div class="text-[15px] font-bold text-[#F4F1EA] tracking-wide truncate-1">金山岭小院 · 施工协同</div>
-          <div class="text-[10px] text-[#A39B90] mt-0.5 tracking-wider truncate-1">9月3日现场交底</div>
+          <div class="text-[10px] text-[#A39B90] mt-0.5 tracking-wider truncate-1">9月3日现场交底日</div>
         </div>
       </div>
       <select id="userRole" class="bg-[#2A2725] text-[#E0DAD0] text-xs font-semibold rounded-lg px-2.5 py-2 border border-[#44403C] focus:outline-none focus:border-[#B89355] max-w-[135px] truncate-1 flex-shrink-0">
@@ -164,7 +164,7 @@
           <span class="text-[10px] bg-[#B89355] text-black font-bold px-1.5 py-0.5 rounded truncate-1">主卡口</span>
         </div>
         <div class="min-w-0">
-          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">9月3日现场交底</div>
+          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">9月3日现场交底清单</div>
           <div class="text-[10px] text-[#A39B90] truncate-1">测量/园林基建/种植土/逻辑</div>
         </div>
       </div>
@@ -172,7 +172,7 @@
       <!-- Card 2: 现场确认样品清单 -->
       <div onclick="toggleModule('tabSample')" id="gcSample" class="nav-grid-card h-24 bg-gradient-to-br from-[#2E3B32] to-[#1E2821] text-[#F4F1EA] p-3 flex flex-col justify-between">
         <div class="flex justify-end items-center">
-          <span class="text-[10px] bg-[#4E7A59] text-white font-bold px-1.5 py-0.5 rounded truncate-1">新增封样</span>
+          <span class="text-[10px] bg-[#4E7A59] text-white font-bold px-1.5 py-0.5 rounded truncate-1">9月3日封样</span>
         </div>
         <div class="min-w-0">
           <div class="text-xs font-bold text-[#F4F1EA] truncate-1">现场确认样品清单</div>
@@ -227,9 +227,12 @@
 
     <!-- Card 7: 修改日志 (重磅置底·玄铁色) -->
     <div onclick="toggleModule('tab2')" id="gc2" class="nav-grid-card h-20 bg-gradient-to-r from-[#1C1A19] via-[#2A2725] to-[#1C1A19] text-[#F4F1EA] p-3.5 flex items-center justify-between border-l-4 border-l-[#B89355]">
-      <div class="min-w-0">
-        <div class="text-xs font-bold text-[#F4F1EA] truncate-1">多方修改痕迹与审计日志 (Audit Log)</div>
-        <div class="text-[10px] text-[#A39B90] mt-0.5 truncate-1">记录修改时间与新旧对比值 · 权责留痕防扯皮</div>
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="text-2xl flex-shrink-0">📜</span>
+        <div class="min-w-0">
+          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">多方修改痕迹与审计日志 (Audit Log)</div>
+          <div class="text-[10px] text-[#A39B90] mt-0.5 truncate-1">记录修改时间与新旧对比值 · 权责留痕防扯皮</div>
+        </div>
       </div>
       <div class="text-right flex-shrink-0 ml-2">
         <span class="text-xs font-bold bg-[#B89355] text-black px-2.5 py-0.5 rounded-full truncate-1" id="logCnt">0 条</span>
@@ -237,7 +240,7 @@
     </div>
   </div>
 
-  <!-- ============ MODULE 1 : CHECKLIST ============ -->
+  <!-- ============ MODULE 1 : CHECKLIST (9月3日交底日，计划落实完成日期明确为交底后) ============ -->
   <section id="tab1" class="space-y-3.5 pt-2">
     <!-- Progress & KPI Card -->
     <div class="card-zen p-4">
@@ -275,7 +278,7 @@
       <div class="flex justify-between items-center border-b border-[#EFECE6] pb-3 gap-2">
         <div class="min-w-0">
           <div class="text-xs font-bold text-[#23201E] truncate-1">🪵 现场确认样品与材质封样清单</div>
-          <div class="text-[11px] text-[#706B63] mt-0.5 truncate-1">现场实物对色、防护涂层及材质签样封存</div>
+          <div class="text-[11px] text-[#706B63] mt-0.5 truncate-1">9月3日交底日现场实物对色与签样封存</div>
         </div>
         <button onclick="addSampleItem()" class="text-xs bg-[#23201E] text-[#B89355] font-bold px-3 py-1.5 rounded-lg border border-[#B89355]/40 flex-shrink-0">+ 新增封样</button>
       </div>
@@ -301,7 +304,7 @@
   <section id="tab4" class="hidden space-y-3.5 pt-2">
     <div class="card-zen p-4">
       <div class="text-xs font-bold text-[#23201E]">6 大主工序 · 5 处关键交叉碰撞控制</div>
-      <div class="text-[11px] text-[#706B63] mt-1">防止基础受损、螺栓眼错位及电焊火花烧伤艺术石材</div>
+      <div class="text-[11px] text-[#706B63] mt-1">交底日四方核对：防止基础受损、螺栓眼错位及电焊火花烧伤艺术石材</div>
     </div>
     <div id="crossContainer" class="space-y-3"></div>
   </section>
@@ -315,7 +318,7 @@
   <section id="tab6" class="hidden space-y-3.5 pt-2">
     <div class="card-zen p-4">
       <div class="text-xs font-bold text-[#23201E] truncate-1">施工进度排期与关键里程碑</div>
-      <div class="text-[11px] text-[#706B63] mt-1 truncate-1">9 大 WBS 施工排期节点 · 现场工程验收与交接卡口</div>
+      <div class="text-[11px] text-[#706B63] mt-1 truncate-1">9 大 WBS 节点 · 9月3日交底后正式施工阶段排期</div>
     </div>
     <div id="wbsContainer" class="space-y-2.5"></div>
   </section>
@@ -342,39 +345,40 @@
 </footer>
 
 <script>
+// 修正：9月3日为交底沟通日，各项落实完成日期合理安排在交底日之后（9月4日-9月12日）
 let checklistData = [
-  { section: "一 · 现场测量、园林基建与种植土厚度核对", items: [
-    { id: "1.1", name: "边界与定位轴线复核", desc: "依据建施A-1.1复核院墙边界、建筑边界及首层踏步起始点绝对尺寸。", ref: "建施 A-1.1", owner: "施工方 + 建筑设计", measure: "现场实测净宽___mm，较图纸偏差___mm", status: "未复核", action: "图纸尺寸现场放线撒灰线确认", date: "2026-09-03", reviewer: "" },
-    { id: "1.2", name: "地下水井与井盖对接", desc: "核对原有水井、井筒顶标高及地下管线埋深，确认混凝土基座标高-0.030。", ref: "建施 A-1.2", owner: "施工方 + 园林设计", measure: "井筒顶标高实测___，需提高/降低___mm", status: "未复核", action: "调整井筒标高，基座预留水泵控制器支架", date: "2026-09-04", reviewer: "" },
+  { section: "一 · 现场测量、园林基建与种植土厚度核对（9月3日交底）", items: [
+    { id: "1.1", name: "边界与定位轴线复核", desc: "依据建施A-1.1复核院墙边界、建筑边界及首层踏步起始点绝对尺寸。", ref: "建施 A-1.1", owner: "施工方 + 建筑设计", measure: "现场实测净宽___mm，较图纸偏差___mm", status: "未复核", action: "图纸尺寸现场放线撒灰线确认", date: "2026-09-04", reviewer: "" },
+    { id: "1.2", name: "地下水井与井盖对接", desc: "核对原有水井、井筒顶标高及地下管线埋深，确认混凝土基座标高-0.030。", ref: "建施 A-1.2", owner: "施工方 + 园林设计", measure: "井筒顶标高实测___，需提高/降低___mm", status: "未复核", action: "调整井筒标高，基座预留水泵控制器支架", date: "2026-09-05", reviewer: "" },
     { id: "1.3", name: "±0.000标高与排水坡度", desc: "核对首层室内±0.000与庭院碎石铺地、水泥压光地面1%坡度走向。", ref: "建施 A-1.2", owner: "施工方 + 园林设计", measure: "坡度走向与水井井盖标高匹配", status: "未复核", action: "开挖坡度向井盖倾斜，避免积水倒灌", date: "2026-09-05", reviewer: "" },
-    { id: "1.4", name: "二层露台高差与反坎", desc: "核对一楼地面至二层露台(+3.090/+3.250)实际结构净高。", ref: "建施 A-1.3", owner: "施工方 + 建筑设计", measure: "实测二层露台底板标高为___", status: "未复核", action: "核算钢楼梯踏步步数与坡度", date: "2026-09-03", reviewer: "" },
-    { id: "1.5", name: "园林硬质基座与级配碎石垫层", desc: "核对太行金/黄锈石铺地与景石下方的150mm厚级配碎石夯实垫层及素混凝土垫层。", ref: "园林基建规范", owner: "施工方 + 园林设计", measure: "碎石垫层压实度满足>0.93，厚度实测___mm", status: "未复核", action: "基层夯实排干水，防后期石材下沉断裂", date: "2026-09-05", reviewer: "" },
-    { id: "1.6", name: "种植土土质、酸碱度与绿化回填厚度", desc: "核对植栽槽与绿化区种植土有效厚度(草坪>30cm, 灌木>50cm, 乔木>80cm)及pH值。", ref: "园林景观规范", owner: "施工方 + 园林设计", measure: "种植土厚度实测___cm，pH值实测___", status: "未复核", action: "清除建筑垃圾，回填客土营养土，保持透水性", date: "2026-09-06", reviewer: "" },
-    { id: "1.7", name: "盲沟盲管排水与种植区透水过滤层", desc: "核对种植槽及景石周边盲管排水走向，铺设陶粒/粗砂透水层及无纺布过滤层。", ref: "园林隐蔽工程", owner: "施工方 + 园林设计", measure: "透水滤水层厚度实测___mm，无纺布铺设无缝隙", status: "未复核", action: "防止植物烂根与泥水冲刷污染黄锈石地铺", date: "2026-09-07", reviewer: "" }
+    { id: "1.4", name: "二层露台高差与反坎", desc: "核对一楼地面至二层露台(+3.090/+3.250)实际结构净高。", ref: "建施 A-1.3", owner: "施工方 + 建筑设计", measure: "实测二层露台底板标高为___", status: "未复核", action: "核算钢楼梯踏步步数与坡度", date: "2026-09-04", reviewer: "" },
+    { id: "1.5", name: "园林硬质基座与级配碎石垫层", desc: "核对太行金/黄锈石铺地与景石下方的150mm厚级配碎石夯实垫层及素混凝土垫层。", ref: "园林基建规范", owner: "施工方 + 园林设计", measure: "碎石垫层压实度满足>0.93，厚度实测___mm", status: "未复核", action: "基层夯实排干水，防后期石材下沉断裂", date: "2026-09-06", reviewer: "" },
+    { id: "1.6", name: "种植土土质、酸碱度与绿化回填厚度", desc: "核对植栽槽与绿化区种植土有效厚度(草坪>30cm, 灌木>50cm, 乔木>80cm)及pH值。", ref: "园林景观规范", owner: "施工方 + 园林设计", measure: "种植土厚度实测___cm，pH值实测___", status: "未复核", action: "清除建筑垃圾，回填客土营养土，保持透水性", date: "2026-09-07", reviewer: "" },
+    { id: "1.7", name: "盲沟盲管排水与种植区透水过滤层", desc: "核对种植槽及景石周边盲管排水走向，铺设陶粒/粗砂透水层及无纺布过滤层。", ref: "园林隐蔽工程", owner: "施工方 + 园林设计", measure: "透水滤水层厚度实测___mm，无纺布铺设无缝隙", status: "未复核", action: "防止植物烂根与泥水冲刷污染黄锈石地铺", date: "2026-09-08", reviewer: "" }
   ]},
   { section: "二 · 石材加工与 1:1 预制交底（里山墨石）", items: [
-    { id: "2.1", name: "水波纹大雕塑石落位", desc: "确认水景边落位坐标与下方4.5吨承重垫层。", ref: "定件#8", owner: "石材厂 + 建筑设计", measure: "落位坐标放线确认，下垫C25混凝土", status: "未复核", action: "施工方先打素混凝土垫层再吊装", date: "2026-09-06", reviewer: "" },
-    { id: "2.2", name: "D1~D5雕塑与平台拆分板", desc: "确认D4(1600×1000×200)分板方案及矿山选石照片。", ref: "定件#55", owner: "石材厂 + 建筑设计", measure: "矿山毛料编号确认，三方拍照留存", status: "未复核", action: "里山墨石提供矿山选石高清图三方确认", date: "2026-09-05", reviewer: "" },
-    { id: "2.3", name: "黄锈石台阶与L型加工", desc: "核对13块定制台阶与现场踏步基座预留50mm结合层。", ref: "定件#20-21", owner: "石材厂 + 施工方", measure: "现场台阶基层尺寸留出50mm", status: "未复核", action: "石材侧边做防碱背涂处理", date: "2026-09-08", reviewer: "" },
-    { id: "2.4", name: "灯具预留开孔/开槽", desc: "核对嵌入式防水射灯与地灯在石材上的工厂开槽。", ref: "建施 A-1.5/1.6", owner: "石材厂 + 园林设计", measure: "提供灯具开孔尺寸图(LT01/02)", status: "未复核", action: "工厂预留灯槽，严禁现场强行打孔", date: "2026-09-07", reviewer: "" },
+    { id: "2.1", name: "水波纹大雕塑石落位", desc: "确认水景边落位坐标与下方4.5吨承重垫层。", ref: "定件#8", owner: "石材厂 + 建筑设计", measure: "落位坐标放线确认，下垫C25混凝土", status: "未复核", action: "施工方先打素混凝土垫层再吊装", date: "2026-09-07", reviewer: "" },
+    { id: "2.2", name: "D1~D5雕塑与平台拆分板", desc: "确认D4(1600×1000×200)分板方案及矿山选石照片。", ref: "定件#55", owner: "石材厂 + 建筑设计", measure: "矿山毛料编号确认，三方拍照留存", status: "未复核", action: "里山墨石提供矿山选石高清图三方确认", date: "2026-09-06", reviewer: "" },
+    { id: "2.3", name: "黄锈石台阶与L型加工", desc: "核对13块定制台阶与现场踏步基座预留50mm结合层。", ref: "定件#20-21", owner: "石材厂 + 施工方", measure: "现场台阶基层尺寸留出50mm", status: "未复核", action: "石材侧边做防碱背涂处理", date: "2026-09-09", reviewer: "" },
+    { id: "2.4", name: "灯具预留开孔/开槽", desc: "核对嵌入式防水射灯与地灯在石材上的工厂开槽。", ref: "建施 A-1.5/1.6", owner: "石材厂 + 园林设计", measure: "提供灯具开孔尺寸图(LT01/02)", status: "未复核", action: "工厂预留灯槽，严禁现场强行打孔", date: "2026-09-08", reviewer: "" },
     { id: "2.5", name: "厂内1:1试拼验收节点", desc: "约定里山墨石厂内1:1组装完成时间与线上视频验收流程。", ref: "石材加工协议", owner: "石材厂 + 业主/设计", measure: "约定厂内1:1试拼完成日期为___", status: "未复核", action: "试拼验收合格后安排发货", date: "2026-09-15", reviewer: "" }
   ]},
   { section: "三 · 钢楼梯平台、栏杆与工序衔接", items: [
-    { id: "3.1", name: "钢楼梯偏心柱脚基础", desc: "对照结施S-101，核对-120×160×16预埋钢板定位与300mm基础。", ref: "结施 S-101", owner: "施工方 + 建筑结构", measure: "预埋件中心坐标已打轴线定位", status: "未复核", action: "优先开挖浇筑钢柱脚基础", date: "2026-09-05", reviewer: "" },
-    { id: "3.2", name: "主梁与踏步托板结构", desc: "核对150×100钢梁与5mm托板、石材底螺栓辅助固定方式。", ref: "结施 S-401", owner: "施工方 + 石材厂", measure: "石材底部预留螺栓定位眼", status: "未复核", action: "采用1mm专用胶+底部螺栓双重固定", date: "2026-09-08", reviewer: "" },
-    { id: "3.3", name: "圆钢栏杆与杆件A/B", desc: "核对Φ16圆钢与100×100×8钢板在墙侧的焊接点，避开视线。", ref: "详图02 P3-P9", owner: "施工方 + 建筑设计", measure: "圆钢焊缝打磨平整，隐蔽焊接", status: "未复核", action: "工厂预制杆件，现场螺栓/焊接组合", date: "2026-09-10", reviewer: "" },
-    { id: "3.4", name: "防腐涂装标准", desc: "确认钢结构、栏杆、金属置物架全件采用黑色哑光氟碳喷涂。", ref: "钢结构加工协议", owner: "施工方", measure: "氟碳喷涂涂层厚度>40μm", status: "未复核", action: "现场焊缝除锈后补二次氟碳漆", date: "2026-09-12", reviewer: "" }
+    { id: "3.1", name: "钢楼梯偏心柱脚基础", desc: "对照结施S-101，核对-120×160×16预埋钢板定位与300mm基础。", ref: "结施 S-101", owner: "施工方 + 建筑结构", measure: "预埋件中心坐标已打轴线定位", status: "未复核", action: "优先开挖浇筑钢柱脚基础", date: "2026-09-06", reviewer: "" },
+    { id: "3.2", name: "主梁与踏步托板结构", desc: "核对150×100钢梁与5mm托板、石材底螺栓辅助固定方式。", ref: "结施 S-401", owner: "施工方 + 石材厂", measure: "石材底部预留螺栓定位眼", status: "未复核", action: "采用1mm专用胶+底部螺栓双重固定", date: "2026-09-09", reviewer: "" },
+    { id: "3.3", name: "圆钢栏杆与杆件A/B", desc: "核对Φ16圆钢与100×100×8钢板在墙侧的焊接点，避开视线。", ref: "详图02 P3-P9", owner: "施工方 + 建筑设计", measure: "圆钢焊缝打磨平整，隐蔽焊接", status: "未复核", action: "工厂预制杆件，现场螺栓/焊接组合", date: "2026-09-11", reviewer: "" },
+    { id: "3.4", name: "防腐涂装标准", desc: "确认钢结构、栏杆、金属置物架全件采用黑色哑光氟碳喷涂。", ref: "钢结构加工协议", owner: "施工方", measure: "氟碳喷涂涂层厚度>40μm", status: "未复核", action: "现场焊缝除锈后补二次氟碳漆", date: "2026-09-13", reviewer: "" }
   ]},
   { section: "四 · 工序逻辑与防碰撞冲突控制", items: [
-    { id: "4.1", name: "工序1 · 管线探摸与撒灰线", desc: "施工方探摸地下水井管线，现场撒粉放线，确认零碰撞。", ref: "建施 A-1.2", owner: "施工方", measure: "地下管线无碰撞/有管线冲突", status: "未复核", action: "先探摸管线再机械开挖", date: "2026-09-03", reviewer: "" },
-    { id: "4.2", name: "工序2 · 钢柱脚基础&景石垫层", desc: "优先浇筑钢基础及水波纹石垫层，养护期7天。", ref: "结施 S-101", owner: "施工方", measure: "混凝土基座养护期排期___天", status: "未复核", action: "严禁先铺景观石后做基础", date: "2026-09-04", reviewer: "" },
-    { id: "4.3", name: "工序3 · 钢楼梯主骨架吊装", desc: "150×100钢梁及二层平台框架整体安装到位。", ref: "结施 S-201", owner: "施工方", measure: "钢框架安装垂直度<2mm", status: "未复核", action: "校正钢梁水平度与标高", date: "2026-09-10", reviewer: "" },
+    { id: "4.1", name: "工序1 · 管线探摸与撒灰线", desc: "施工方探摸地下水井管线，现场撒粉放线，确认零碰撞。", ref: "建施 A-1.2", owner: "施工方", measure: "地下管线无碰撞/有管线冲突", status: "未复核", action: "先探摸管线再机械开挖", date: "2026-09-04", reviewer: "" },
+    { id: "4.2", name: "工序2 · 钢柱脚基础&景石垫层", desc: "优先浇筑钢基础及水波纹石垫层，养护期7天。", ref: "结施 S-101", owner: "施工方", measure: "混凝土基座养护期排期___天", status: "未复核", action: "严禁先铺景观石后做基础", date: "2026-09-05", reviewer: "" },
+    { id: "4.3", name: "工序3 · 钢楼梯主骨架吊装", desc: "150×100钢梁及二层平台框架整体安装到位。", ref: "结施 S-201", owner: "施工方", measure: "钢框架安装垂直度<2mm", status: "未复核", action: "校正钢梁水平度与标高", date: "2026-09-11", reviewer: "" },
     { id: "4.4", name: "工序4 · 石材进场与吊装铺贴", desc: "石材到场进场，随车吊落位，铺设黄锈石与中国黑景石。", ref: "石材加工协议", owner: "石材厂 + 施工方", measure: "吊装使用柔性吊带保护石角", status: "未复核", action: "成品表面覆盖珍珠棉保护", date: "2026-09-16", reviewer: "" }
   ]}
 ];
 
 let sampleData = [
-  { id: "S-01", name: "中国黑石材（水波纹/自然面）", supplier: "里山墨石", spec: "色泽纯黑，表面拉槽匀称无杂色", status: "未确认", date: "2026-09-03", note: "现场比对小样与水景立面对色" },
+  { id: "S-01", name: "中国黑石材（水波纹/自然面）", supplier: "里山墨石", spec: "色泽纯黑，表面拉槽匀称无杂色", status: "未确认", date: "2026-09-03", note: "9月3日交底日现场比对小样与水景立面对色" },
   { id: "S-02", name: "老皮黄锈石（平台/台阶板）", supplier: "里山墨石", spec: "自然老皮面，做防碱背涂防护", status: "未确认", date: "2026-09-03", note: "核对老皮纹理与拉槽面交界感" },
   { id: "S-03", name: "黑色哑光氟碳漆（钢梁/栏杆）", supplier: "施工方", spec: "哑光黑，涂层厚度>40μm，无光泽反应", status: "未确认", date: "2026-09-03", note: "现场喷涂小样板，光泽度<10%" },
   { id: "S-04", name: "太行金老皮踏步样板", supplier: "里山墨石", spec: "厚度100mm整板，边沿倒角R5", status: "未确认", date: "2026-09-03", note: "核对防滑拉槽防滑性能" },
@@ -408,14 +412,14 @@ let crossData = [
   { c:"#3D3A5C", title:"交叉点五 · 电焊火花防烧伤", sub:"工序3/6 电焊打磨 ↔ 石材成品表面保护", risk:"现场焊接圆钢栏杆时，高温电焊火花与铁屑飞溅到已铺好的黄锈石或水波纹大石上，会瞬间熔化留下黑斑与黄锈。", act:"现场焊接打磨前，周边3米内石材必须覆盖湿麻袋与三合板防护；栏杆尽可在工厂完成喷涂，现场做补漆。" }
 ];
 
-// 已移除单纯商业性的“合同签署与定金”节点，更新为纯技术施工节点排期
+// 修正：9月3日为四方现场交底沟通日（WBS-01），交底确认后于9月4日开始正式施工（WBS-02起）
 let wbsData = [
-  { code:"WBS-01", name:"现场放线与地下管线探摸", owner:"施工方", start:"09-03", end:"09-03", days:1, ms:"准备阶段" },
-  { code:"WBS-02", name:"钢柱脚基础、园林垫层&种植土回填", owner:"施工方", start:"09-04", end:"09-06", days:2, ms:"隐蔽工程" },
-  { code:"WBS-03", name:"矿山选石照片三方确认", owner:"石材厂 + 设计方", start:"09-04", end:"09-06", days:2, ms:"石材选型" },
-  { code:"WBS-04", name:"混凝土基础7天养护期", owner:"施工方", start:"09-06", end:"09-12", days:7, ms:"基础完工" },
-  { code:"WBS-05", name:"钢楼梯主骨架&平台安装", owner:"施工方", start:"09-10", end:"09-12", days:2, ms:"钢框架校正" },
-  { code:"WBS-06", name:"里山墨石厂内1:1试拼验收", owner:"石材厂 + 业主/设计", start:"09-12", end:"09-14", days:2, ms:"石材发货" },
+  { code:"WBS-01", name:"9月3日四方现场交底与管线探摸", owner:"四方参会人员", start:"09-03", end:"09-03", days:1, ms:"现场交底节点" },
+  { code:"WBS-02", name:"钢柱脚基础、园林垫层&种植土回填", owner:"施工方", start:"09-04", end:"09-06", days:2, ms:"隐蔽工程开工" },
+  { code:"WBS-03", name:"矿山选石照片三方确认", owner:"石材厂 + 设计方", start:"09-04", end:"09-06", days:2, ms:"石材选型确认" },
+  { code:"WBS-04", name:"混凝土基础7天养护期", owner:"施工方", start:"09-06", end:"09-12", days:7, ms:"基础养护完工" },
+  { code:"WBS-05", name:"钢楼梯主骨架&平台框架安装", owner:"施工方", start:"09-10", end:"09-12", days:2, ms:"钢框架校正" },
+  { code:"WBS-06", name:"里山墨石厂内1:1试拼验收", owner:"石材厂 + 业主/设计", start:"09-12", end:"09-14", days:2, ms:"石材试拼发货" },
   { code:"WBS-07", name:"100吨吊车进场与石材铺贴", owner:"石材厂 + 施工方", start:"09-15", end:"09-18", days:3, ms:"石材落位" },
   { code:"WBS-08", name:"圆钢栏杆焊接与氟碳漆补漆", owner:"施工方", start:"09-18", end:"09-20", days:2, ms:"涂装收尾" },
   { code:"WBS-09", name:"灯具线路接通与整体验收", owner:"全员", start:"09-20", end:"09-22", days:2, ms:"整体验收" }
@@ -537,7 +541,7 @@ function renderChecklist(){
 
             <div class="grid grid-cols-2 gap-2">
               <div>
-                <div class="field-label">完成日期</div>
+                <div class="field-label">计划完成日期</div>
                 <input type="date" class="input-zen text-center" value="${item.date}" onchange="onField(${si},${gi},'date','完成日期',this.value,'${item.date}')">
               </div>
               <div>
