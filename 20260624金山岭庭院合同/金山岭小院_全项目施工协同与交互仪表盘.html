@@ -6,7 +6,6 @@
 <title>金山岭小院 · 施工协同</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  /* Import Source Han Serif / Noto Serif SC from Google Fonts */
   @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap');
   
   :root {
@@ -21,10 +20,9 @@
 
   * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
   
-  /* Apply Source Han Serif (Noto Serif SC) to entire document */
   body, input, textarea, select, button {
     background: var(--bg-main);
-    font-family: 'Noto Serif SC', "Source Han Serif SC", "Source Han Serif CN", "Songti SC", STSong, "Noto Serif", serif !important;
+    font-family: 'Noto Serif SC', "Source Han Serif SC", "Source Han Serif CN", "Songti SC", STSong, serif !important;
     padding-bottom: 84px;
     color: var(--text-primary);
   }
@@ -51,7 +49,6 @@
     font-size: 13px;
     background: #FAFAFA;
     color: #1C1917;
-    font-family: 'Noto Serif SC', "Source Han Serif SC", serif !important;
     transition: all .2s ease;
   }
   .input-luxury:focus {
@@ -84,22 +81,19 @@
   .st-progress { background: #FFFBEB; color: #B45309; border: 1px solid #FDE68A; }
   .st-risk { background: #FEF2F2; color: #B91C1C; border: 1px solid #FECACA; }
 
-  /* Segmented Bar */
-  .seg-bar {
-    display: flex; overflow-x: auto; gap: 8px; padding: 10px 14px;
-    -webkit-overflow-scrolling: touch; scrollbar-width: none;
-    background: rgba(250, 248, 245, 0.95);
-    backdrop-filter: blur(10px);
+  /* Navigation Visual Grid Cards */
+  .nav-grid-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #E7E5E4;
+    box-shadow: 0 4px 16px -2px rgba(28, 25, 23, 0.05);
+    transition: all .25s ease;
+    cursor: pointer;
   }
-  .seg-bar::-webkit-scrollbar { display: none; }
-  .seg-btn {
-    flex: 0 0 auto; padding: 9px 16px; border-radius: 12px;
-    font-size: 12px; font-weight: 600; color: #78716C; background: #FFFFFF;
-    border: 1px solid #E7E5E4; white-space: nowrap; transition: all .2s ease;
-  }
-  .seg-btn.active {
-    background: #1C1917; color: #F5F5F4; border-color: #1C1917;
-    box-shadow: 0 4px 12px rgba(28, 25, 23, 0.12);
+  .nav-grid-card.active {
+    border-color: #C5A059;
+    box-shadow: 0 0 0 2px #C5A059, 0 8px 24px -4px rgba(197, 160, 89, 0.3);
   }
 
   .acc-body { overflow: hidden; transition: max-height .3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -116,7 +110,7 @@
         <div class="w-8 h-8 rounded-lg bg-[#C5A059]/20 border border-[#C5A059]/40 flex items-center justify-center text-[#C5A059] font-bold text-sm">金</div>
         <div>
           <div class="text-[15px] font-bold text-[#F5F5F4] tracking-wide">金山岭小院 · 施工协同</div>
-          <div class="text-[10px] text-[#A8A29E] mt-0.5 tracking-wider">9月3日现场交底 · 雅奢庭院与装置</div>
+          <div class="text-[10px] text-[#A8A29E] mt-0.5 tracking-wider">9月3日现场交底 · 图卡式视觉交互</div>
         </div>
       </div>
       <select id="userRole" class="bg-[#2A2725] text-[#D6D3D1] text-xs font-semibold rounded-lg px-2.5 py-2 border border-[#44403C] focus:outline-none focus:border-[#C5A059] max-w-[135px]">
@@ -128,22 +122,108 @@
       </select>
     </div>
   </div>
-
-  <!-- Segmented Navigation -->
-  <div class="seg-bar border-t border-[#2A2725]">
-    <button onclick="switchTab('tab1')" id="t1" class="seg-btn active">📋 交底清单</button>
-    <button onclick="switchTab('tab2')" id="t2" class="seg-btn">📜 修改日志 <span id="logCnt" class="ml-1 text-[#C5A059] font-bold">0</span></button>
-    <button onclick="switchTab('tab3')" id="t3" class="seg-btn">🧱 工程量清单</button>
-    <button onclick="switchTab('tab4')" id="t4" class="seg-btn">🔀 交叉碰撞</button>
-    <button onclick="switchTab('tab5')" id="t5" class="seg-btn">🏗️ 吊车计算</button>
-    <button onclick="switchTab('tab6')" id="t6" class="seg-btn">⏳ 里程碑</button>
-  </div>
 </header>
 
 <main class="px-3.5 pt-4 space-y-4">
 
-  <!-- ============ TAB 1 : CHECKLIST ============ -->
-  <section id="tab1" class="space-y-3.5">
+  <!-- ===== Visual Grid Navigation Cards (点击图片展开) ===== -->
+  <div class="space-y-2">
+    <div class="text-xs font-bold text-[#78716C] px-1 flex justify-between items-center">
+      <span>🖼️ 模块视觉导航（点击卡片展开对应功能）</span>
+      <span class="text-[10px] text-[#C5A059]" id="activeTabName">当前展开：交底清单</span>
+    </div>
+    
+    <div class="grid grid-cols-2 gap-2.5">
+      <!-- Card 1: 交底清单 -->
+      <div onclick="toggleModule('tab1')" id="gc1" class="nav-grid-card active h-24 bg-gradient-to-br from-slate-900 to-slate-800 text-white p-3 flex flex-col justify-between">
+        <div class="flex justify-between items-start">
+          <span class="text-xl">📋</span>
+          <span class="text-[10px] bg-[#C5A059] text-black font-bold px-1.5 py-0.5 rounded">主卡口</span>
+        </div>
+        <div>
+          <div class="text-xs font-bold text-white">9月3日现场交底</div>
+          <div class="text-[10px] text-slate-300">测量 / 石材 / 钢构 / 逻辑</div>
+        </div>
+      </div>
+
+      <!-- Card 2: 现场确认样品清单 (新增加) -->
+      <div onclick="toggleModule('tabSample')" id="gcSample" class="nav-grid-card h-24 bg-gradient-to-br from-stone-800 to-stone-700 text-white p-3 flex flex-col justify-between">
+        <div class="flex justify-between items-start">
+          <span class="text-xl">🪵</span>
+          <span class="text-[10px] bg-[#047857] text-white font-bold px-1.5 py-0.5 rounded">新增</span>
+        </div>
+        <div>
+          <div class="text-xs font-bold text-white">现场确认样品清单</div>
+          <div class="text-[10px] text-stone-300">石材小样 / 漆面 / 铺装封样</div>
+        </div>
+      </div>
+
+      <!-- Card 3: 完整施工工程量 -->
+      <div onclick="toggleModule('tab3')" id="gc3" class="nav-grid-card h-24 bg-gradient-to-br from-amber-900 to-amber-800 text-white p-3 flex flex-col justify-between">
+        <div class="flex justify-between items-start">
+          <span class="text-xl">🧱</span>
+          <span class="text-[10px] bg-amber-500 text-black font-bold px-1.5 py-0.5 rounded">34.38t</span>
+        </div>
+        <div>
+          <div class="text-xs font-bold text-white">工程量与技术规格</div>
+          <div class="text-[10px] text-amber-200">56项石材 / 钢构 / 基础</div>
+        </div>
+      </div>
+
+      <!-- Card 4: 工序交叉碰撞 -->
+      <div onclick="toggleModule('tab4')" id="gc4" class="nav-grid-card h-24 bg-gradient-to-br from-rose-900 to-red-800 text-white p-3 flex flex-col justify-between">
+        <div class="flex justify-between items-start">
+          <span class="text-xl">🔀</span>
+          <span class="text-[10px] bg-red-500 text-white font-bold px-1.5 py-0.5 rounded">5大节点</span>
+        </div>
+        <div>
+          <div class="text-xs font-bold text-white">工序交叉碰撞控制</div>
+          <div class="text-[10px] text-red-200">防破损 / 数据互锁</div>
+        </div>
+      </div>
+
+      <!-- Card 5: 25米大吊车起重计算 -->
+      <div onclick="toggleModule('tab5')" id="gc5" class="nav-grid-card h-24 bg-gradient-to-br from-blue-900 to-indigo-900 text-white p-3 flex flex-col justify-between">
+        <div class="flex justify-between items-start">
+          <span class="text-xl">🏗️</span>
+          <span class="text-[10px] bg-blue-500 text-white font-bold px-1.5 py-0.5 rounded">25m/100t</span>
+        </div>
+        <div>
+          <div class="text-xs font-bold text-white">大吊车起重力矩计算</div>
+          <div class="text-[10px] text-blue-200">4.54t单件大石吊装选型</div>
+        </div>
+      </div>
+
+      <!-- Card 6: 施工关键里程碑 -->
+      <div onclick="toggleModule('tab6')" id="gc6" class="nav-grid-card h-24 bg-gradient-to-br from-emerald-900 to-teal-900 text-white p-3 flex flex-col justify-between">
+        <div class="flex justify-between items-start">
+          <span class="text-xl">⏳</span>
+          <span class="text-[10px] bg-emerald-500 text-white font-bold px-1.5 py-0.5 rounded">10节点</span>
+        </div>
+        <div>
+          <div class="text-xs font-bold text-white">施工关键里程碑</div>
+          <div class="text-[10px] text-emerald-200">WBS 施工排期与节点</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 7: 修改日志 (单独置底重点突出) -->
+    <div onclick="toggleModule('tab2')" id="gc2" class="nav-grid-card h-20 bg-gradient-to-r from-stone-900 via-neutral-800 to-zinc-900 text-white p-3.5 flex items-center justify-between border-l-4 border-l-[#C5A059]">
+      <div class="flex items-center gap-3">
+        <span class="text-2xl">📜</span>
+        <div>
+          <div class="text-xs font-bold text-white">多方修改痕迹与审计日志 (Audit Log)</div>
+          <div class="text-[10px] text-stone-400 mt-0.5">记录谁在何时修改了何值 · 防修改防扯皮</div>
+        </div>
+      </div>
+      <div class="text-right">
+        <span class="text-xs font-bold bg-[#C5A059] text-black px-2 py-0.5 rounded-full" id="logCnt">0 条</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MODULE 1 : CHECKLIST ============ -->
+  <section id="tab1" class="space-y-3.5 pt-2">
     <!-- Progress & KPI Card -->
     <div class="card-luxury p-4">
       <div class="flex items-center justify-between mb-2">
@@ -174,17 +254,22 @@
     <div id="checklistContainer" class="space-y-3"></div>
   </section>
 
-  <!-- ============ TAB 2 : AUDIT LOG ============ -->
-  <section id="tab2" class="hidden space-y-3">
-    <div class="card-luxury p-3.5 flex items-center justify-between">
-      <div class="text-xs font-bold text-[#1C1917]">📜 修改痕迹与审计日志</div>
-      <button onclick="clearAuditLogs()" class="text-xs bg-[#FEF2F2] text-[#B91C1C] font-semibold px-3 py-1.5 rounded-lg border border-[#FECACA]">清空日志</button>
+  <!-- ============ MODULE SAMPLE : 现场确认样品清单 (新增加) ============ -->
+  <section id="tabSample" class="hidden space-y-3.5 pt-2">
+    <div class="card-luxury p-4">
+      <div class="flex justify-between items-center border-b border-[#F5F5F4] pb-3">
+        <div>
+          <div class="text-xs font-bold text-[#1C1917]">🪵 现场确认样品与材质封样清单</div>
+          <div class="text-[11px] text-[#78716C] mt-0.5">现场实物对色、防护涂层及材质签样封存</div>
+        </div>
+        <button onclick="addSampleItem()" class="text-xs bg-[#1C1917] text-[#C5A059] font-bold px-2.5 py-1.5 rounded-lg border border-[#C5A059]/40">+ 新增封样</button>
+      </div>
+      <div id="sampleCardsContainer" class="space-y-3 mt-3"></div>
     </div>
-    <div id="auditContainer" class="space-y-2.5"></div>
   </section>
 
-  <!-- ============ TAB 3 : MANIFEST ============ -->
-  <section id="tab3" class="hidden space-y-3.5">
+  <!-- ============ MODULE 3 : MANIFEST ============ -->
+  <section id="tab3" class="hidden space-y-3.5 pt-2">
     <div class="card-luxury p-4 bg-gradient-to-br from-[#1C1917] to-[#2A2725] text-[#F5F5F4]">
       <div class="text-xs text-[#C5A059] font-semibold tracking-widest uppercase">构件预估总重量</div>
       <div class="text-3xl font-bold text-[#FFFFFF] mt-1">34.38 <span class="text-base font-normal text-[#D6D3D1]">吨</span></div>
@@ -197,8 +282,8 @@
     <div id="manifestContainer" class="space-y-3"></div>
   </section>
 
-  <!-- ============ TAB 4 : CROSS POINTS ============ -->
-  <section id="tab4" class="hidden space-y-3.5">
+  <!-- ============ MODULE 4 : CROSS POINTS ============ -->
+  <section id="tab4" class="hidden space-y-3.5 pt-2">
     <div class="card-luxury p-4">
       <div class="text-xs font-bold text-[#1C1917]">6 大主工序 · 5 处关键交叉碰撞控制</div>
       <div class="text-[11px] text-[#78716C] mt-1">防止基础受损、螺栓眼错位及电焊火花烧伤艺术石材</div>
@@ -206,13 +291,13 @@
     <div id="crossContainer" class="space-y-3"></div>
   </section>
 
-  <!-- ============ TAB 5 : CRANE ============ -->
-  <section id="tab5" class="hidden space-y-3.5">
+  <!-- ============ MODULE 5 : CRANE ============ -->
+  <section id="tab5" class="hidden space-y-3.5 pt-2">
     <div id="craneContainer" class="space-y-3.5"></div>
   </section>
 
-  <!-- ============ TAB 6 : WBS ============ -->
-  <section id="tab6" class="hidden space-y-3.5">
+  <!-- ============ MODULE 6 : WBS ============ -->
+  <section id="tab6" class="hidden space-y-3.5 pt-2">
     <div class="card-luxury p-4">
       <div class="text-xs font-bold text-[#1C1917]">施工进度排期与关键里程碑</div>
       <div class="text-[11px] text-[#78716C] mt-1">10 大 WBS 节点 · 现场验收与交接卡口</div>
@@ -220,9 +305,18 @@
     <div id="wbsContainer" class="space-y-2.5"></div>
   </section>
 
+  <!-- ============ MODULE 2 : AUDIT LOG (最后置底显示) ============ -->
+  <section id="tab2" class="hidden space-y-3.5 pt-2">
+    <div class="card-luxury p-3.5 flex items-center justify-between">
+      <div class="text-xs font-bold text-[#1C1917]">📜 多方修改痕迹与审计日志 (Audit Trail)</div>
+      <button onclick="clearAuditLogs()" class="text-xs bg-[#FEF2F2] text-[#B91C1C] font-semibold px-3 py-1.5 rounded-lg border border-[#FECACA]">清空日志</button>
+    </div>
+    <div id="auditContainer" class="space-y-2.5"></div>
+  </section>
+
 </main>
 
-<!-- ===== Elegant Bottom Bar ===== -->
+<!-- ===== Bottom Bar ===== -->
 <footer class="fixed bottom-0 left-0 right-0 z-40 bg-[#FFFFFF]/95 backdrop-blur-md border-t border-[#E7E5E4] px-4 py-2.5">
   <div class="flex gap-2.5 max-w-md mx-auto">
     <button onclick="saveData()" class="flex-1 tap bg-[#1C1917] active:bg-[#2A2725] text-[#F5F5F4] rounded-xl py-3 text-xs font-bold tracking-wider shadow-sm transition">💾 保存改动</button>
@@ -259,6 +353,14 @@ let checklistData = [
     { id: "4.3", name: "工序3 · 钢楼梯主骨架吊装", desc: "150×100钢梁及二层平台框架整体安装到位。", ref: "结施 S-201", owner: "施工方", measure: "钢框架安装垂直度<2mm", status: "未复核", action: "校正钢梁水平度与标高", date: "2026-09-10", reviewer: "" },
     { id: "4.4", name: "工序4 · 石材进场与吊装铺贴", desc: "石材到场进场，随车吊落位，铺设黄锈石与中国黑景石。", ref: "石材加工协议", owner: "石材厂 + 施工方", measure: "吊装使用柔性吊带保护石角", status: "未复核", action: "成品表面覆盖珍珠棉保护", date: "2026-09-16", reviewer: "" }
   ]}
+];
+
+// 新增：现场确认样品清单数据
+let sampleData = [
+  { id: "S-01", name: "中国黑石材（水波纹/自然面）", supplier: "里山墨石", spec: "色泽纯黑，表面拉槽匀称无杂色", status: "未确认", date: "2026-09-03", note: "现场比对小样与水景立面对色" },
+  { id: "S-02", name: "老皮黄锈石（平台/台阶板）", supplier: "里山墨石", spec: "自然老皮面，做防碱背涂防护", status: "未确认", date: "2026-09-03", note: "核对老皮纹理与拉槽面交界感" },
+  { id: "S-03", name: "黑色哑光氟碳漆（钢梁/栏杆）", supplier: "施工方", spec: "哑光黑，涂层厚度>40μm，无光泽反应", status: "未确认", date: "2026-09-03", note: "现场喷涂小样板，光泽度<10%" },
+  { id: "S-04", name: "太行金老皮踏步样板", supplier: "里山墨石", spec: "厚度100mm整板，边沿倒角R5", status: "未确认", date: "2026-09-03", note: "核对防滑拉槽防滑性能" }
 ];
 
 let manifestData = [
@@ -303,29 +405,32 @@ let wbsData = [
 let auditLogs = [];
 let currentFilter = 'all';
 let expandedSet = new Set();
+let currentActiveTab = 'tab1';
 
 function loadSavedData() {
   try {
-    const c = localStorage.getItem('jl_checklist_v3');
-    const l = localStorage.getItem('jl_logs_v3');
+    const c = localStorage.getItem('jl_checklist_v4');
+    const l = localStorage.getItem('jl_logs_v4');
+    const sm = localStorage.getItem('jl_samples_v4');
     if (c) checklistData = JSON.parse(c);
     if (l) auditLogs = JSON.parse(l);
+    if (sm) sampleData = JSON.parse(sm);
   } catch(e){}
 }
 
-function escapeHtml(s){ if(!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escapeHtml(s){ if(!s) return ''; return str = String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
 function stClass(st){
-  if(st==='已通过(无误差)') return 'st-pass';
-  if(st==='存疑/需整改') return 'st-risk';
-  if(st==='处理中') return 'st-progress';
+  if(st==='已通过(无误差)'||st==='已封样确认') return 'st-pass';
+  if(st==='存疑/需整改'||st==='封样退回') return 'st-risk';
+  if(st==='处理中'||st==='打样中') return 'st-progress';
   return 'st-pending';
 }
 function stLabel(st){
-  if(st==='已通过(无误差)') return '🟢 已通过';
-  if(st==='存疑/需整改') return '🔴 存疑整改';
-  if(st==='处理中') return '🟡 处理中';
-  return '⚪ 未复核';
+  if(st==='已通过(无误差)'||st==='已封样确认') return '🟢 已确认';
+  if(st==='存疑/需整改'||st==='封样退回') return '🔴 退回整改';
+  if(st==='处理中'||st==='打样中') return '🟡 样板制作';
+  return '⚪ 未确认';
 }
 
 function matchesFilter(st){
@@ -339,6 +444,7 @@ function matchesFilter(st){
 
 function renderChecklist(){
   const cont = document.getElementById('checklistContainer');
+  if(!cont) return;
   cont.innerHTML = '';
   let total=0, pass=0, progress=0, pending=0;
 
@@ -347,7 +453,6 @@ function renderChecklist(){
     const visibleItems = sec.items.filter(i => matchesFilter(i.status));
     if (visibleItems.length === 0) return;
 
-    // Section header
     const secCard = document.createElement('div');
     secCard.className = 'card-luxury p-3.5';
     secCard.innerHTML = `
@@ -435,6 +540,73 @@ function renderChecklist(){
   document.getElementById('overallBar').style.width = pct + '%';
 }
 
+function renderSamples(){
+  const cont = document.getElementById('sampleCardsContainer');
+  if(!cont) return;
+  cont.innerHTML = '';
+
+  sampleData.forEach((s, idx) => {
+    const card = document.createElement('div');
+    card.className = 'card-luxury p-3.5 space-y-2 border-l-4 border-l-[#C5A059]';
+    card.innerHTML = `
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-md bg-[#FAF6F0] text-[#C5A059] font-bold text-[10px] flex items-center justify-center border border-[#EFE8DE]">${s.id}</span>
+          <span class="text-[13px] font-bold text-[#1C1917]">${escapeHtml(s.name)}</span>
+        </div>
+        <span class="badge-luxury ${stClass(s.status)}">${stLabel(s.status)}</span>
+      </div>
+
+      <div class="text-[11px] text-[#78716C] space-y-1">
+        <div>供应商/提供方：<strong class="text-[#1C1917]">${escapeHtml(s.supplier)}</strong></div>
+        <div>规格要求：<span class="font-mono text-[#57534E]">${escapeHtml(s.spec)}</span></div>
+        <div>对色/对样备注：<input type="text" class="input-luxury mt-1 text-xs" value="${escapeHtml(s.note)}" onchange="updateSampleNote(${idx}, this.value)"></div>
+      </div>
+
+      <div class="flex items-center justify-between pt-2 border-t border-[#F5F5F4] text-[11px]">
+        <div class="flex gap-1">
+          ${['未确认','打样中','已封样确认','封样退回'].map(st=>`
+            <button onclick="setSampleStatus(${idx},'${st}')" class="px-2 py-1 rounded text-[10px] font-bold border ${s.status===st?stClass(st):'bg-slate-50 text-slate-400 border-slate-200'}">${st.replace('确认','').replace('封样','')}</button>
+          `).join('')}
+        </div>
+        <input type="date" class="input-luxury text-center max-w-[110px] py-1 text-[10px]" value="${s.date}" onchange="updateSampleDate(${idx}, this.value)">
+      </div>`;
+    cont.appendChild(card);
+  });
+}
+
+function updateSampleNote(idx, val){
+  sampleData[idx].note = val;
+  saveLocal();
+}
+
+function updateSampleDate(idx, val){
+  sampleData[idx].date = val;
+  saveLocal();
+}
+
+function setSampleStatus(idx, st){
+  const old = sampleData[idx].status;
+  sampleData[idx].status = st;
+  const operator = document.getElementById('userRole').value || '未知操作人';
+  const ts = new Date().toLocaleString('zh-CN',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+  auditLogs.unshift({ time: ts, user: operator, id: sampleData[idx].id, field: '封样状态', oldVal: old, newVal: st });
+  saveLocal();
+  renderSamples();
+  renderAudit();
+}
+
+function addSampleItem(){
+  const name = prompt('请输入新增封装样品的名称（如：太行金地面磨光样）：');
+  if(!name) return;
+  const newId = `S-0${sampleData.length+1}`;
+  sampleData.push({
+    id: newId, name: name, supplier: "现场提供", spec: "符合设计封样要求", status: "打样中", date: new Date().toISOString().slice(0,10), note: "等待现场四方共同签样封存"
+  });
+  saveLocal();
+  renderSamples();
+}
+
 function toggleCard(key){
   if(expandedSet.has(key)) expandedSet.delete(key); else expandedSet.add(key);
   renderChecklist();
@@ -464,7 +636,7 @@ function onField(si, gi, key, fieldName, newVal, oldVal){
 }
 
 function renderAudit(){
-  document.getElementById('logCnt').innerText = auditLogs.length;
+  document.getElementById('logCnt').innerText = auditLogs.length + ' 条';
   const cont = document.getElementById('auditContainer');
   if(!cont) return;
   cont.innerHTML = '';
@@ -494,7 +666,7 @@ function renderAudit(){
 function clearAuditLogs(){
   if(confirm('确认清空所有修改痕迹历史记录吗？')){
     auditLogs = [];
-    localStorage.removeItem('jl_logs_v3');
+    localStorage.removeItem('jl_logs_v4');
     renderAudit();
   }
 }
@@ -621,19 +793,52 @@ function renderWbs(){
   });
 }
 
+function toggleModule(tabId) {
+  const tabs = ['tab1', 'tabSample', 'tab3', 'tab4', 'tab5', 'tab6', 'tab2'];
+  const gridIds = ['gc1', 'gcSample', 'gc3', 'gc4', 'gc5', 'gc6', 'gc2'];
+
+  tabs.forEach((id, idx) => {
+    const sectionEl = document.getElementById(id);
+    const cardEl = document.getElementById(gridIds[idx]);
+    if (sectionEl) sectionEl.classList.add('hidden');
+    if (cardEl) cardEl.classList.remove('active');
+  });
+
+  const targetSec = document.getElementById(tabId);
+  const activeIdx = tabs.indexOf(tabId);
+  if (targetSec) targetSec.classList.remove('hidden');
+  if (activeIdx !== -1 && document.getElementById(gridIds[activeIdx])) {
+    document.getElementById(gridIds[activeIdx]).classList.add('active');
+  }
+
+  // update title indicator
+  const names = {
+    'tab1': '交底清单',
+    'tabSample': '现场确认样品清单',
+    'tab3': '完整工程量清单',
+    'tab4': '工序交叉碰撞',
+    'tab5': '大吊车起重计算',
+    'tab6': '施工里程碑',
+    'tab2': '修改痕迹审计日志'
+  };
+  document.getElementById('activeTabName').innerText = '当前展开：' + (names[tabId] || '');
+  targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 function saveLocal(){
-  localStorage.setItem('jl_checklist_v3', JSON.stringify(checklistData));
-  localStorage.setItem('jl_logs_v3', JSON.stringify(auditLogs));
+  localStorage.setItem('jl_checklist_v4', JSON.stringify(checklistData));
+  localStorage.setItem('jl_logs_v4', JSON.stringify(auditLogs));
+  localStorage.setItem('jl_samples_v4', JSON.stringify(sampleData));
 }
 function saveData(){
   saveLocal();
-  alert('💾 包含完整修改痕迹的数据已成功保存！');
+  alert('💾 包含完整修改痕迹与样品数据的协同记录已成功保存！');
 }
 function exportJSON(){
-  const obj = { checklistData, auditLogs };
+  const obj = { checklistData, sampleData, auditLogs };
   const s = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj,null,2));
   const a = document.createElement('a');
-  a.href = s; a.download = `金山岭小院交底数据_${new Date().toISOString().slice(0,10)}.json`;
+  a.href = s; a.download = `金山岭小院交底与样品数据_${new Date().toISOString().slice(0,10)}.json`;
   document.body.appendChild(a); a.click(); a.remove();
 }
 function importJSON(e){
@@ -642,28 +847,23 @@ function importJSON(e){
   r.onload = function(ev){
     try{
       const d = JSON.parse(ev.target.result);
-      if(d.checklistData && Array.isArray(d.checklistData)){ checklistData = d.checklistData; auditLogs = d.auditLogs||[]; }
+      if(d.checklistData && Array.isArray(d.checklistData)){ 
+        checklistData = d.checklistData; 
+        if(d.sampleData) sampleData = d.sampleData;
+        auditLogs = d.auditLogs||[]; 
+      }
       else if(Array.isArray(d)){ checklistData = d; }
-      saveLocal(); renderChecklist(); renderAudit();
-      alert('📥 成功导入数据及修改痕迹！');
+      saveLocal(); renderChecklist(); renderSamples(); renderAudit();
+      alert('📥 成功导入交底、样品与修改痕迹数据！');
     }catch(err){ alert('⚠️ 导入文件格式错误！'); }
   };
   r.readAsText(f);
 }
 
-function switchTab(tab){
-  for(let i=1;i<=6;i++){
-    document.getElementById('tab'+i).classList.add('hidden');
-    document.getElementById('t'+i).classList.remove('active');
-  }
-  document.getElementById(tab).classList.remove('hidden');
-  document.getElementById(tab.replace('tab','t')).classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-
 // Init
 loadSavedData();
 renderChecklist();
+renderSamples();
 renderAudit();
 renderManifest();
 renderCross();
