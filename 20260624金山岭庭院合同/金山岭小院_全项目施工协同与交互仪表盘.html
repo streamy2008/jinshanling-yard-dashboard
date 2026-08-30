@@ -135,7 +135,7 @@
 
 <main class="px-3.5 pt-4 space-y-4">
 
-  <!-- ===== Visual Grid Navigation Cards (所有文字单行截断) ===== -->
+  <!-- ===== Visual Grid Navigation Cards ===== -->
   <div class="space-y-2">
     <div class="text-xs font-bold text-[#706B63] px-1 flex justify-between items-center gap-2">
       <span class="truncate-1">🖼️ 模块视觉导航（点击展开对应功能）</span>
@@ -325,12 +325,12 @@
 
 </main>
 
-<!-- ===== Elegant Bottom Bar ===== -->
+<!-- ===== Elegant Bottom Bar (仅保留纯文字，取消所有图标) ===== -->
 <footer class="fixed bottom-0 left-0 right-0 z-40 bg-[#FFFFFF]/95 backdrop-blur-md border-t border-[#E8E3D9] px-4 py-2.5">
   <div class="flex gap-2.5 max-w-md mx-auto">
-    <button onclick="saveData()" class="flex-1 tap bg-[#23201E] active:bg-[#2A2725] text-[#F4F1EA] rounded-xl py-3 text-xs font-bold tracking-wider shadow-sm transition truncate-1">💾 保存改动</button>
-    <button onclick="exportJSON()" class="flex-1 tap bg-[#F4F1EA] active:bg-[#E8E3D9] text-[#423D38] rounded-xl py-3 text-xs font-bold border border-[#E0DAD0] transition truncate-1">📤 导出</button>
-    <button onclick="document.getElementById('importFile').click()" class="flex-1 tap bg-[#F4F1EA] active:bg-[#E8E3D9] text-[#423D38] rounded-xl py-3 text-xs font-bold border border-[#E0DAD0] transition truncate-1">📥 导入</button>
+    <button onclick="saveData()" class="flex-1 tap bg-[#23201E] active:bg-[#2A2725] text-[#F4F1EA] rounded-xl py-3 text-xs font-bold tracking-wider shadow-sm transition truncate-1">保存改动</button>
+    <button onclick="exportJSON()" class="flex-1 tap bg-[#F4F1EA] active:bg-[#E8E3D9] text-[#423D38] rounded-xl py-3 text-xs font-bold border border-[#E0DAD0] transition truncate-1">导出</button>
+    <button onclick="document.getElementById('importFile').click()" class="flex-1 tap bg-[#F4F1EA] active:bg-[#E8E3D9] text-[#423D38] rounded-xl py-3 text-xs font-bold border border-[#E0DAD0] transition truncate-1">导入</button>
     <input type="file" id="importFile" onchange="importJSON(event)" class="hidden">
   </div>
 </footer>
