@@ -166,7 +166,7 @@
         </div>
         <div class="min-w-0">
           <div class="text-xs font-bold text-[#F4F1EA] truncate-1">9月3日现场交底</div>
-          <div class="text-[10px] text-[#A39B90] truncate-1">测量/石材/钢构/逻辑</div>
+          <div class="text-[10px] text-[#A39B90] truncate-1">测量/园林基建/种植土/逻辑</div>
         </div>
       </div>
 
@@ -246,7 +246,7 @@
     </div>
   </div>
 
-  <!-- ============ MODULE 1 : CHECKLIST ============ -->
+  <!-- ============ MODULE 1 : CHECKLIST (加入园林基础与种植土) ============ -->
   <section id="tab1" class="space-y-3.5 pt-2">
     <!-- Progress & KPI Card -->
     <div class="card-zen p-4">
@@ -258,10 +258,10 @@
         <div id="overallBar" class="h-full bg-[#B89355] rounded-full transition-all duration-500" style="width:0%"></div>
       </div>
       <div class="grid grid-cols-4 gap-2 mt-4 text-center border-t border-[#EFECE6] pt-3">
-        <div><div class="text-base font-bold text-[#23201E] truncate-1" id="kpiTotal">17</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">总项</div></div>
+        <div><div class="text-base font-bold text-[#23201E] truncate-1" id="kpiTotal">20</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">总项</div></div>
         <div><div class="text-base font-bold text-[#2E6B38] truncate-1" id="kpiPass">0</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">已通过</div></div>
         <div><div class="text-base font-bold text-[#9E6B18] truncate-1" id="kpiProgress">0</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">处理中</div></div>
-        <div><div class="text-base font-bold text-[#8C857B] truncate-1" id="kpiPending">17</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">未复核</div></div>
+        <div><div class="text-base font-bold text-[#8C857B] truncate-1" id="kpiPending">20</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">未复核</div></div>
       </div>
     </div>
 
@@ -351,12 +351,17 @@
 </footer>
 
 <script>
+// 升级后的 checklistData，包含园林基建与种植土土质回填卡口
 let checklistData = [
-  { section: "一 · 现场测量与地下隐蔽工程", items: [
+  { section: "一 · 现场测量、园林基建与种植土厚度核对", items: [
     { id: "1.1", name: "边界与定位轴线复核", desc: "依据建施A-1.1复核院墙边界、建筑边界及首层踏步起始点绝对尺寸。", ref: "建施 A-1.1", owner: "施工方 + 建筑设计", measure: "现场实测净宽___mm，较图纸偏差___mm", status: "未复核", action: "图纸尺寸现场放线撒灰线确认", date: "2026-09-03", reviewer: "" },
     { id: "1.2", name: "地下水井与井盖对接", desc: "核对原有水井、井筒顶标高及地下管线埋深，确认混凝土基座标高-0.030。", ref: "建施 A-1.2", owner: "施工方 + 园林设计", measure: "井筒顶标高实测___，需提高/降低___mm", status: "未复核", action: "调整井筒标高，基座预留水泵控制器支架", date: "2026-09-04", reviewer: "" },
     { id: "1.3", name: "±0.000标高与排水坡度", desc: "核对首层室内±0.000与庭院碎石铺地、水泥压光地面1%坡度走向。", ref: "建施 A-1.2", owner: "施工方 + 园林设计", measure: "坡度走向与水井井盖标高匹配", status: "未复核", action: "开挖坡度向井盖倾斜，避免积水倒灌", date: "2026-09-05", reviewer: "" },
-    { id: "1.4", name: "二层露台高差与反坎", desc: "核对一楼地面至二层露台(+3.090/+3.250)实际结构净高。", ref: "建施 A-1.3", owner: "施工方 + 建筑设计", measure: "实测二层露台底板标高为___", status: "未复核", action: "核算钢楼梯踏步步数与坡度", date: "2026-09-03", reviewer: "" }
+    { id: "1.4", name: "二层露台高差与反坎", desc: "核对一楼地面至二层露台(+3.090/+3.250)实际结构净高。", ref: "建施 A-1.3", owner: "施工方 + 建筑设计", measure: "实测二层露台底板标高为___", status: "未复核", action: "核算钢楼梯踏步步数与坡度", date: "2026-09-03", reviewer: "" },
+    // 新增园林基建与种植土卡口
+    { id: "1.5", name: "园林硬质基座与级配碎石垫层", desc: "核对太行金/黄锈石铺地与景石下方的150mm厚级配碎石夯实垫层及素混凝土垫层。", ref: "园林基建规范", owner: "施工方 + 园林设计", measure: "碎石垫层压实度满足>0.93，厚度实测___mm", status: "未复核", action: "基层夯实排干水，防后期石材下沉断裂", date: "2026-09-05", reviewer: "" },
+    { id: "1.6", name: "种植土土质、酸碱度与绿化回填厚度", desc: "核对植栽槽与绿化区种植土有效厚度(草坪>30cm, 灌木>50cm, 乔木>80cm)及pH值。", ref: "园林景观规范", owner: "施工方 + 园林设计", measure: "种植土厚度实测___cm，pH值实测___", status: "未复核", action: "清除建筑垃圾，回填客土营养土，保持透水性", date: "2026-09-06", reviewer: "" },
+    { id: "1.7", name: "盲沟盲管排水与种植区透水过滤层", desc: "核对种植槽及景石周边盲管排水走向，铺设陶粒/粗砂透水层及无纺布过滤层。", ref: "园林隐蔽工程", owner: "施工方 + 园林设计", measure: "透水滤水层厚度实测___mm，无纺布铺设无缝隙", status: "未复核", action: "防止植物烂根与泥水冲刷污染黄锈石地铺", date: "2026-09-07", reviewer: "" }
   ]},
   { section: "二 · 石材加工与 1:1 预制交底（里山墨石）", items: [
     { id: "2.1", name: "水波纹大雕塑石落位", desc: "确认水景边落位坐标与下方4.5吨承重垫层。", ref: "定件#8", owner: "石材厂 + 建筑设计", measure: "落位坐标放线确认，下垫C25混凝土", status: "未复核", action: "施工方先打素混凝土垫层再吊装", date: "2026-09-06", reviewer: "" },
@@ -383,7 +388,8 @@ let sampleData = [
   { id: "S-01", name: "中国黑石材（水波纹/自然面）", supplier: "里山墨石", spec: "色泽纯黑，表面拉槽匀称无杂色", status: "未确认", date: "2026-09-03", note: "现场比对小样与水景立面对色" },
   { id: "S-02", name: "老皮黄锈石（平台/台阶板）", supplier: "里山墨石", spec: "自然老皮面，做防碱背涂防护", status: "未确认", date: "2026-09-03", note: "核对老皮纹理与拉槽面交界感" },
   { id: "S-03", name: "黑色哑光氟碳漆（钢梁/栏杆）", supplier: "施工方", spec: "哑光黑，涂层厚度>40μm，无光泽反应", status: "未确认", date: "2026-09-03", note: "现场喷涂小样板，光泽度<10%" },
-  { id: "S-04", name: "太行金老皮踏步样板", supplier: "里山墨石", spec: "厚度100mm整板，边沿倒角R5", status: "未确认", date: "2026-09-03", note: "核对防滑拉槽防滑性能" }
+  { id: "S-04", name: "太行金老皮踏步样板", supplier: "里山墨石", spec: "厚度100mm整板，边沿倒角R5", status: "未确认", date: "2026-09-03", note: "核对防滑拉槽防滑性能" },
+  { id: "S-05", name: "园林种植客土与营养土样品", supplier: "施工方", spec: "松软无石块，pH 6.5-7.5，有机质>3%", status: "未确认", date: "2026-09-03", note: "核对泥炭土与沙壤土混合比例" }
 ];
 
 let manifestData = [
@@ -398,6 +404,7 @@ let manifestData = [
   { cat: "钢构", name: "圆钢栏杆 1~5 与杆件 A/B", param: "Φ16圆钢 + 5/10mm扁钢 + 钢板", weight: "0.35", desc: "隐蔽焊接靠墙西侧，用于挂布帘" },
   { cat: "钢构", name: "定制金属置物架", param: "30×30方钢/角钢 + 金属冲孔网板", weight: "0.15", desc: "底端连接-0.030，侧面隐蔽固定" },
   { cat: "隐蔽", name: "偏心柱脚基础与混凝土垫层", param: "300mm C25 + -120×160×16埋件", weight: "8.50", desc: "强卡口：优先浇筑，养护7天后再铺景石" },
+  { cat: "隐蔽", name: "园林碎石垫层与种植土回填", param: "150mm级配碎石 + 30-80cm厚客土种植土", weight: "12.00", desc: "防石材下沉断裂，铺陶粒/无纺布透水过滤层" },
   { cat: "物流", name: "石材长途卡车运输", param: "13.5米高栏/平板卡车", weight: "24.34", desc: "4.54t大石放中央轴线，木托盘固结" },
   { cat: "吊装", name: "100吨大吨位汽车吊台班", param: "100吨汽车吊 · 25米半径", weight: "-", desc: "吊装4.54t大石至25m远处" },
   { cat: "吊装", name: "专业吊装指挥与柔性吊具", param: "高强柔性吊带 + 3名信号工", weight: "-", desc: "严禁钢丝绳，保护石角，溜绳落位" },
@@ -415,7 +422,7 @@ let crossData = [
 let wbsData = [
   { code:"WBS-01", name:"现场放线与地下管线探摸", owner:"施工方", start:"09-03", end:"09-03", days:1, ms:"准备阶段" },
   { code:"WBS-02", name:"里山墨石合同签署与定金", owner:"业主 + 石材厂", start:"09-03", end:"09-04", days:1, ms:"锁料与排期" },
-  { code:"WBS-03", name:"钢柱脚基础&景石垫层浇筑", owner:"施工方", start:"09-04", end:"09-06", days:2, ms:"隐蔽工程" },
+  { code:"WBS-03", name:"钢柱脚基础、园林垫层&种植土回填", owner:"施工方", start:"09-04", end:"09-06", days:2, ms:"隐蔽工程" },
   { code:"WBS-04", name:"矿山选石照片三方确认", owner:"石材厂 + 设计方", start:"09-04", end:"09-06", days:2, ms:"石材选型" },
   { code:"WBS-05", name:"混凝土基础7天养护期", owner:"施工方", start:"09-06", end:"09-12", days:7, ms:"基础完工" },
   { code:"WBS-06", name:"钢楼梯主骨架&平台安装", owner:"施工方", start:"09-10", end:"09-12", days:2, ms:"钢框架校正" },
@@ -431,9 +438,9 @@ let expandedSet = new Set();
 
 function loadSavedData() {
   try {
-    const c = localStorage.getItem('jl_checklist_v4');
-    const l = localStorage.getItem('jl_logs_v4');
-    const sm = localStorage.getItem('jl_samples_v4');
+    const c = localStorage.getItem('jl_checklist_v5');
+    const l = localStorage.getItem('jl_logs_v5');
+    const sm = localStorage.getItem('jl_samples_v5');
     if (c) checklistData = JSON.parse(c);
     if (l) auditLogs = JSON.parse(l);
     if (sm) sampleData = JSON.parse(sm);
@@ -683,7 +690,7 @@ function renderAudit(){
 function clearAuditLogs(){
   if(confirm('确认清空所有修改痕迹历史记录吗？')){
     auditLogs = [];
-    localStorage.removeItem('jl_logs_v4');
+    localStorage.removeItem('jl_logs_v5');
     renderAudit();
   }
 }
@@ -697,7 +704,7 @@ function renderManifest(){
     const items = manifestData.filter(m=>m.cat===cat);
     const secDiv = document.createElement('div');
     secDiv.className = 'text-[12px] font-bold text-[#706B63] px-1 mt-2 truncate-1';
-    secDiv.innerText = cat==='石材' ? '一 · 石材供货（里山墨石）' : cat==='钢构' ? '二 · 钢结构平台' : cat==='隐蔽' ? '三 · 混凝土基础' : cat==='物流' ? '四 · 长途运输' : cat==='吊装' ? '五 · 现场吊装' : '六 · 成品保护';
+    secDiv.innerText = cat==='石材' ? '一 · 石材供货（里山墨石）' : cat==='钢构' ? '二 · 钢结构平台' : cat==='隐蔽' ? '三 · 混凝土基础与园林基建' : cat==='物流' ? '四 · 长途运输' : cat==='吊装' ? '五 · 现场吊装' : '六 · 成品保护';
     cont.appendChild(secDiv);
     items.forEach(m=>{
       const div = document.createElement('div');
@@ -842,19 +849,19 @@ function toggleModule(tabId) {
 }
 
 function saveLocal(){
-  localStorage.setItem('jl_checklist_v4', JSON.stringify(checklistData));
-  localStorage.setItem('jl_logs_v4', JSON.stringify(auditLogs));
-  localStorage.setItem('jl_samples_v4', JSON.stringify(sampleData));
+  localStorage.setItem('jl_checklist_v5', JSON.stringify(checklistData));
+  localStorage.setItem('jl_logs_v5', JSON.stringify(auditLogs));
+  localStorage.setItem('jl_samples_v5', JSON.stringify(sampleData));
 }
 function saveData(){
   saveLocal();
-  alert('💾 包含完整修改痕迹与样品数据的协同记录已成功保存！');
+  alert('💾 包含完整园林基建、种植土及修改痕迹的协同记录已成功保存！');
 }
 function exportJSON(){
   const obj = { checklistData, sampleData, auditLogs };
   const s = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj,null,2));
   const a = document.createElement('a');
-  a.href = s; a.download = `金山岭小院交底与样品数据_${new Date().toISOString().slice(0,10)}.json`;
+  a.href = s; a.download = `金山岭小院交底与园林基建数据_${new Date().toISOString().slice(0,10)}.json`;
   document.body.appendChild(a); a.click(); a.remove();
 }
 function importJSON(e){
@@ -870,7 +877,7 @@ function importJSON(e){
       }
       else if(Array.isArray(d)){ checklistData = d; }
       saveLocal(); renderChecklist(); renderSamples(); renderAudit();
-      alert('📥 成功导入交底、样品与修改痕迹数据！');
+      alert('📥 成功导入数据！');
     }catch(err){ alert('⚠️ 导入文件格式错误！'); }
   };
   r.readAsText(f);
