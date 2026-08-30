@@ -34,6 +34,13 @@
     text-overflow: ellipsis !important;
   }
 
+  /* Natural Multi-line Wrapping for Explanatory Text */
+  .wrap-natural {
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+
   .card-zen {
     background: var(--card-bg);
     border-radius: 16px;
@@ -116,10 +123,8 @@
   <div class="px-4 pt-3.5 pb-2.5">
     <div class="flex items-center justify-between gap-2">
       <div class="flex items-center gap-2.5 min-w-0">
-        <!-- 极简高雅几何古建筑线条徽标 (Minimalist Architectural SVG Icon) -->
         <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2A2624] to-[#1C1A19] border border-[#B89355]/40 flex-shrink-0 flex items-center justify-center p-1.5 shadow-inner">
           <svg class="w-full h-full text-[#B89355]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <!-- 极简庭院屋檐与置石线条 -->
             <path d="M3 10L12 4L21 10" />
             <path d="M5 10V19C5 19.5 5.5 20 6 20H18C18.5 20 19 19.5 19 19V10" />
             <path d="M9 20V14H15V20" />
@@ -129,7 +134,7 @@
 
         <div class="min-w-0">
           <div class="text-[15px] font-bold text-[#F4F1EA] tracking-wide truncate-1">金山岭小院 · 施工协同</div>
-          <div class="text-[10px] text-[#A39B90] mt-0.5 tracking-wider truncate-1">9月3日现场交底 · 单行极简雅奢</div>
+          <div class="text-[10px] text-[#A39B90] mt-0.5 tracking-wider truncate-1">9月3日现场交底 · 雅奢完整显示</div>
         </div>
       </div>
       <select id="userRole" class="bg-[#2A2725] text-[#E0DAD0] text-xs font-semibold rounded-lg px-2.5 py-2 border border-[#44403C] focus:outline-none focus:border-[#B89355] max-w-[135px] truncate-1 flex-shrink-0">
@@ -301,11 +306,11 @@
     <div id="manifestContainer" class="space-y-3"></div>
   </section>
 
-  <!-- ============ MODULE 4 : CROSS POINTS ============ -->
+  <!-- ============ MODULE 4 : CROSS POINTS (修正为自然多行换行，保证手机端文字完整显示) ============ -->
   <section id="tab4" class="hidden space-y-3.5 pt-2">
     <div class="card-zen p-4">
-      <div class="text-xs font-bold text-[#23201E] truncate-1">6 大主工序 · 5 处关键交叉碰撞控制</div>
-      <div class="text-[11px] text-[#706B63] mt-1 truncate-1">防止基础受损、螺栓眼错位及电焊火花烧伤艺术石材</div>
+      <div class="text-xs font-bold text-[#23201E]">6 大主工序 · 5 处关键交叉碰撞控制</div>
+      <div class="text-[11px] text-[#706B63] mt-1">防止基础受损、螺栓眼错位及电焊火花烧伤艺术石材</div>
     </div>
     <div id="crossContainer" class="space-y-3"></div>
   </section>
@@ -668,8 +673,8 @@ function renderAudit(){
         <span class="text-[10px] text-[#8C857B] flex-shrink-0 font-mono">${log.time}</span>
       </div>
       <div class="text-[12px] space-y-0.5 pt-1 border-t border-[#EFECE6]">
-        <div class="text-[#A83232] line-through decoration-[#F8D7D7] truncate-1"><span class="text-[10px] text-[#8C857B]">旧：</span>${escapeHtml(log.oldVal)}</div>
-        <div class="text-[#2E6B38] font-semibold truncate-1"><span class="text-[10px] text-[#8C857B]">新：</span>${escapeHtml(log.newVal)}</div>
+        <div class="text-[#A83232] line-through decoration-[#F8D7D7] wrap-natural"><span class="text-[10px] text-[#8C857B]">旧：</span>${escapeHtml(log.oldVal)}</div>
+        <div class="text-[#2E6B38] font-semibold wrap-natural"><span class="text-[10px] text-[#8C857B]">新：</span>${escapeHtml(log.newVal)}</div>
       </div>`;
     cont.appendChild(div);
   });
@@ -703,15 +708,16 @@ function renderManifest(){
           <div class="text-[9px] text-[#8C857B]">吨</div>
         </div>
         <div class="flex-1 min-w-0">
-          <div class="text-[13px] font-bold text-[#23201E] truncate-1">${escapeHtml(m.name)}</div>
-          <div class="text-[11px] font-mono text-[#706B63] mt-0.5 truncate-1">${escapeHtml(m.param)}</div>
-          <div class="text-[11px] text-[#8C857B] mt-1 truncate-1">${escapeHtml(m.desc)}</div>
+          <div class="text-[13px] font-bold text-[#23201E] wrap-natural">${escapeHtml(m.name)}</div>
+          <div class="text-[11px] font-mono text-[#706B63] mt-0.5 wrap-natural">${escapeHtml(m.param)}</div>
+          <div class="text-[11px] text-[#8C857B] mt-1 wrap-natural">${escapeHtml(m.desc)}</div>
         </div>`;
       cont.appendChild(div);
     });
   });
 }
 
+/* 重点修复：工序交叉碰撞组件（Tab 4）采用 wrap-natural 允许自然多行换行，确保文字在手机屏幕上100%完整显示 */
 function renderCross(){
   const cont = document.getElementById('crossContainer');
   if(!cont) return;
@@ -722,12 +728,12 @@ function renderCross(){
     div.style.borderLeftColor = c.c;
     div.innerHTML = `
       <div class="flex items-center gap-2 mb-1 min-w-0">
-        <span class="w-2 h-2 rounded-full flex-shrink-0" style="background:${c.c}"></span>
-        <span class="text-[13px] font-bold text-[#23201E] truncate-1">${c.title}</span>
+        <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:${c.c}"></span>
+        <span class="text-[14px] font-bold text-[#23201E] wrap-natural">${c.title}</span>
       </div>
-      <div class="text-[11px] font-mono text-[#8C857B] mb-2.5 truncate-1">${c.sub}</div>
-      <div class="text-[12px] text-[#57534E] mb-2.5 leading-relaxed truncate-1"><span class="font-bold text-[#A83232]">⚠ 冲突隐患：</span>${c.risk}</div>
-      <div class="text-[12px] bg-[#E8F5E9] text-[#2E6B38] border border-[#C8E6C9] rounded-xl p-2.5 leading-relaxed truncate-1"><span class="font-bold">✅ 强卡口动作：</span>${c.act}</div>`;
+      <div class="text-[11px] font-mono text-[#8C857B] mb-2.5 wrap-natural">${c.sub}</div>
+      <div class="text-[12px] text-[#57534E] mb-2.5 leading-relaxed wrap-natural"><span class="font-bold text-[#A83232]">⚠ 冲突隐患：</span>${c.risk}</div>
+      <div class="text-[12px] bg-[#E8F5E9] text-[#2E6B38] border border-[#C8E6C9] rounded-xl p-2.5 leading-relaxed wrap-natural"><span class="font-bold">✅ 强卡口动作：</span>${c.act}</div>`;
     cont.appendChild(div);
   });
 }
@@ -738,23 +744,23 @@ function renderCrane(){
   cont.innerHTML = `
     <div class="card-zen p-4 bg-gradient-to-br from-[#1C1A19] to-[#2A2725] text-[#F4F1EA]">
       <div class="text-xs text-[#B89355] font-bold truncate-1">📐 起重力矩物理计算</div>
-      <div class="text-[11px] text-[#A39B90] mt-0.5 truncate-1">现场距离路面 25 米 · 最重单件水波纹石 4.54 吨</div>
+      <div class="text-[11px] text-[#A39B90] mt-0.5 wrap-natural">现场距离路面 25 米 · 最重单件水波纹石 4.54 吨</div>
       <div class="bg-[#2A2725] rounded-xl p-3.5 mt-3 space-y-1.5 text-xs font-mono border border-[#383533]">
-        <p class="truncate-1">• 工作幅度 R = <span class="text-[#B89355] font-bold">25 米</span></p>
-        <p class="truncate-1">• 水波纹石 #8 = <span class="text-[#B89355] font-bold">4.54 吨</span></p>
-        <p class="truncate-1">• 柔性吊具预留 = <span class="text-[#B89355] font-bold">0.30 吨</span></p>
-        <p class="truncate-1">• 额定荷载 P = <span class="text-[#B89355] font-bold">4.84 吨</span></p>
-        <p class="pt-2 border-t border-[#383533] text-[#A7F3D0] font-bold truncate-1">最小起重力矩 = 4.84 × 25 = 121.0 吨·米</p>
+        <p class="wrap-natural">• 工作幅度 R = <span class="text-[#B89355] font-bold">25 米</span></p>
+        <p class="wrap-natural">• 水波纹石 #8 = <span class="text-[#B89355] font-bold">4.54 吨</span></p>
+        <p class="wrap-natural">• 柔性吊具预留 = <span class="text-[#B89355] font-bold">0.30 吨</span></p>
+        <p class="wrap-natural">• 额定荷载 P = <span class="text-[#B89355] font-bold">4.84 吨</span></p>
+        <p class="pt-2 border-t border-[#383533] text-[#A7F3D0] font-bold wrap-natural">最小起重力矩 = 4.84 × 25 = 121.0 吨·米</p>
       </div>
     </div>
 
     <div class="card-zen p-4">
       <div class="text-xs font-bold text-[#23201E] truncate-1">🚚 长途卡车运输选型</div>
-      <div class="text-[11px] text-[#706B63] mt-0.5 truncate-1">石材总重 24.34 吨 · 总体积 9.01 m³</div>
+      <div class="text-[11px] text-[#706B63] mt-0.5 wrap-natural">石材总重 24.34 吨 · 总体积 9.01 m³</div>
       <div class="bg-[#FAF6F0] rounded-xl p-3 mt-2.5 text-xs text-[#57534E] space-y-1 border border-[#EFE8DE]">
-        <p class="truncate-1">• 推荐：<strong class="text-[#23201E]">13.5米高栏/平板卡车</strong>（可一车运达）</p>
-        <p class="truncate-1">• 4.54t大石置于车厢中央轴线平衡重心</p>
-        <p class="truncate-1">• 石板竖放，垫珍珠棉与木托盘固定</p>
+        <p class="wrap-natural">• 推荐：<strong class="text-[#23201E]">13.5米高栏/平板卡车</strong>（可一车运达）</p>
+        <p class="wrap-natural">• 4.54t大石置于车厢中央轴线平衡重心</p>
+        <p class="wrap-natural">• 石板竖放，垫珍珠棉与木托盘固定</p>
       </div>
     </div>
 
@@ -775,7 +781,7 @@ function renderCrane(){
             <span class="truncate-1">25m额定: ${c.load}</span>
             <span class="truncate-1">安全系数: ${c.coef}</span>
           </div>
-          <div class="text-[11px] text-[#706B63] mt-0.5 truncate-1">${c.r}</div>
+          <div class="text-[11px] text-[#706B63] mt-0.5 wrap-natural">${c.r}</div>
         </div>`).join('')}
     </div>`;
 }
@@ -797,9 +803,9 @@ function renderWbs(){
           <span class="text-[11px] font-mono font-bold text-[#B89355] truncate-1">${w.code}</span>
           <span class="text-[10px] bg-[#EFECE6] text-[#706B63] px-2 py-0.5 rounded font-semibold flex-shrink-0">${w.days}天</span>
         </div>
-        <div class="text-[13px] font-bold text-[#23201E] mt-0.5 truncate-1">${w.name}</div>
-        <div class="text-[11px] text-[#8C857B] mt-0.5 truncate-1">${w.owner} · ${w.start} → ${w.end}</div>
-        <div class="text-[10px] mt-1.5 inline-flex bg-[#FAF6F0] text-[#9E6B18] border border-[#EFE8DE] px-2 py-0.5 rounded-md font-medium truncate-1">📍 ${w.ms}</div>
+        <div class="text-[13px] font-bold text-[#23201E] mt-0.5 wrap-natural">${w.name}</div>
+        <div class="text-[11px] text-[#8C857B] mt-0.5 wrap-natural">${w.owner} · ${w.start} → ${w.end}</div>
+        <div class="text-[10px] mt-1.5 inline-flex bg-[#FAF6F0] text-[#9E6B18] border border-[#EFE8DE] px-2 py-0.5 rounded-md font-medium wrap-natural">📍 ${w.ms}</div>
       </div>`;
     cont.appendChild(div);
   });
