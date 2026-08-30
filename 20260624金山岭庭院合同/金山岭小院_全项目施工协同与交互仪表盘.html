@@ -150,7 +150,7 @@
 
 <main class="px-3.5 pt-4 space-y-4">
 
-  <!-- ===== Visual Grid Navigation Cards (取消图标 & 70% 灰色显示) ===== -->
+  <!-- ===== Visual Grid Navigation Cards ===== -->
   <div class="space-y-2">
     <div class="text-xs font-bold text-[#706B63]/70 opacity-70 px-1 flex justify-between items-center gap-2">
       <span class="truncate-1">模块视觉导航（点击展开对应功能）</span>
@@ -158,7 +158,7 @@
     </div>
     
     <div class="grid grid-cols-2 gap-2.5">
-      <!-- Card 1: 交底清单 (纯文字，无图标) -->
+      <!-- Card 1: 交底清单 -->
       <div onclick="toggleModule('tab1')" id="gc1" class="nav-grid-card active h-24 bg-gradient-to-br from-[#1C1A19] to-[#2C2927] text-[#F4F1EA] p-3 flex flex-col justify-between">
         <div class="flex justify-end items-center">
           <span class="text-[10px] bg-[#B89355] text-black font-bold px-1.5 py-0.5 rounded truncate-1">主卡口</span>
@@ -216,7 +216,7 @@
       <!-- Card 6: 施工关键里程碑 -->
       <div onclick="toggleModule('tab6')" id="gc6" class="nav-grid-card h-24 bg-gradient-to-br from-[#253636] to-[#172626] text-[#F4F1EA] p-3 flex flex-col justify-between">
         <div class="flex justify-end items-center">
-          <span class="text-[10px] bg-[#3E6B6B] text-white font-bold px-1.5 py-0.5 rounded truncate-1">10节点</span>
+          <span class="text-[10px] bg-[#3E6B6B] text-white font-bold px-1.5 py-0.5 rounded truncate-1">9节点</span>
         </div>
         <div class="min-w-0">
           <div class="text-xs font-bold text-[#F4F1EA] truncate-1">施工关键里程碑</div>
@@ -225,7 +225,7 @@
       </div>
     </div>
 
-    <!-- Card 7: 修改日志 (重磅置底·玄铁色，取消图标) -->
+    <!-- Card 7: 修改日志 (重磅置底·玄铁色) -->
     <div onclick="toggleModule('tab2')" id="gc2" class="nav-grid-card h-20 bg-gradient-to-r from-[#1C1A19] via-[#2A2725] to-[#1C1A19] text-[#F4F1EA] p-3.5 flex items-center justify-between border-l-4 border-l-[#B89355]">
       <div class="min-w-0">
         <div class="text-xs font-bold text-[#F4F1EA] truncate-1">多方修改痕迹与审计日志 (Audit Log)</div>
@@ -315,7 +315,7 @@
   <section id="tab6" class="hidden space-y-3.5 pt-2">
     <div class="card-zen p-4">
       <div class="text-xs font-bold text-[#23201E] truncate-1">施工进度排期与关键里程碑</div>
-      <div class="text-[11px] text-[#706B63] mt-1 truncate-1">10 大 WBS 节点 · 现场验收与交接卡口</div>
+      <div class="text-[11px] text-[#706B63] mt-1 truncate-1">9 大 WBS 施工排期节点 · 现场工程验收与交接卡口</div>
     </div>
     <div id="wbsContainer" class="space-y-2.5"></div>
   </section>
@@ -408,17 +408,17 @@ let crossData = [
   { c:"#3D3A5C", title:"交叉点五 · 电焊火花防烧伤", sub:"工序3/6 电焊打磨 ↔ 石材成品表面保护", risk:"现场焊接圆钢栏杆时，高温电焊火花与铁屑飞溅到已铺好的黄锈石或水波纹大石上，会瞬间熔化留下黑斑与黄锈。", act:"现场焊接打磨前，周边3米内石材必须覆盖湿麻袋与三合板防护；栏杆尽可在工厂完成喷涂，现场做补漆。" }
 ];
 
+// 已移除单纯商业性的“合同签署与定金”节点，更新为纯技术施工节点排期
 let wbsData = [
   { code:"WBS-01", name:"现场放线与地下管线探摸", owner:"施工方", start:"09-03", end:"09-03", days:1, ms:"准备阶段" },
-  { code:"WBS-02", name:"里山墨石合同签署与定金", owner:"业主 + 石材厂", start:"09-03", end:"09-04", days:1, ms:"锁料与排期" },
-  { code:"WBS-03", name:"钢柱脚基础、园林垫层&种植土回填", owner:"施工方", start:"09-04", end:"09-06", days:2, ms:"隐蔽工程" },
-  { code:"WBS-04", name:"矿山选石照片三方确认", owner:"石材厂 + 设计方", start:"09-04", end:"09-06", days:2, ms:"石材选型" },
-  { code:"WBS-05", name:"混凝土基础7天养护期", owner:"施工方", start:"09-06", end:"09-12", days:7, ms:"基础完工" },
-  { code:"WBS-06", name:"钢楼梯主骨架&平台安装", owner:"施工方", start:"09-10", end:"09-12", days:2, ms:"钢框架校正" },
-  { code:"WBS-07", name:"里山墨石厂内1:1试拼验收", owner:"石材厂 + 业主/设计", start:"09-12", end:"09-14", days:2, ms:"石材发货" },
-  { code:"WBS-08", name:"100吨吊车进场与石材铺贴", owner:"石材厂 + 施工方", start:"09-15", end:"09-18", days:3, ms:"石材落位" },
-  { code:"WBS-09", name:"圆钢栏杆焊接与氟碳漆补漆", owner:"施工方", start:"09-18", end:"09-20", days:2, ms:"涂装收尾" },
-  { code:"WBS-10", name:"灯具线路接通与整体验收", owner:"全员", start:"09-20", end:"09-22", days:2, ms:"整体验收" }
+  { code:"WBS-02", name:"钢柱脚基础、园林垫层&种植土回填", owner:"施工方", start:"09-04", end:"09-06", days:2, ms:"隐蔽工程" },
+  { code:"WBS-03", name:"矿山选石照片三方确认", owner:"石材厂 + 设计方", start:"09-04", end:"09-06", days:2, ms:"石材选型" },
+  { code:"WBS-04", name:"混凝土基础7天养护期", owner:"施工方", start:"09-06", end:"09-12", days:7, ms:"基础完工" },
+  { code:"WBS-05", name:"钢楼梯主骨架&平台安装", owner:"施工方", start:"09-10", end:"09-12", days:2, ms:"钢框架校正" },
+  { code:"WBS-06", name:"里山墨石厂内1:1试拼验收", owner:"石材厂 + 业主/设计", start:"09-12", end:"09-14", days:2, ms:"石材发货" },
+  { code:"WBS-07", name:"100吨吊车进场与石材铺贴", owner:"石材厂 + 施工方", start:"09-15", end:"09-18", days:3, ms:"石材落位" },
+  { code:"WBS-08", name:"圆钢栏杆焊接与氟碳漆补漆", owner:"施工方", start:"09-18", end:"09-20", days:2, ms:"涂装收尾" },
+  { code:"WBS-09", name:"灯具线路接通与整体验收", owner:"全员", start:"09-20", end:"09-22", days:2, ms:"整体验收" }
 ];
 
 let auditLogs = [];
