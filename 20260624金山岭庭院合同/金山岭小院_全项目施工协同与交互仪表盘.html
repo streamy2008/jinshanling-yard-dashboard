@@ -214,7 +214,7 @@
         </div>
         <div class="min-w-0">
           <div class="text-xs font-bold text-[#F4F1EA] truncate-1">大吊车起重力矩计算</div>
-          <div class="text-[10px] text-[#9CB5C4] truncate-1">4.54t单件大石吊装</div>
+          <div class="text-[10px] text-[#9CB5C4] truncate-1">4.54t单件大石远距离吊装</div>
         </div>
       </div>
 
@@ -246,7 +246,7 @@
     </div>
   </div>
 
-  <!-- ============ MODULE 1 : CHECKLIST (加入园林基础与种植土) ============ -->
+  <!-- ============ MODULE 1 : CHECKLIST ============ -->
   <section id="tab1" class="space-y-3.5 pt-2">
     <!-- Progress & KPI Card -->
     <div class="card-zen p-4">
@@ -306,7 +306,7 @@
     <div id="manifestContainer" class="space-y-3"></div>
   </section>
 
-  <!-- ============ MODULE 4 : CROSS POINTS ============ -->
+  <!-- ============ MODULE 4 : CROSS POINTS (修正交叉点4：吊车停靠外侧沥青路面，不侵入小院新浇基础) ============ -->
   <section id="tab4" class="hidden space-y-3.5 pt-2">
     <div class="card-zen p-4">
       <div class="text-xs font-bold text-[#23201E]">6 大主工序 · 5 处关键交叉碰撞控制</div>
@@ -351,14 +351,12 @@
 </footer>
 
 <script>
-// 升级后的 checklistData，包含园林基建与种植土土质回填卡口
 let checklistData = [
   { section: "一 · 现场测量、园林基建与种植土厚度核对", items: [
     { id: "1.1", name: "边界与定位轴线复核", desc: "依据建施A-1.1复核院墙边界、建筑边界及首层踏步起始点绝对尺寸。", ref: "建施 A-1.1", owner: "施工方 + 建筑设计", measure: "现场实测净宽___mm，较图纸偏差___mm", status: "未复核", action: "图纸尺寸现场放线撒灰线确认", date: "2026-09-03", reviewer: "" },
     { id: "1.2", name: "地下水井与井盖对接", desc: "核对原有水井、井筒顶标高及地下管线埋深，确认混凝土基座标高-0.030。", ref: "建施 A-1.2", owner: "施工方 + 园林设计", measure: "井筒顶标高实测___，需提高/降低___mm", status: "未复核", action: "调整井筒标高，基座预留水泵控制器支架", date: "2026-09-04", reviewer: "" },
     { id: "1.3", name: "±0.000标高与排水坡度", desc: "核对首层室内±0.000与庭院碎石铺地、水泥压光地面1%坡度走向。", ref: "建施 A-1.2", owner: "施工方 + 园林设计", measure: "坡度走向与水井井盖标高匹配", status: "未复核", action: "开挖坡度向井盖倾斜，避免积水倒灌", date: "2026-09-05", reviewer: "" },
     { id: "1.4", name: "二层露台高差与反坎", desc: "核对一楼地面至二层露台(+3.090/+3.250)实际结构净高。", ref: "建施 A-1.3", owner: "施工方 + 建筑设计", measure: "实测二层露台底板标高为___", status: "未复核", action: "核算钢楼梯踏步步数与坡度", date: "2026-09-03", reviewer: "" },
-    // 新增园林基建与种植土卡口
     { id: "1.5", name: "园林硬质基座与级配碎石垫层", desc: "核对太行金/黄锈石铺地与景石下方的150mm厚级配碎石夯实垫层及素混凝土垫层。", ref: "园林基建规范", owner: "施工方 + 园林设计", measure: "碎石垫层压实度满足>0.93，厚度实测___mm", status: "未复核", action: "基层夯实排干水，防后期石材下沉断裂", date: "2026-09-05", reviewer: "" },
     { id: "1.6", name: "种植土土质、酸碱度与绿化回填厚度", desc: "核对植栽槽与绿化区种植土有效厚度(草坪>30cm, 灌木>50cm, 乔木>80cm)及pH值。", ref: "园林景观规范", owner: "施工方 + 园林设计", measure: "种植土厚度实测___cm，pH值实测___", status: "未复核", action: "清除建筑垃圾，回填客土营养土，保持透水性", date: "2026-09-06", reviewer: "" },
     { id: "1.7", name: "盲沟盲管排水与种植区透水过滤层", desc: "核对种植槽及景石周边盲管排水走向，铺设陶粒/粗砂透水层及无纺布过滤层。", ref: "园林隐蔽工程", owner: "施工方 + 园林设计", measure: "透水滤水层厚度实测___mm，无纺布铺设无缝隙", status: "未复核", action: "防止植物烂根与泥水冲刷污染黄锈石地铺", date: "2026-09-07", reviewer: "" }
@@ -393,7 +391,7 @@ let sampleData = [
 ];
 
 let manifestData = [
-  { cat: "石材", name: "中国黑水波纹大雕塑石 (#8)", param: "2800×1500×400 mm · 水波纹加工", weight: "4.54", desc: "4.54t超重单件，需100t吊车吊装，下垫C25垫层" },
+  { cat: "石材", name: "中国黑水波纹大雕塑石 (#8)", param: "2800×1500×400 mm · 水波纹加工", weight: "4.54", desc: "4.54t超重单件，需100t吊车远距离吊装，下垫C25垫层" },
   { cat: "石材", name: "中国黑景石群 (#1~#9)", param: "#1: 1600×1300×500 / #5: 1250×500×600", weight: "7.08", desc: "背切平、合缝加工，与水景/景墙贴合落位" },
   { cat: "石材", name: "中国黑石皮与内凹雕塑石", param: "石皮 30-80mm · 雕塑 200×200×350", weight: "1.48", desc: "水景立面与景墙贴皮饰面，高耐候胶固结" },
   { cat: "石材", name: "黄锈石/太行金雕塑群 (D1~D5)", param: "D4: 1600×1000×200 / D1: 2340×600×200", weight: "2.62", desc: "深化分板，平台侧面及立面干挂/托底固定" },
@@ -406,16 +404,17 @@ let manifestData = [
   { cat: "隐蔽", name: "偏心柱脚基础与混凝土垫层", param: "300mm C25 + -120×160×16埋件", weight: "8.50", desc: "强卡口：优先浇筑，养护7天后再铺景石" },
   { cat: "隐蔽", name: "园林碎石垫层与种植土回填", param: "150mm级配碎石 + 30-80cm厚客土种植土", weight: "12.00", desc: "防石材下沉断裂，铺陶粒/无纺布透水过滤层" },
   { cat: "物流", name: "石材长途卡车运输", param: "13.5米高栏/平板卡车", weight: "24.34", desc: "4.54t大石放中央轴线，木托盘固结" },
-  { cat: "吊装", name: "100吨大吨位汽车吊台班", param: "100吨汽车吊 · 25米半径", weight: "-", desc: "吊装4.54t大石至25m远处" },
+  { cat: "吊装", name: "100吨大吨位汽车吊台班", param: "100吨汽车吊 · 25米半径", weight: "-", desc: "停靠小院外侧沥青路面，吊装4.54t大石至25m远处" },
   { cat: "吊装", name: "专业吊装指挥与柔性吊具", param: "高强柔性吊带 + 3名信号工", weight: "-", desc: "严禁钢丝绳，保护石角，溜绳落位" },
   { cat: "保护", name: "现场短驳与成品保护", param: "小履带车/液压车 + 珍珠棉", weight: "-", desc: "狭窄区二次短驳，铺贴后覆盖防护" }
 ];
 
+// 修正交叉点四：明确吊车停靠在小院外侧沥青路面上，不直接进入小院内新浇筑的基础区域，但需防护支腿压强
 let crossData = [
   { c:"#B89355", title:"交叉点一 · 数据反向互锁", sub:"工序2 基础浇筑 ↔ 工序4 厂内1:1试拼", risk:"现场预埋件坐标若偏差10~20mm，工厂石材打孔后到场底部螺栓眼与钢梁托板孔完全错位。", act:"基础浇筑后施工方立刻实测预埋件坐标，在工厂石材正式打孔前反馈给里山墨石，按实测值精确开孔。" },
   { c:"#A83232", title:"交叉点二 · 空间物理屏蔽", sub:"工序3 钢骨架安装 ↔ 工序5 100吨吊车吊装", risk:"若先将二层钢平台焊死，100吨吊车伸臂25米吊装4.54t水波纹大石落位时，吊装轨迹会被二层钢梁阻挡。", act:"实行“先大后小”，100吨吊车先将4.54t大石落位；二层高空杆件预留3m×3m天井，大石落位后再封口。" },
   { c:"#456878", title:"交叉点三 · 隐蔽穿线同步", sub:"工序4 石材预留灯槽 ↔ 工序6 铺贴与电气暗敷", risk:"黄锈石台阶与平台配有嵌入式防水射灯，若铺石材时没同步穿线，石材铺死后线路无法穿入，现场打孔会导致石材崩角。", act:"石材厂预先开出背面线槽与引线孔；现场铺贴石材时电工全程跟班，一边铺石材一边拉套管穿线。" },
-  { c:"#5E4266", title:"交叉点四 · 重载地基保护", sub:"工序5 100吨吊车作业 ↔ 工序2 新浇筑基础", risk:"100吨大吊车自重及4.54t吊重动荷载极高，若在养护未满7天的混凝土基础旁作业，会将新基础压裂压塌。", act:"基础浇筑后强制保证至少7天完整养护期；吊车路面支腿下方必须垫厚度≥20mm钢板分散压强。" },
+  { c:"#5E4266", title:"交叉点四 · 吊车停靠路面防护与新基础养护", sub:"工序5 100吨吊车外侧停靠 ↔ 工序2 院内新浇筑基础", risk:"100吨吊车停靠在院外沥青路面，通过25米长臂伸入院内吊装。吊车支腿局部压强极高，若路面下方有暗管易压坍，且吊装飞越院内未满7天养护期的混凝土基础时，若发生失手碰撞会压坏新基础。", act:"100吨吊车停靠在小院外侧沥青路面上（不直接进入小院内），支腿下必须垫≥20mm钢板；院内偏心柱脚基础强制养护7天且覆盖三合板保护后，方可进行25米飞越吊装作业。" },
   { c:"#3D3A5C", title:"交叉点五 · 电焊火花防烧伤", sub:"工序3/6 电焊打磨 ↔ 石材成品表面保护", risk:"现场焊接圆钢栏杆时，高温电焊火花与铁屑飞溅到已铺好的黄锈石或水波纹大石上，会瞬间熔化留下黑斑与黄锈。", act:"现场焊接打磨前，周边3米内石材必须覆盖湿麻袋与三合板防护；栏杆尽可在工厂完成喷涂，现场做补漆。" }
 ];
 
@@ -744,39 +743,41 @@ function renderCross(){
   });
 }
 
+/* 修正起重计算模块：明确吊车停靠在院外沥青路面，通过25米臂长跨越吊装至院内 */
 function renderCrane(){
   const cont = document.getElementById('craneContainer');
   if(!cont) return;
   cont.innerHTML = `
     <div class="card-zen p-4 bg-gradient-to-br from-[#1C1A19] to-[#2A2725] text-[#F4F1EA]">
-      <div class="text-xs text-[#B89355] font-bold truncate-1">📐 起重力矩物理计算</div>
-      <div class="text-[11px] text-[#A39B90] mt-0.5 wrap-natural">现场距离路面 25 米 · 最重单件水波纹石 4.54 吨</div>
+      <div class="text-xs text-[#B89355] font-bold truncate-1">📐 起重力矩物理计算 (院外路面停靠 ➔ 25米飞越吊装)</div>
+      <div class="text-[11px] text-[#A39B90] mt-0.5 wrap-natural">吊车停靠于小院外侧沥青路面，不侵入小院内新浇筑的基础与地面</div>
       <div class="bg-[#2A2725] rounded-xl p-3.5 mt-3 space-y-1.5 text-xs font-mono border border-[#383533]">
-        <p class="wrap-natural">• 工作幅度 R = <span class="text-[#B89355] font-bold">25 米</span></p>
-        <p class="wrap-natural">• 水波纹石 #8 = <span class="text-[#B89355] font-bold">4.54 吨</span></p>
+        <p class="wrap-natural">• 吊车停靠位置 = <span class="text-[#B89355] font-bold">小院外侧沥青路面（不占院内基础）</span></p>
+        <p class="wrap-natural">• 吊装工作幅度 R = <span class="text-[#B89355] font-bold">25 米（飞越至小院落地点）</span></p>
+        <p class="wrap-natural">• 最重单件 (水波纹石 #8) = <span class="text-[#B89355] font-bold">4.54 吨 (4,536 kg)</span></p>
         <p class="wrap-natural">• 柔性吊具预留 = <span class="text-[#B89355] font-bold">0.30 吨</span></p>
-        <p class="wrap-natural">• 额定荷载 P = <span class="text-[#B89355] font-bold">4.84 吨</span></p>
+        <p class="wrap-natural">• 实际安全荷载 P = <span class="text-[#B89355] font-bold">4.84 吨</span></p>
         <p class="pt-2 border-t border-[#383533] text-[#A7F3D0] font-bold wrap-natural">最小起重力矩 = 4.84 × 25 = 121.0 吨·米</p>
       </div>
     </div>
 
     <div class="card-zen p-4">
-      <div class="text-xs font-bold text-[#23201E] truncate-1">🚚 长途卡车运输选型</div>
+      <div class="text-xs font-bold text-[#23201E] truncate-1">🚚 长途卡车运输与现场停靠选型</div>
       <div class="text-[11px] text-[#706B63] mt-0.5 wrap-natural">石材总重 24.34 吨 · 总体积 9.01 m³</div>
       <div class="bg-[#FAF6F0] rounded-xl p-3 mt-2.5 text-xs text-[#57534E] space-y-1 border border-[#EFE8DE]">
-        <p class="wrap-natural">• 推荐：<strong class="text-[#23201E]">13.5米高栏/平板卡车</strong>（可一车运达）</p>
-        <p class="wrap-natural">• 4.54t大石置于车厢中央轴线平衡重心</p>
-        <p class="wrap-natural">• 石板竖放，垫珍珠棉与木托盘固定</p>
+        <p class="wrap-natural">• 卡车推荐：<strong class="text-[#23201E]">13.5米高栏/平板卡车</strong>（一车运达）</p>
+        <p class="wrap-natural">• 吊车位置：停靠于外侧沥青路面，支腿下铺 ≥20mm 钢板分散压强</p>
+        <p class="wrap-natural">• 安全隔离：吊装飞越过程中，院内新浇筑基础周围严禁人员站立</p>
       </div>
     </div>
 
     <div class="card-zen p-4 space-y-2.5">
-      <div class="text-xs font-bold text-[#23201E] truncate-1">吊车吨位可行性对比</div>
+      <div class="text-xs font-bold text-[#23201E] truncate-1">吊车吨位可行性对比 (25米跨度吊装)</div>
       ${[
-        {t:'25吨汽车吊', load:'0.8~1.2吨', coef:'0.25', v:'❌ 绝对不可用', cls:'bg-[#FDF2F2] border-[#F8D7D7]', vcls:'text-[#A83232]', r:'主臂不足，远低于荷载'},
-        {t:'50吨汽车吊', load:'2.0~2.5吨', coef:'0.51', v:'❌ 无法吊装大石', cls:'bg-[#FDF2F2] border-[#F8D7D7]', vcls:'text-[#A83232]', r:'25m半径下无法起吊4.54t'},
-        {t:'80吨汽车吊', load:'3.8~4.5吨', coef:'0.93', v:'⚠️ 临界风险', cls:'bg-[#FEF8EA] border-[#F3E5AB]', vcls:'text-[#9E6B18]', r:'接近极限，遇阵风易报警'},
-        {t:'100吨汽车吊', load:'5.5~7.5吨', coef:'1.35+', v:'✅ 推荐主吊车型', cls:'bg-[#E8F5E9] border-[#C8E6C9]', vcls:'text-[#2E6B38]', r:'力矩安全充裕，可一次吊装到位'}
+        {t:'25吨汽车吊', load:'0.8~1.2吨', coef:'0.25', v:'❌ 绝对不可用', cls:'bg-[#FDF2F2] border-[#F8D7D7]', vcls:'text-[#A83232]', r:'主臂长度不足，25m远处额定起重量远低于荷载'},
+        {t:'50吨汽车吊', load:'2.0~2.5吨', coef:'0.51', v:'❌ 无法吊装大石', cls:'bg-[#FDF2F2] border-[#F8D7D7]', vcls:'text-[#A83232]', r:'在25m工作半径下无法起吊4.54t水波纹大石'},
+        {t:'80吨汽车吊', load:'3.8~4.5吨', coef:'0.93', v:'⚠️ 临界风险', cls:'bg-[#FEF8EA] border-[#F3E5AB]', vcls:'text-[#9E6B18]', r:'接近极限，若遇山区阵风或微晃易报警'},
+        {t:'100吨汽车吊', load:'5.5~7.5吨', coef:'1.35+', v:'✅ 推荐主吊车型', cls:'bg-[#E8F5E9] border-[#C8E6C9]', vcls:'text-[#2E6B38]', r:'停靠外侧路面，起重力矩充裕，可一次飞越吊装落位'}
       ].map(c=>`
         <div class="${c.cls} border rounded-xl p-3">
           <div class="flex items-center justify-between gap-2">
@@ -842,7 +843,7 @@ function toggleModule(tabId) {
     'tab4': '工序交叉碰撞',
     'tab5': '大吊车起重计算',
     'tab6': '施工里程碑',
-    'tab2': '修改痕迹审计日志'
+    'tab2': '修改痕痕迹审计日志'
   };
   document.getElementById('activeTabName').innerText = '当前展开：' + (names[tabId] || '');
   targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -855,13 +856,13 @@ function saveLocal(){
 }
 function saveData(){
   saveLocal();
-  alert('💾 包含完整园林基建、种植土及修改痕迹的协同记录已成功保存！');
+  alert('💾 包含完整修改痕迹与样品数据的协同记录已成功保存！');
 }
 function exportJSON(){
   const obj = { checklistData, sampleData, auditLogs };
   const s = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj,null,2));
   const a = document.createElement('a');
-  a.href = s; a.download = `金山岭小院交底与园林基建数据_${new Date().toISOString().slice(0,10)}.json`;
+  a.href = s; a.download = `金山岭小院交底与样品数据_${new Date().toISOString().slice(0,10)}.json`;
   document.body.appendChild(a); a.click(); a.remove();
 }
 function importJSON(e){
