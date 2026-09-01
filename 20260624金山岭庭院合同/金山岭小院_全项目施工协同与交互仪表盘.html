@@ -311,6 +311,7 @@
         <div class="bg-[#2A2725] rounded-xl p-2 border border-[#383533] min-w-0"><div class="text-sm font-bold text-[#E0DAD0] truncate-1">8.50t</div><div class="text-[10px] text-[#A39B90] mt-0.5 truncate-1">C25混凝土基础</div></div>
       </div>
     </div>
+    <div id="hoistingContainer" class="space-y-3"></div>
     <div id="manifestContainer" class="space-y-3"></div>
   </section>
 
@@ -748,6 +749,50 @@ function renderManifest(){
   });
 }
 
+// ===== 一层/二层 × 吊装分级渲染 =====
+function renderHoisting(){
+  const cont = document.getElementById('hoistingContainer');
+  if(!cont) return;
+  cont.innerHTML = '';
+
+  const card = document.createElement('div');
+  card.className = 'card-zen p-4';
+  card.innerHTML = `
+    <div class="flex items-center gap-2 mb-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-[#A83232]"></span>
+      <span class="text-[13px] font-bold text-[#23201E]">🏠 一层 / 二层 × 吊装分级（按单件重量）</span>
+    </div>
+
+    <div class="text-[11px] font-bold text-[#23201E] mt-2 mb-1">🏠 一层 · 天井水景庭院区（吊装重点）</div>
+    <div class="space-y-1.5 mb-2.5">
+      <div class="bg-[#FDF2F2] border border-[#F8D7D7] rounded-xl p-2.5">
+        <div class="text-[11px] font-bold text-[#A83232]">A级 · 必须100吨吊车（>2.5t，2件 7.34t）</div>
+        <div class="text-[11px] text-[#57534E] mt-1 wrap-natural">#8 水波纹雕塑石 2800×1500×400 = <strong>4.54t</strong> ｜ #3 中国黑景石#1 1600×1300×500 = <strong>2.81t</strong></div>
+      </div>
+      <div class="bg-[#FEF8EA] border border-[#F3E5AB] rounded-xl p-2.5">
+        <div class="text-[11px] font-bold text-[#9E6B18]">B级 · 中小吊车/叉车（0.5~2.5t，6件 4.16t）</div>
+        <div class="text-[11px] text-[#57534E] mt-1 wrap-natural">#7 景石#5(1.01t) ｜ #55 D4(0.86t) ｜ #52 D1(0.76t) ｜ #4 景石#2(0.73t) ｜ #56 D5(0.65t) ｜ #53/54 D2/D3(0.24~0.37t)</div>
+      </div>
+      <div class="bg-[#FAF8F5] border border-[#EFE8DE] rounded-xl p-2.5">
+        <div class="text-[11px] font-bold text-[#706B63]">C/D级 · 人工+小机械（40+件 ≈12.6t）</div>
+        <div class="text-[11px] text-[#706B63] mt-1 wrap-natural">景石#3/#6/#7/#8/#9、石皮、桥面(蝴蝶榫)、地铺、台阶、平台板及雕塑A/B/C组全部小件</div>
+      </div>
+    </div>
+
+    <div class="text-[11px] font-bold text-[#23201E] mt-2 mb-1">🏠 二层 · 露台小院区（无吊装需求）</div>
+    <div class="bg-[#E8F5E9] border border-[#C8E6C9] rounded-xl p-2.5 mb-2.5">
+      <div class="text-[11px] text-[#57534E] wrap-natural">#17 黄绣石太行金老皮面穿插地铺（1800×500×80，5.52m²）：<strong>人工搬运即可</strong>；二层露台植栽槽收边石轻质，全程人工+手推车，完全不需要吊车。</div>
+    </div>
+
+    <div class="text-[11px] font-bold text-[#23201E] mt-2 mb-1">🚨 吊装执行结论</div>
+    <div class="bg-[#F0F7FA] border border-[#D8E8EF] rounded-xl p-2.5 space-y-1">
+      <div class="text-[11px] text-[#456878] wrap-natural">① 100吨吊车唯一任务：吊装 <strong>#8 水波纹石(4.54t) + #3 景石#1(2.81t)</strong> 至一层天井，25米飞越落位；</div>
+      <div class="text-[11px] text-[#456878] wrap-natural">② 二层完全无吊装，地铺板可提前人工搬运至露台，不与吊车作业冲突；</div>
+      <div class="text-[11px] text-[#456878] wrap-natural">③ 一层B级6件中石可在100吨台班内顺带吊装，或另派25吨吊车/叉车，节省台班费。</div>
+    </div>`;
+  cont.appendChild(card);
+}
+
 function renderCross(){
   const cont = document.getElementById('crossContainer');
   if(!cont) return;
@@ -1087,6 +1132,7 @@ renderChecklist();
 renderSamples();
 renderAudit();
 renderManifest();
+renderHoisting();
 renderCross();
 renderCrane();
 renderWbs();
