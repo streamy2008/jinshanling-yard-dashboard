@@ -266,10 +266,10 @@
         <div id="overallBar" class="h-full bg-[#B89355] rounded-full transition-all duration-500" style="width:0%"></div>
       </div>
       <div class="grid grid-cols-4 gap-2 mt-4 text-center border-t border-[#EFECE6] pt-3">
-        <div><div class="text-base font-bold text-[#23201E] truncate-1" id="kpiTotal">21</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">总项</div></div>
+        <div><div class="text-base font-bold text-[#23201E] truncate-1" id="kpiTotal">22</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">总项</div></div>
         <div><div class="text-base font-bold text-[#2E6B38] truncate-1" id="kpiPass">0</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">已通过</div></div>
         <div><div class="text-base font-bold text-[#9E6B18] truncate-1" id="kpiProgress">0</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">处理中</div></div>
-        <div><div class="text-base font-bold text-[#8C857B] truncate-1" id="kpiPending">21</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">未复核</div></div>
+        <div><div class="text-base font-bold text-[#8C857B] truncate-1" id="kpiPending">22</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">未复核</div></div>
       </div>
     </div>
 
@@ -374,7 +374,8 @@ let checklistData = [
     { id: "1.5", name: "园林硬质基座与级配碎石垫层", desc: "核对太行金/黄锈石铺地与景石下方的150mm厚级配碎石夯实垫层及素混凝土垫层。", ref: "园林基建规范", owner: "施工方 + 园林设计", measure: "碎石垫层压实度满足>0.93，厚度实测___mm", status: "未复核", action: "基层夯实排干水，防后期石材下沉断裂", date: "2026-09-06", reviewer: "" },
     { id: "1.6", name: "种植土土质、酸碱度与绿化回填厚度", desc: "核对植栽槽与绿化区种植土有效厚度(草坪>30cm, 灌木>50cm, 乔木>80cm)及pH值。", ref: "园林景观规范", owner: "施工方 + 园林设计", measure: "种植土厚度实测___cm，pH值实测___", status: "未复核", action: "清除建筑垃圾，回填客土营养土，保持透水性", date: "2026-09-07", reviewer: "" },
     { id: "1.7", name: "盲沟盲管排水与种植区透水过滤层", desc: "核对种植槽及景石周边盲管排水走向，铺设陶粒/粗砂透水层及无纺布过滤层。", ref: "园林隐蔽工程", owner: "施工方 + 园林设计", measure: "透水滤水层厚度实测___mm，无纺布铺设无缝隙", status: "未复核", action: "防止植物烂根与泥水冲刷污染黄锈石地铺", date: "2026-09-08", reviewer: "" },
-    { id: "1.8", name: "天井景石/踏步石顶面完成面标高", desc: "核对天井内水波纹大雕塑石、中国黑景石及黄锈石踏步石的顶面完成面标高，与室内±0.000、水景常水位及周边地铺完成面的相对高差关系。", ref: "建施 A-1.1 / 深化放线", owner: "施工方 + 建筑设计", measure: "天井石头顶面绝对标高实测___m，较设计值偏差___mm", status: "未复核", action: "以设计绝对标高为准，预留垫层与结合层厚度，确保排水坡度与空间观感", date: "2026-09-04", reviewer: "" }
+    { id: "1.8", name: "天井景石/踏步石顶面完成面标高", desc: "核对天井内水波纹大雕塑石、中国黑景石及黄锈石踏步石的顶面完成面标高，与室内±0.000、水景常水位及周边地铺完成面的相对高差关系。", ref: "建施 A-1.1 / 深化放线", owner: "施工方 + 建筑设计", measure: "天井石头顶面绝对标高实测___m，较设计值偏差___mm", status: "未复核", action: "以设计绝对标高为准，预留垫层与结合层厚度，确保排水坡度与空间观感", date: "2026-09-04", reviewer: "" },
+    { id: "1.9", name: "种植带物理边界设置", desc: "核对所有种植带是否设置物理边界（不锈钢收边/石材路缘/砌筑挡土边），确保种植土不流失蔓延污染铺装面，便于后期割草维护。", ref: "园林景观深化", owner: "施工方 + 园林设计", measure: "种植带边界形式确认：___，边界顶面标高实测___mm", status: "未复核", action: "所有种植带设置明确物理边界，边界顶面低于铺装完成面5-10mm便于收边", date: "2026-09-08", reviewer: "" }
   ]},
   { section: "二 · 石材加工与 1:1 预制交底（里山墨石）", items: [
     { id: "2.1", name: "水波纹大雕塑石落位", desc: "确认水景边落位坐标与下方4.5吨承重垫层。", ref: "定件#8", owner: "石材厂 + 建筑设计", measure: "落位坐标放线确认，下垫C25混凝土", status: "未复核", action: "施工方先打素混凝土垫层再吊装", date: "2026-09-07", reviewer: "" },
@@ -922,7 +923,8 @@ const meetingData = {
       { t: "景观排水点位调整", d: "新加楼梯装置导致原靠墙下水点冲突，需在基础施工后确定最侧边排水点位，并在装置底侧增加排水点以防积水。" },
       { t: "庭院灯光布局叠加", d: "建筑灯光已定，园林部分新增的自然派景观灯光需叠合到建筑图纸上统一考虑，确保不冲突且具层次感。" },
       { t: "爬藤植物施工处理", d: "楼梯与墙体4.5cm缝隙虽窄但可留作爬山虎攀爬空间，后期通过堆坡种植及牵引绳引导根系生长，无需预留过宽种植带。" },
-      { t: "种植箱内胆设计", d: "外侧为锈板，内侧需加不锈钢内胆以防竹子根系破坏箱体结构，具体尺寸需到现场讨论确定。" }
+      { t: "种植箱内胆设计", d: "外侧为锈板，内侧需加不锈钢内胆以防竹子根系破坏箱体结构，具体尺寸需到现场讨论确定。" },
+      { t: "种植带物理边界", d: "所有种植带均需设置物理边界（不锈钢收边/石材路缘/砌筑挡土边），便于后期割草与维护，防止种植土流失蔓延污染铺装面。" }
     ]},
     { title: "三 · 施工工序与现场协调", icon: "🏗️", color: "#456878", items: [
       { t: "工序交叉与空间协调", d: "一层院落工具间安装需先于钢架施工完成，建议在狭窄空间内先塞入工具间并做好保护，再行施工钢架以防磕碰。" },
