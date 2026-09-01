@@ -134,7 +134,7 @@
 
         <div class="min-w-0">
           <div class="text-[15px] font-bold text-[#F4F1EA] tracking-wide truncate-1">金山岭小院 · 施工协同</div>
-          <div class="text-[10px] text-[#A39B90] mt-0.5 tracking-wider truncate-1">9月3日现场交底日</div>
+          <div class="text-[10px] text-[#A39B90] mt-0.5 tracking-wider truncate-1">9月4日现场交底日</div>
         </div>
       </div>
       <select id="userRole" class="bg-[#2A2725] text-[#E0DAD0] text-xs font-semibold rounded-lg px-2.5 py-2 border border-[#44403C] focus:outline-none focus:border-[#B89355] max-w-[135px] truncate-1 flex-shrink-0">
@@ -164,7 +164,7 @@
           <span class="text-[10px] bg-[#B89355] text-black font-bold px-1.5 py-0.5 rounded truncate-1">主卡口</span>
         </div>
         <div class="min-w-0">
-          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">9月3日现场交底清单</div>
+          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">9月4日现场交底清单</div>
           <div class="text-[10px] text-[#A39B90] truncate-1">测量/园林基建/种植土/逻辑</div>
         </div>
       </div>
@@ -172,7 +172,7 @@
       <!-- Card 2: 现场确认样品清单 -->
       <div onclick="toggleModule('tabSample')" id="gcSample" class="nav-grid-card h-24 bg-gradient-to-br from-[#2E3B32] to-[#1E2821] text-[#F4F1EA] p-3 flex flex-col justify-between">
         <div class="flex justify-end items-center">
-          <span class="text-[10px] bg-[#4E7A59] text-white font-bold px-1.5 py-0.5 rounded truncate-1">9月3日封样</span>
+          <span class="text-[10px] bg-[#4E7A59] text-white font-bold px-1.5 py-0.5 rounded truncate-1">9月4日封样</span>
         </div>
         <div class="min-w-0">
           <div class="text-xs font-bold text-[#F4F1EA] truncate-1">现场确认样品清单</div>
@@ -225,12 +225,12 @@
       </div>
     </div>
 
-    <!-- Card 7: 9月3日会议纪要与待办 (重磅新增) -->
+    <!-- Card 7: 9月4日会议纪要与待办 (重磅新增) -->
     <div onclick="toggleModule('tabMeeting')" id="gcMeeting" class="nav-grid-card h-20 bg-gradient-to-r from-[#2B231B] via-[#3D3226] to-[#2B231B] text-[#F4F1EA] p-3.5 flex items-center justify-between border-l-4 border-l-[#D8C29D]">
       <div class="flex items-center gap-3 min-w-0">
         <span class="text-2xl flex-shrink-0">📋</span>
         <div class="min-w-0">
-          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">9月3日会议纪要与待办事项</div>
+          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">9月4日会议纪要与待办事项</div>
           <div class="text-[10px] text-[#D8C29D] mt-0.5 truncate-1">样品清单 · 园林协同 · 报价修正 · 待办分工</div>
         </div>
       </div>
@@ -254,7 +254,7 @@
     </div>
   </div>
 
-  <!-- ============ MODULE 1 : CHECKLIST (9月3日交底日，计划落实完成日期明确为交底后) ============ -->
+  <!-- ============ MODULE 1 : CHECKLIST (9月4日交底日，计划落实完成日期明确为交底后) ============ -->
   <section id="tab1" class="space-y-3.5 pt-2">
     <!-- Progress & KPI Card -->
     <div class="card-zen p-4">
@@ -292,7 +292,7 @@
       <div class="flex justify-between items-center border-b border-[#EFECE6] pb-3 gap-2">
         <div class="min-w-0">
           <div class="text-xs font-bold text-[#23201E] truncate-1">🪵 现场确认样品与材质封样清单</div>
-          <div class="text-[11px] text-[#706B63] mt-0.5 truncate-1">9月3日交底日现场实物对色与签样封存</div>
+          <div class="text-[11px] text-[#706B63] mt-0.5 truncate-1">9月4日交底日现场实物对色与签样封存</div>
         </div>
         <button onclick="addSampleItem()" class="text-xs bg-[#23201E] text-[#B89355] font-bold px-3 py-1.5 rounded-lg border border-[#B89355]/40 flex-shrink-0">+ 新增封样</button>
       </div>
@@ -332,12 +332,12 @@
   <section id="tab6" class="hidden space-y-3.5 pt-2">
     <div class="card-zen p-4">
       <div class="text-xs font-bold text-[#23201E] truncate-1">施工进度排期与关键里程碑</div>
-      <div class="text-[11px] text-[#706B63] mt-1 truncate-1">9 大 WBS 节点 · 9月3日交底后正式施工阶段排期</div>
+      <div class="text-[11px] text-[#706B63] mt-1 truncate-1">9 大 WBS 节点 · 9月4日交底后正式施工阶段排期</div>
     </div>
     <div id="wbsContainer" class="space-y-2.5"></div>
   </section>
 
-  <!-- ============ MODULE MEETING : 9月3日会议纪要与待办 ============ -->
+  <!-- ============ MODULE MEETING : 9月4日会议纪要与待办 ============ -->
   <section id="tabMeeting" class="hidden space-y-3.5 pt-2">
     <div id="meetingContainer" class="space-y-3.5"></div>
   </section>
@@ -364,9 +364,9 @@
 </footer>
 
 <script>
-// 修正：9月3日为交底沟通日，各项落实完成日期合理安排在交底日之后（9月4日-9月12日）
+// 修正：9月4日为交底沟通日，各项落实完成日期合理安排在交底日之后（9月4日-9月12日）
 let checklistData = [
-  { section: "一 · 现场测量、园林基建与种植土厚度核对（9月3日交底）", items: [
+  { section: "一 · 现场测量、园林基建与种植土厚度核对（9月4日交底）", items: [
     { id: "1.1", name: "边界与定位轴线复核", desc: "依据建施A-1.1复核院墙边界、建筑边界及首层踏步起始点绝对尺寸。", ref: "建施 A-1.1", owner: "施工方 + 建筑设计", measure: "现场实测净宽___mm，较图纸偏差___mm", status: "未复核", action: "图纸尺寸现场放线撒灰线确认", date: "2026-09-04", reviewer: "" },
     { id: "1.2", name: "地下水井与井盖对接", desc: "核对原有水井、井筒顶标高及地下管线埋深，确认混凝土基座标高-0.030。", ref: "建施 A-1.2", owner: "施工方 + 园林设计", measure: "井筒顶标高实测___，需提高/降低___mm", status: "未复核", action: "调整井筒标高，基座预留水泵控制器支架", date: "2026-09-05", reviewer: "" },
     { id: "1.3", name: "±0.000标高与排水坡度", desc: "核对首层室内±0.000与庭院碎石铺地、水泥压光地面1%坡度走向。", ref: "建施 A-1.2", owner: "施工方 + 园林设计", measure: "坡度走向与水井井盖标高匹配", status: "未复核", action: "开挖坡度向井盖倾斜，避免积水倒灌", date: "2026-09-05", reviewer: "" },
@@ -398,20 +398,20 @@ let checklistData = [
 ];
 
 let sampleData = [
-  { id: "S-01", name: "中国黑石材（水波纹/自然面）", supplier: "里山墨石", spec: "色泽纯黑，表面拉槽匀称无杂色", status: "未确认", date: "2026-09-03", note: "9月3日交底日现场比对小样与水景立面对色" },
-  { id: "S-02", name: "老皮黄锈石（平台/台阶板）", supplier: "里山墨石", spec: "自然老皮面，做防碱背涂防护", status: "未确认", date: "2026-09-03", note: "核对老皮纹理与拉槽面交界感" },
-  { id: "S-03", name: "黑色哑光氟碳漆（钢梁/栏杆）", supplier: "施工方", spec: "哑光黑，涂层厚度>40μm，无光泽反应", status: "未确认", date: "2026-09-03", note: "现场喷涂小样板，光泽度<10%" },
-  { id: "S-04", name: "太行金老皮踏步样板", supplier: "里山墨石", spec: "厚度100mm整板，边沿倒角R5", status: "未确认", date: "2026-09-03", note: "核对防滑拉槽防滑性能" },
-  { id: "S-05", name: "园林种植客土与营养土样品", supplier: "施工方", spec: "松软无石块，pH 6.5-7.5，有机质>3%", status: "未确认", date: "2026-09-03", note: "核对泥炭土与沙壤土混合比例" },
-  { id: "S-06", name: "天井景石/踏步石标高与垫层厚度样板", supplier: "施工方 + 建筑设计", spec: "天井石头顶面完成面标高与±0.000高差，预留垫层+结合层总厚度", status: "未确认", date: "2026-09-03", note: "9月3日交底日现场用水准仪复核天井石头标高样板与垫层厚度" },
-  { id: "S-07", name: "全院景石/雕塑石规格尺寸汇总封样", supplier: "里山墨石", spec: "涵盖中国黑景石#1~#9、水波纹雕塑石#8、黄锈石雕塑D1~D5及A/B/C组等56项石子的长×宽×高规格尺寸", status: "未确认", date: "2026-09-03", note: "9月3日交底日现场逐项核对全院石子规格尺寸与报价清单一致性并封样" },
-  { id: "S-08", name: "黄锈石桥面蝴蝶榫连接件（大小与材质）", supplier: "里山墨石", spec: "蝴蝶榫长度/厚度尺寸及材质，与桥面黄锈石一致（对照报价单#15两块拼接蝴蝶榫）", status: "未确认", date: "2026-09-03", note: "现场确认蝴蝶榫大小、材质与嵌合深度，确保两块桥面拼接牢固" },
-  { id: "S-09", name: "二层小院地铺砾石（不同粒径）", supplier: "施工方 + 园林设计", spec: "灰色碎石铺地分不同粒径规格（如5-10mm / 10-20mm / 20-40mm）分别封样", status: "未确认", date: "2026-09-03", note: "二层露台/小院灰色碎石铺地按粒径分级封样确认" },
-  { id: "S-10", name: "建筑装置石料", supplier: "里山墨石", spec: "建筑装置（钢楼梯平台承载）石料材质、规格尺寸与完成面处理", status: "未确认", date: "2026-09-03", note: "核对建筑装置石材与钢构立面的连接界面与受力要求" },
-  { id: "S-11", name: "老皮材质荔枝面交界样品", supplier: "里山墨石", spec: "老皮黄锈石老皮面与荔枝面交界过渡样品，可直接观察到交界面效果", status: "未确认", date: "2026-09-03", note: "确认老皮面与荔枝面交界线的加工方式与视觉效果" },
-  { id: "S-12", name: "Φ16圆钢栏杆组合样品（喷哑光黑漆）", supplier: "施工方", spec: "Φ16mm圆钢三根并列组合样品，黑色哑光氟碳喷涂，含焊缝打磨平整效果", status: "未确认", date: "2026-09-03", note: "对照详图02 P3-P9，确认三根圆钢间距与哑光黑漆面效果" },
-  { id: "S-13", name: "金属冲孔板尺寸（现场切割样板）", supplier: "施工方", spec: "冲孔板孔径/孔距/板厚，按现场实测尺寸现场切割封样", status: "未确认", date: "2026-09-03", note: "对照详图02 P10-11置物架冲孔板，现场切割确定尺寸" },
-  { id: "S-14", name: "螺栓选型尺寸要求（袁工确认）", supplier: "袁工", spec: "石材底部螺栓与钢结构连接螺栓的型号、规格尺寸由袁工现场确认", status: "未确认", date: "2026-09-03", note: "现场记录袁工确定的螺栓直径/长度/材质要求" }
+  { id: "S-01", name: "中国黑石材（水波纹/自然面）", supplier: "里山墨石", spec: "色泽纯黑，表面拉槽匀称无杂色", status: "未确认", date: "2026-09-04", note: "9月4日交底日现场比对小样与水景立面对色" },
+  { id: "S-02", name: "老皮黄锈石（平台/台阶板）", supplier: "里山墨石", spec: "自然老皮面，做防碱背涂防护", status: "未确认", date: "2026-09-04", note: "核对老皮纹理与拉槽面交界感" },
+  { id: "S-03", name: "黑色哑光氟碳漆（钢梁/栏杆）", supplier: "施工方", spec: "哑光黑，涂层厚度>40μm，无光泽反应", status: "未确认", date: "2026-09-04", note: "现场喷涂小样板，光泽度<10%" },
+  { id: "S-04", name: "太行金老皮踏步样板", supplier: "里山墨石", spec: "厚度100mm整板，边沿倒角R5", status: "未确认", date: "2026-09-04", note: "核对防滑拉槽防滑性能" },
+  { id: "S-05", name: "园林种植客土与营养土样品", supplier: "施工方", spec: "松软无石块，pH 6.5-7.5，有机质>3%", status: "未确认", date: "2026-09-04", note: "核对泥炭土与沙壤土混合比例" },
+  { id: "S-06", name: "天井景石/踏步石标高与垫层厚度样板", supplier: "施工方 + 建筑设计", spec: "天井石头顶面完成面标高与±0.000高差，预留垫层+结合层总厚度", status: "未确认", date: "2026-09-04", note: "9月4日交底日现场用水准仪复核天井石头标高样板与垫层厚度" },
+  { id: "S-07", name: "全院景石/雕塑石规格尺寸汇总封样", supplier: "里山墨石", spec: "涵盖中国黑景石#1~#9、水波纹雕塑石#8、黄锈石雕塑D1~D5及A/B/C组等56项石子的长×宽×高规格尺寸", status: "未确认", date: "2026-09-04", note: "9月4日交底日现场逐项核对全院石子规格尺寸与报价清单一致性并封样" },
+  { id: "S-08", name: "黄锈石桥面蝴蝶榫连接件（大小与材质）", supplier: "里山墨石", spec: "蝴蝶榫长度/厚度尺寸及材质，与桥面黄锈石一致（对照报价单#15两块拼接蝴蝶榫）", status: "未确认", date: "2026-09-04", note: "现场确认蝴蝶榫大小、材质与嵌合深度，确保两块桥面拼接牢固" },
+  { id: "S-09", name: "二层小院地铺砾石（不同粒径）", supplier: "施工方 + 园林设计", spec: "灰色碎石铺地分不同粒径规格（如5-10mm / 10-20mm / 20-40mm）分别封样", status: "未确认", date: "2026-09-04", note: "二层露台/小院灰色碎石铺地按粒径分级封样确认" },
+  { id: "S-10", name: "建筑装置石料", supplier: "里山墨石", spec: "建筑装置（钢楼梯平台承载）石料材质、规格尺寸与完成面处理", status: "未确认", date: "2026-09-04", note: "核对建筑装置石材与钢构立面的连接界面与受力要求" },
+  { id: "S-11", name: "老皮材质荔枝面交界样品", supplier: "里山墨石", spec: "老皮黄锈石老皮面与荔枝面交界过渡样品，可直接观察到交界面效果", status: "未确认", date: "2026-09-04", note: "确认老皮面与荔枝面交界线的加工方式与视觉效果" },
+  { id: "S-12", name: "Φ16圆钢栏杆组合样品（喷哑光黑漆）", supplier: "施工方", spec: "Φ16mm圆钢三根并列组合样品，黑色哑光氟碳喷涂，含焊缝打磨平整效果", status: "未确认", date: "2026-09-04", note: "对照详图02 P3-P9，确认三根圆钢间距与哑光黑漆面效果" },
+  { id: "S-13", name: "金属冲孔板尺寸（现场切割样板）", supplier: "施工方", spec: "冲孔板孔径/孔距/板厚，按现场实测尺寸现场切割封样", status: "未确认", date: "2026-09-04", note: "对照详图02 P10-11置物架冲孔板，现场切割确定尺寸" },
+  { id: "S-14", name: "螺栓选型尺寸要求（袁工确认）", supplier: "袁工", spec: "石材底部螺栓与钢结构连接螺栓的型号、规格尺寸由袁工现场确认", status: "未确认", date: "2026-09-04", note: "现场记录袁工确定的螺栓直径/长度/材质要求" }
 ];
 
 let manifestData = [
@@ -441,9 +441,9 @@ let crossData = [
   { c:"#3D3A5C", title:"交叉点五 · 电焊火花防烧伤", sub:"工序3/6 电焊打磨 ↔ 石材成品表面保护", risk:"现场焊接圆钢栏杆时，高温电焊火花与铁屑飞溅到已铺好的黄锈石或水波纹大石上，会瞬间熔化留下黑斑与黄锈。", act:"现场焊接打磨前，周边3米内石材必须覆盖湿麻袋与三合板防护；栏杆尽可在工厂完成喷涂，现场做补漆。" }
 ];
 
-// 修正：9月3日为四方现场交底沟通日（WBS-01），交底确认后于9月4日开始正式施工（WBS-02起）
+// 修正：9月4日为四方现场交底沟通日（WBS-01），交底确认后于9月4日开始正式施工（WBS-02起）
 let wbsData = [
-  { code:"WBS-01", name:"9月3日四方现场交底与管线探摸", owner:"四方参会人员", start:"09-03", end:"09-03", days:1, ms:"现场交底节点" },
+  { code:"WBS-01", name:"9月4日四方现场交底与管线探摸", owner:"四方参会人员", start:"09-04", end:"09-04", days:1, ms:"现场交底节点" },
   { code:"WBS-02", name:"钢柱脚基础、园林垫层&种植土回填", owner:"施工方", start:"09-04", end:"09-06", days:2, ms:"隐蔽工程开工" },
   { code:"WBS-03", name:"矿山选石照片三方确认", owner:"石材厂 + 设计方", start:"09-04", end:"09-06", days:2, ms:"石材选型确认" },
   { code:"WBS-04", name:"混凝土基础7天养护期", owner:"施工方", start:"09-06", end:"09-12", days:7, ms:"基础养护完工" },
@@ -907,9 +907,9 @@ function importJSON(e){
   r.readAsText(f);
 }
 
-// ===== 9月3日会议纪要数据 =====
+// ===== 9月4日会议纪要数据 =====
 const meetingData = {
-  overview: "本次会议围绕9月3日庭院施工交底与协同展开，重点确认了石材、金属构件及园林基础的材料样品清单、工序交叉安排及报价单细节，并明确了现场复尺、设备选型及后续对接的具体要求。",
+  overview: "本次会议围绕9月4日庭院施工交底与协同展开，重点确认了石材、金属构件及园林基础的材料样品清单、工序交叉安排及报价单细节，并明确了现场复尺、设备选型及后续对接的具体要求。",
   sections: [
     { title: "一 · 材料样品与打样清单", icon: "🪨", color: "#C5A059", items: [
       { t: "石材面层小样", d: "拉毛面、微自然面、荔枝面、蝴蝶笋等材质需带小样现场确认；蝴蝶笋倾向使用石材材质而非铜材质。" },
@@ -926,7 +926,7 @@ const meetingData = {
     ]},
     { title: "三 · 施工工序与现场协调", icon: "🏗️", color: "#456878", items: [
       { t: "工序交叉与空间协调", d: "一层院落工具间安装需先于钢架施工完成，建议在狭窄空间内先塞入工具间并做好保护，再行施工钢架以防磕碰。" },
-      { t: "石材吊装与吊车进场", d: "9月3日到场首要任务是确认吊车距离及进场路线，明确石材施工的衔接方式。" },
+      { t: "石材吊装与吊车进场", d: "9月4日到场首要任务是确认吊车距离及进场路线，明确石材施工的衔接方式。" },
       { t: "堆坡与土壤改造", d: "堆坡造型在石材吊装完成后进行，底层需清运原有砾石并铺土工布防杂草，表层用腐殖土改良并用三合土塑形。" },
       { t: "喷淋系统规划", d: "下层星星藓种植区需加装自动喷淋系统以提升长势，该管网需布置在堆坡造型完成后的面层上。" }
     ]},
@@ -946,7 +946,7 @@ const meetingData = {
   todos: [
     { item: "提供园林堆坡所需的土壤材料及土工布清单", owner: "狄工" },
     { item: "整理并提供建筑灯光布局图，供狄工叠合考虑新增景观灯光", owner: "赵丹" },
-    { item: "带齐各类石材、金属构件及历史石料小样至9月3日现场", owner: "员工" },
+    { item: "带齐各类石材、金属构件及历史石料小样至9月4日现场", owner: "员工" },
     { item: "提交更新后的石材报价单（修正厚度、删除重复项等）", owner: "员工" },
     { item: "提供固定石材的螺栓规格尺寸需求，以便钢结构配套打孔", owner: "赵丹" },
     { item: "联系西铁厂家寄送射灯实物样品至现场确认色温与亮度", owner: "赵丹" },
