@@ -225,7 +225,21 @@
       </div>
     </div>
 
-    <!-- Card 7: 修改日志 (重磅置底·玄铁色) -->
+    <!-- Card 7: 9月3日会议纪要与待办 (重磅新增) -->
+    <div onclick="toggleModule('tabMeeting')" id="gcMeeting" class="nav-grid-card h-20 bg-gradient-to-r from-[#2B231B] via-[#3D3226] to-[#2B231B] text-[#F4F1EA] p-3.5 flex items-center justify-between border-l-4 border-l-[#D8C29D]">
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="text-2xl flex-shrink-0">📋</span>
+        <div class="min-w-0">
+          <div class="text-xs font-bold text-[#F4F1EA] truncate-1">9月3日会议纪要与待办事项</div>
+          <div class="text-[10px] text-[#D8C29D] mt-0.5 truncate-1">样品清单 · 园林协同 · 报价修正 · 待办分工</div>
+        </div>
+      </div>
+      <div class="text-right flex-shrink-0 ml-2">
+        <span class="text-xs font-bold bg-[#D8C29D] text-black px-2.5 py-0.5 rounded-full truncate-1">8项待办</span>
+      </div>
+    </div>
+
+    <!-- Card 8: 修改日志 (重磅置底·玄铁色) -->
     <div onclick="toggleModule('tab2')" id="gc2" class="nav-grid-card h-20 bg-gradient-to-r from-[#1C1A19] via-[#2A2725] to-[#1C1A19] text-[#F4F1EA] p-3.5 flex items-center justify-between border-l-4 border-l-[#B89355]">
       <div class="flex items-center gap-3 min-w-0">
         <span class="text-2xl flex-shrink-0">📜</span>
@@ -321,6 +335,11 @@
       <div class="text-[11px] text-[#706B63] mt-1 truncate-1">9 大 WBS 节点 · 9月3日交底后正式施工阶段排期</div>
     </div>
     <div id="wbsContainer" class="space-y-2.5"></div>
+  </section>
+
+  <!-- ============ MODULE MEETING : 9月3日会议纪要与待办 ============ -->
+  <section id="tabMeeting" class="hidden space-y-3.5 pt-2">
+    <div id="meetingContainer" class="space-y-3.5"></div>
   </section>
 
   <!-- ============ MODULE 2 : AUDIT LOG (最后置底显示) ============ -->
@@ -822,8 +841,8 @@ function renderWbs(){
 }
 
 function toggleModule(tabId) {
-  const tabs = ['tab1', 'tabSample', 'tab3', 'tab4', 'tab5', 'tab6', 'tab2'];
-  const gridIds = ['gc1', 'gcSample', 'gc3', 'gc4', 'gc5', 'gc6', 'gc2'];
+  const tabs = ['tab1', 'tabSample', 'tab3', 'tab4', 'tab5', 'tab6', 'tabMeeting', 'tab2'];
+  const gridIds = ['gc1', 'gcSample', 'gc3', 'gc4', 'gc5', 'gc6', 'gcMeeting', 'gc2'];
 
   tabs.forEach((id, idx) => {
     const sectionEl = document.getElementById(id);
@@ -846,6 +865,7 @@ function toggleModule(tabId) {
     'tab4': '工序交叉碰撞',
     'tab5': '大吊车起重计算',
     'tab6': '施工里程碑',
+    'tabMeeting': '会议纪要与待办',
     'tab2': '修改痕迹审计日志'
   };
   document.getElementById('activeTabName').innerText = '当前展开：' + (names[tabId] || '');
@@ -887,6 +907,127 @@ function importJSON(e){
   r.readAsText(f);
 }
 
+// ===== 9月3日会议纪要数据 =====
+const meetingData = {
+  overview: "本次会议围绕9月3日庭院施工交底与协同展开，重点确认了石材、金属构件及园林基础的材料样品清单、工序交叉安排及报价单细节，并明确了现场复尺、设备选型及后续对接的具体要求。",
+  sections: [
+    { title: "一 · 材料样品与打样清单", icon: "🪨", color: "#C5A059", items: [
+      { t: "石材面层小样", d: "拉毛面、微自然面、荔枝面、蝴蝶笋等材质需带小样现场确认；蝴蝶笋倾向使用石材材质而非铜材质。" },
+      { t: "地铺与踏步小样", d: "二层小院地铺需带太行金老皮和黄锈石老皮拼接的小样；楼梯踏步需带L型阳角/阴角交接处及倒角效果的小样。" },
+      { t: "雕塑装置小样", d: "立质雕塑需带斜面转角处的老石皮与荔枝面交接状态的小样，以确认交界面效果。" },
+      { t: "水波纹石料", d: "因无法现做完整打样，需带1~3cm和3~5cm不同规格的黑色历史石料，以及类似材质的自然边石料。" },
+      { t: "金属构件小样", d: "栏杆圆钢需带直径16mm的折弯直角样；入口三根圆钢焊接处需带满焊打磨平整后的样块，暂喷哑光黑漆模拟最终颜色。" }
+    ]},
+    { title: "二 · 园林设计与灯光协同", icon: "🌿", color: "#4E7A59", items: [
+      { t: "景观排水点位调整", d: "新加楼梯装置导致原靠墙下水点冲突，需在基础施工后确定最侧边排水点位，并在装置底侧增加排水点以防积水。" },
+      { t: "庭院灯光布局叠加", d: "建筑灯光已定，园林部分新增的自然派景观灯光需叠合到建筑图纸上统一考虑，确保不冲突且具层次感。" },
+      { t: "爬藤植物施工处理", d: "楼梯与墙体4.5cm缝隙虽窄但可留作爬山虎攀爬空间，后期通过堆坡种植及牵引绳引导根系生长，无需预留过宽种植带。" },
+      { t: "种植箱内胆设计", d: "外侧为锈板，内侧需加不锈钢内胆以防竹子根系破坏箱体结构，具体尺寸需到现场讨论确定。" }
+    ]},
+    { title: "三 · 施工工序与现场协调", icon: "🏗️", color: "#456878", items: [
+      { t: "工序交叉与空间协调", d: "一层院落工具间安装需先于钢架施工完成，建议在狭窄空间内先塞入工具间并做好保护，再行施工钢架以防磕碰。" },
+      { t: "石材吊装与吊车进场", d: "9月3日到场首要任务是确认吊车距离及进场路线，明确石材施工的衔接方式。" },
+      { t: "堆坡与土壤改造", d: "堆坡造型在石材吊装完成后进行，底层需清运原有砾石并铺土工布防杂草，表层用腐殖土改良并用三合土塑形。" },
+      { t: "喷淋系统规划", d: "下层星星藓种植区需加装自动喷淋系统以提升长势，该管网需布置在堆坡造型完成后的面层上。" }
+    ]},
+    { title: "四 · 报价单核对与设备选型", icon: "💰", color: "#9E6B18", items: [
+      { t: "报价单差异修正", d: "楼梯最下阶尺寸略大不影响成本；大平台厚度5cm可行但需单独确认；29~31项栏板重复需删除；底部石材厚度应为250mm需更新。" },
+      { t: "流水装置选型确认", d: "泵体、延长管、软管、出水口及配套防水盒等整套设备由员工方选定，甲方确认后直接下单发给员工测试。" },
+      { t: "射灯选型与开孔", d: "外露直径23mm射灯瓦数低且不刺眼，需提前寄样至现场在暗环境中确认效果，制作时需拿实物比对开孔。" },
+      { t: "储物间灯具控制", d: "储藏间中心功能性灯具采用手动开关控制而非感应灯，需就近设置安全可靠的控制面板位置。" }
+    ]},
+    { title: "五 · 模型对齐与技术交底", icon: "📐", color: "#3D3A5C", items: [
+      { t: "建筑与景观模型叠合", d: "场地宽度及二层平台高度存在细微误差，需将建筑模型与景观模型叠合复核，尺寸较真以确保楼梯与建筑关系紧密。" },
+      { t: "扶手形态维持原状", d: "左侧扶手取消向右拐角改为直落状态，经甲方确认仍维持原拐角形态以保证视觉对称与美观。" },
+      { t: "出水点隐藏设计", d: "水波纹装置的出水点需隐藏在波纹中间或重叠处，表面覆盖与石头同纹的小石块漫水而出，避免突兀孔洞。" },
+      { t: "冬季水面维护方案", d: "北方干燥风沙大，无水季节难以保持镜面效果，建议冬季保留薄冰层覆盖水面，既防冻又不显脏乱。" }
+    ]}
+  ],
+  todos: [
+    { item: "提供园林堆坡所需的土壤材料及土工布清单", owner: "狄工" },
+    { item: "整理并提供建筑灯光布局图，供狄工叠合考虑新增景观灯光", owner: "赵丹" },
+    { item: "带齐各类石材、金属构件及历史石料小样至9月3日现场", owner: "员工" },
+    { item: "提交更新后的石材报价单（修正厚度、删除重复项等）", owner: "员工" },
+    { item: "提供固定石材的螺栓规格尺寸需求，以便钢结构配套打孔", owner: "赵丹" },
+    { item: "联系西铁厂家寄送射灯实物样品至现场确认色温与亮度", owner: "赵丹" },
+    { item: "会后拉群分工沟通射灯样品寄送及选型事宜", owner: "全体成员" },
+    { item: "准备钢结构技术交接会，沟通施工精度与复尺流程", owner: "郭工" }
+  ]
+};
+
+function renderMeeting(){
+  const cont = document.getElementById('meetingContainer');
+  if(!cont) return;
+  cont.innerHTML = '';
+
+  // 会议概览
+  const overviewCard = document.createElement('div');
+  overviewCard.className = 'card-zen p-4';
+  overviewCard.innerHTML = `
+    <div class="flex items-center gap-2 mb-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-[#C5A059]"></span>
+      <span class="text-[13px] font-bold text-[#23201E]">📌 会议概览</span>
+    </div>
+    <div class="text-[12px] text-[#57534E] leading-relaxed wrap-natural">${escapeHtml(meetingData.overview)}</div>`;
+  cont.appendChild(overviewCard);
+
+  // 会议小结分类
+  meetingData.sections.forEach(sec=>{
+    const secCard = document.createElement('div');
+    secCard.className = 'card-zen p-4 border-l-4';
+    secCard.style.borderLeftColor = sec.color;
+    secCard.innerHTML = `
+      <div class="flex items-center gap-2 mb-2">
+        <span>${sec.icon}</span>
+        <span class="text-[13px] font-bold text-[#23201E]">${sec.title}</span>
+      </div>
+      <div class="space-y-2.5">
+        ${sec.items.map(it=>`
+          <div class="bg-[#FAF8F5] border border-[#EFE8DE] rounded-xl p-2.5">
+            <div class="text-[12px] font-bold text-[#23201E] wrap-natural">${escapeHtml(it.t)}</div>
+            <div class="text-[11px] text-[#706B63] mt-0.5 leading-relaxed wrap-natural">${escapeHtml(it.d)}</div>
+          </div>`).join('')}
+      </div>`;
+    cont.appendChild(secCard);
+  });
+
+  // 待办事项（可勾选）
+  const todoCard = document.createElement('div');
+  todoCard.className = 'card-zen p-4';
+  todoCard.innerHTML = `
+    <div class="flex items-center justify-between mb-3">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-[#B91C1C]"></span>
+        <span class="text-[13px] font-bold text-[#23201E]">✅ 会议待办事项（点击勾选完成）</span>
+      </div>
+      <span class="text-[10px] bg-[#FDF2F2] text-[#A83232] px-2 py-0.5 rounded font-semibold">${meetingData.todos.length}项待办</span>
+    </div>
+    <div class="space-y-2" id="todoListContainer">
+      ${meetingData.todos.map((t, idx)=>`
+        <label class="flex items-center gap-2.5 bg-[#FAF8F5] border border-[#EFE8DE] rounded-xl p-3 tap cursor-pointer" style="touch-action:manipulation">
+          <input type="checkbox" class="w-4 h-4 accent-[#C5A059] flex-shrink-0" onchange="toggleTodo(${idx}, this.checked)">
+          <div class="flex-1 min-w-0">
+            <div class="text-[12px] font-semibold text-[#23201E] wrap-natural">${escapeHtml(t.item)}</div>
+          </div>
+          <span class="flex-shrink-0 text-[10px] bg-[#EFECE6] text-[#706B63] px-2 py-0.5 rounded font-bold">${escapeHtml(t.owner)}</span>
+        </label>`).join('')}
+    </div>`;
+  cont.appendChild(todoCard);
+}
+
+function toggleTodo(idx, checked){
+  const card = document.getElementById('todoListContainer').children[idx];
+  const item = meetingData.todos[idx];
+  const operator = document.getElementById('userRole').value || '未知操作人';
+  const ts = new Date().toLocaleString('zh-CN',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+  auditLogs.unshift({ time: ts, user: operator, id: '待办-'+(idx+1), field: '待办状态', oldVal: checked?'未完成':'已完成', newVal: checked?'已完成':'未完成' });
+  const label = card.querySelector('div');
+  label.style.textDecoration = checked ? 'line-through' : 'none';
+  label.style.color = checked ? '#A8A29E' : '#23201E';
+  saveLocal();
+  renderAudit();
+}
+
 // Init
 loadSavedData();
 renderChecklist();
@@ -896,6 +1037,7 @@ renderManifest();
 renderCross();
 renderCrane();
 renderWbs();
+renderMeeting();
 </script>
 </body>
 </html>
