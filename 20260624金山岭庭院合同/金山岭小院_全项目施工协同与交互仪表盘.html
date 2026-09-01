@@ -945,6 +945,32 @@ const meetingData = {
       { t: "冬季水面维护方案", d: "北方干燥风沙大，无水季节难以保持镜面效果，建议冬季保留薄冰层覆盖水面，既防冻又不显脏乱。" }
     ]}
   ],
+  attachment: {
+    title: "📎 技术附件 · 水波纹雕塑水景装置「流水 + 镜面」制作方案",
+    principle: "核心思路：静压层流溢流 + 波峰镜面/波谷导流的分区加工，让水在波谷缓缓流过，波峰保持如镜——解决「流动水膜破坏镜面」的物理矛盾。",
+    params: [
+      { k: "水膜厚度", v: "1~3mm（镜面区 ≤1.5mm）" },
+      { k: "溢流堰平整度", v: "±0.5mm/延米（304不锈钢可调平）" },
+      { k: "单位堰长流量", v: "0.3~0.8 L/min·m（层流）" },
+      { k: "供水方式", v: "静压供水（无动力喷嘴）" },
+      { k: "波峰镜面光泽度", v: "≥80°（3000目抛光+晶面）" },
+      { k: "波峰间距/高差", v: "80~150mm / 5~10mm" },
+      { k: "波谷导流面", v: "细拉丝面 Ra6.3（减速漫流）" },
+      { k: "隐蔽回水孔", v: "φ3~5mm @150mm" },
+      { k: "出水点隐藏", v: "波纹重叠处 + 同纹小石盖板漫水" },
+      { k: "冬季策略", v: "停泵保水30~50mm，结薄冰覆盖（防冻+反射）" },
+      { k: "分时控制", v: "流水30min ↔ 静水镜面5min（变频泵）" },
+      { k: "厂内试水验收", v: "1:1试拼+试水：水膜均匀无断流、镜面清晰" }
+    ],
+    process: [
+      "① 深化设计：3D扫描 + 1:1模型确认波纹与出水口位置",
+      "② 数控粗成型：水刀/桥切，尺寸公差 ±3mm",
+      "③ 手工精修：波峰3000目抛光+晶面处理，波谷细拉丝",
+      "④ 厂内试水（关键卡口）：1:1试拼+模拟供水验收镜面与流水效果",
+      "⑤ 吊装安装：100t吊车飞越落位、调平溢流堰、联调变频水泵",
+      "⑥ 效果验收：白天镜面 + 夜间灯光叠加测试"
+    ]
+  },
   todos: [
     { item: "提供园林堆坡所需的土壤材料及土工布清单", owner: "狄工" },
     { item: "整理并提供建筑灯光布局图，供狄工叠合考虑新增景观灯光", owner: "赵丹" },
@@ -992,6 +1018,30 @@ function renderMeeting(){
       </div>`;
     cont.appendChild(secCard);
   });
+
+  // 技术附件：水波纹雕塑「流水+镜面」制作方案
+  const att = meetingData.attachment;
+  if(att){
+    const attCard = document.createElement('div');
+    attCard.className = 'card-zen p-4 border-l-4 border-l-[#456878]';
+    attCard.innerHTML = `
+      <div class="text-[13px] font-bold text-[#23201E] mb-1.5">${att.title}</div>
+      <div class="text-[11px] text-[#456878] bg-[#F0F7FA] border border-[#D8E8EF] rounded-xl p-2.5 mb-2.5 leading-relaxed wrap-natural"><strong>⚙ 核心原理：</strong>${escapeHtml(att.principle)}</div>
+      <div class="text-[11px] font-bold text-[#23201E] mb-1.5">关键制作参数</div>
+      <div class="bg-[#FAF8F5] border border-[#EFE8DE] rounded-xl overflow-hidden mb-2.5">
+        ${att.params.map((p,i)=>`
+          <div class="flex items-center justify-between gap-2 px-2.5 py-1.5 ${i%2?'bg-[#F4F1EA]':''}">
+            <span class="text-[11px] text-[#706B63] font-semibold flex-shrink-0">${escapeHtml(p.k)}</span>
+            <span class="text-[11px] text-[#23201E] font-mono text-right wrap-natural">${escapeHtml(p.v)}</span>
+          </div>`).join('')}
+      </div>
+      <div class="text-[11px] font-bold text-[#23201E] mb-1.5">制作与验收流程</div>
+      <div class="space-y-1">
+        ${att.process.map(p=>`
+          <div class="text-[11px] text-[#57534E] leading-relaxed wrap-natural">${escapeHtml(p)}</div>`).join('')}
+      </div>`;
+    cont.appendChild(attCard);
+  }
 
   // 待办事项（可勾选）
   const todoCard = document.createElement('div');
