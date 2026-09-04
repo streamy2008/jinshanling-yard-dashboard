@@ -266,10 +266,10 @@
         <div id="overallBar" class="h-full bg-[#B89355] rounded-full transition-all duration-500" style="width:0%"></div>
       </div>
       <div class="grid grid-cols-4 gap-2 mt-4 text-center border-t border-[#EFECE6] pt-3">
-        <div><div class="text-base font-bold text-[#23201E] truncate-1" id="kpiTotal">27</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">总项</div></div>
+        <div><div class="text-base font-bold text-[#23201E] truncate-1" id="kpiTotal">36</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">总项</div></div>
         <div><div class="text-base font-bold text-[#2E6B38] truncate-1" id="kpiPass">0</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">已通过</div></div>
         <div><div class="text-base font-bold text-[#9E6B18] truncate-1" id="kpiProgress">0</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">处理中</div></div>
-        <div><div class="text-base font-bold text-[#8C857B] truncate-1" id="kpiPending">27</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">未复核</div></div>
+        <div><div class="text-base font-bold text-[#8C857B] truncate-1" id="kpiPending">36</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">未复核</div></div>
       </div>
     </div>
 
@@ -402,7 +402,16 @@ let checklistData = [
     { id: "5.2", name: "二层入户原有石材与新增石材交接", desc: "核对二层入户门处原有石材与新增石材的交接处理：新旧石材高差、色差与拼接缝处理，保证过渡自然不积水。", ref: "现场实测 / 原状核对", owner: "施工方 + 园林设计", measure: "新旧石材交接处高差实测___mm，原有石材完成面标高___", status: "未复核", action: "按原有石材完成面标高顺接新增石材，交接缝做同色处理与防水", date: "2026-09-05", reviewer: "" },
     { id: "5.3", name: "一层小院客厅出口新定制石材收口", desc: "核对一层小院从客厅出口处新定制石材与室内地面/门槛的收口：门槛石与室内外高差、防潮及收边节点。", ref: "建施 A-1.1 / 现场实测", owner: "施工方 + 建筑设计", measure: "客厅出口室内外高差实测___mm，门槛石规格确认：___", status: "未复核", action: "定制门槛石按实测高差加工，出口处设排水坡度并做好防水收口", date: "2026-09-05", reviewer: "" },
     { id: "5.4", name: "一层钢结构吊装 vs 现场焊接方式确认", desc: "核对一层院落钢架采用整体吊装还是现场分件焊接：依据吊车就位条件与场地净空确定安装方式。", ref: "结施 S-201 / 现场条件", owner: "施工方 + 建筑设计", measure: "钢架最大单件重量___kg，吊车是否可到达作业点：是/否", status: "未复核", action: "可吊装则整体吊装减少高空焊接；受限则现场散件拼装焊接，焊缝满焊打磨", date: "2026-09-06", reviewer: "" },
-    { id: "5.5", name: "类似交接问题全面排查清单", desc: "在交底日系统排查其他新旧交接/收口点：二层露台反坎与地铺交接、水景池壁与景石交接、钢柱脚与石材交接、灯具开孔与石材交接等。", ref: "全图纸 / 现场排查", owner: "四方共同", measure: "排查发现交接点共___处，其中需深化处理___处", status: "未复核", action: "逐点确认收口做法并记录于审计日志，形成交接处理明细表", date: "2026-09-06", reviewer: "" }
+    { id: "5.5", name: "二层露台反坎与地铺交接处理", desc: "核对二层露台反坎（高100/200mm）与新增地铺石材的交接：反坎内侧/外侧收口方式、防水上翻高度及交接缝处理。", ref: "建施 A-1.3 / A-2.1", owner: "施工方 + 建筑设计", measure: "反坎与地铺交接缝宽实测___mm，反坎标高___mm", status: "未复核", action: "反坎与地铺交接处做防水收口（泛水上翻≥150mm），交接缝用耐候密封胶", date: "2026-09-06", reviewer: "" },
+    { id: "5.6", name: "水景池壁防水与景石交接处理", desc: "核对水景池壁防水层与内壁景石/中国黑石皮的交接：防水上翻高度、景石固定方式不得破坏防水层。", ref: "建施 A-1.2 / 水景深化", owner: "施工方 + 石材厂", measure: "水景池壁防水上翻实测___mm，景石固定方式确认：___", status: "未复核", action: "景石采用预留挂件/粘结，严禁破坏防水层；交接处打防水密封胶", date: "2026-09-07", reviewer: "" },
+    { id: "5.7", name: "钢柱脚预埋件与石材收口处理", desc: "核对钢楼梯/钢柱脚预埋钢板与周边石材地铺的收口：柱脚包覆或外露方式、石材预留孔洞收边。", ref: "结施 S-401 / 现场", owner: "施工方 + 石材厂", measure: "柱脚周边石材预留尺寸实测___mm，包覆方式确认：___", status: "未复核", action: "柱脚周边石材现场实测切割收边，接缝打胶并做氟碳漆补漆", date: "2026-09-07", reviewer: "" },
+    { id: "5.8", name: "灯具开孔/暗敷与石材交接处理", desc: "核对嵌入式防水射灯(LT01/地灯LT02)开孔与石材的交接：开孔公差、灯圈与石材贴合收边、暗敷线槽封堵。", ref: "建施 A-1.5/1.6", owner: "石材厂 + 园林设计", measure: "灯具开孔直径实测___mm（对照23mm射灯外露），孔边处理确认：___", status: "未复核", action: "以灯具实物为准现场比对开孔，孔边磨光倒角，灯圈下加密封垫防水", date: "2026-09-07", reviewer: "" },
+    { id: "5.9", name: "庭院碎石铺地与黄锈石地铺交接收边", desc: "核对一层庭院灰色碎石铺地与黄锈石/太行金地铺的交接：分界收边方式（不锈钢收边条/石材压边），防止碎石滚落混铺。", ref: "建施 A-1.1", owner: "施工方 + 园林设计", measure: "碎石与地铺分界线位置放线确认，收边形式确认：___", status: "未复核", action: "分界处设不锈钢/石材收边条，标高一致防止碎石混入地铺", date: "2026-09-08", reviewer: "" },
+    { id: "5.10", name: "钢楼梯踏面与石材踏步顶面交接", desc: "核对钢楼梯平台/踏步与黄锈石台阶顶面的交接：高差顺接、踏板与石材完成面关系，保证无绊脚与漏水。", ref: "结施 S-301 / 详图", owner: "施工方 + 石材厂", measure: "钢梯踏步顶面与石材面高差实测___mm", status: "未复核", action: "钢梯与石材交接处统一完成面标高，缝内打胶，边缘倒角防绊", date: "2026-09-08", reviewer: "" },
+    { id: "5.11", name: "圆钢杆件/栏杆底座与石材面交接", desc: "核对圆钢栏杆/杆件(Φ16)底座钢板(100×100×8)与石材面的交接：底座埋入石材槽或明装方式、焊接点防水防锈。", ref: "详图02 P3-P9", owner: "施工方 + 建筑设计", measure: "栏杆底座安装方式确认：明装/暗埋，底座与石材间隙___mm", status: "未复核", action: "底座尽量暗埋入石材开槽，明装处加防水垫并做氟碳漆保护", date: "2026-09-09", reviewer: "" },
+    { id: "5.12", name: "水井井盖(标高-0.030)与周边基座交接", desc: "核对原有水井井盖(-0.030，与井筒顶齐平)与周边混凝土基座/石材的交接：井盖可开启性、排水去向。", ref: "建施 A-1.2", owner: "施工方 + 园林设计", measure: "井盖标高实测___，周边基座收口确认：___", status: "未复核", action: "井盖周边留检修开启空间，基座与井盖交界处设排水坡度不积水", date: "2026-09-09", reviewer: "" },
+    { id: "5.13", name: "种植带/植栽槽收边与地铺交接", desc: "核对植栽槽(锈板+不锈钢内胆)、堆坡种植带收边与地铺/露台的交接：收边标高低于铺装5-10mm，泥土不外溢。", ref: "园林景观深化", owner: "施工方 + 园林设计", measure: "种植槽壁顶与铺装面高差实测___mm，收边材料确认：___", status: "未复核", action: "种植带物理边界统一收边做法，堆坡区设挡土边防泥土外溢", date: "2026-09-09", reviewer: "" },
+    { id: "5.14", name: "其他类似交接口继续排查清单", desc: "持续排查全工程其余新旧交接/收口点（工具间顶盖与墙体、跌水装置与池壁、金属饰面板与石材、空调外机罩周边、院墙与新增构造等），发现即单列。", ref: "全图纸 / 现场滚动排查", owner: "四方共同", measure: "本次排查新增交接点共___处，其中需深化处理___处", status: "未复核", action: "四方现场逐点排查并单列记录于审计日志，形成滚动交接处理明细表", date: "2026-09-10", reviewer: "" }
   ]}
 ];
 
