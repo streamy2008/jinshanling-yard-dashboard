@@ -266,10 +266,10 @@
         <div id="overallBar" class="h-full bg-[#B89355] rounded-full transition-all duration-500" style="width:0%"></div>
       </div>
       <div class="grid grid-cols-4 gap-2 mt-4 text-center border-t border-[#EFECE6] pt-3">
-        <div><div class="text-base font-bold text-[#23201E] truncate-1" id="kpiTotal">22</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">总项</div></div>
+        <div><div class="text-base font-bold text-[#23201E] truncate-1" id="kpiTotal">27</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">总项</div></div>
         <div><div class="text-base font-bold text-[#2E6B38] truncate-1" id="kpiPass">0</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">已通过</div></div>
         <div><div class="text-base font-bold text-[#9E6B18] truncate-1" id="kpiProgress">0</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">处理中</div></div>
-        <div><div class="text-base font-bold text-[#8C857B] truncate-1" id="kpiPending">22</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">未复核</div></div>
+        <div><div class="text-base font-bold text-[#8C857B] truncate-1" id="kpiPending">27</div><div class="text-[10px] text-[#8C857B] mt-0.5 truncate-1">未复核</div></div>
       </div>
     </div>
 
@@ -396,6 +396,13 @@ let checklistData = [
     { id: "4.2", name: "工序2 · 钢柱脚基础&景石垫层", desc: "优先浇筑钢基础及水波纹石垫层，养护期7天。", ref: "结施 S-101", owner: "施工方", measure: "混凝土基座养护期排期___天", status: "未复核", action: "严禁先铺景观石后做基础", date: "2026-09-05", reviewer: "" },
     { id: "4.3", name: "工序3 · 钢楼梯主骨架吊装", desc: "150×100钢梁及二层平台框架整体安装到位。", ref: "结施 S-201", owner: "施工方", measure: "钢框架安装垂直度<2mm", status: "未复核", action: "校正钢梁水平度与标高", date: "2026-09-11", reviewer: "" },
     { id: "4.4", name: "工序4 · 石材进场与吊装铺贴", desc: "石材到场进场，随车吊落位，铺设黄锈石与中国黑景石。", ref: "石材加工协议", owner: "石材厂 + 施工方", measure: "吊装使用柔性吊带保护石角", status: "未复核", action: "成品表面覆盖珍珠棉保护", date: "2026-09-16", reviewer: "" }
+  ]},
+  { section: "五 · 新旧交接与收口细节处理", items: [
+    { id: "5.1", name: "二层小院门窗与新增石材收口", desc: "核对二层小院门窗洞口与新增石材铺装/立面的收口处理：门窗框与石材交接缝是否预留、打胶或压条收边，防雨水渗入。", ref: "建施 A-1.4 / 现场实测", owner: "施工方 + 建筑设计", measure: "门窗框与石材交接缝宽度实测___mm，收口方式确认：___", status: "未复核", action: "确认门窗周边石材收口节点（硅酮耐候胶密封+滴水线），现场放线复核", date: "2026-09-04", reviewer: "" },
+    { id: "5.2", name: "二层入户原有石材与新增石材交接", desc: "核对二层入户门处原有石材与新增石材的交接处理：新旧石材高差、色差与拼接缝处理，保证过渡自然不积水。", ref: "现场实测 / 原状核对", owner: "施工方 + 园林设计", measure: "新旧石材交接处高差实测___mm，原有石材完成面标高___", status: "未复核", action: "按原有石材完成面标高顺接新增石材，交接缝做同色处理与防水", date: "2026-09-05", reviewer: "" },
+    { id: "5.3", name: "一层小院客厅出口新定制石材收口", desc: "核对一层小院从客厅出口处新定制石材与室内地面/门槛的收口：门槛石与室内外高差、防潮及收边节点。", ref: "建施 A-1.1 / 现场实测", owner: "施工方 + 建筑设计", measure: "客厅出口室内外高差实测___mm，门槛石规格确认：___", status: "未复核", action: "定制门槛石按实测高差加工，出口处设排水坡度并做好防水收口", date: "2026-09-05", reviewer: "" },
+    { id: "5.4", name: "一层钢结构吊装 vs 现场焊接方式确认", desc: "核对一层院落钢架采用整体吊装还是现场分件焊接：依据吊车就位条件与场地净空确定安装方式。", ref: "结施 S-201 / 现场条件", owner: "施工方 + 建筑设计", measure: "钢架最大单件重量___kg，吊车是否可到达作业点：是/否", status: "未复核", action: "可吊装则整体吊装减少高空焊接；受限则现场散件拼装焊接，焊缝满焊打磨", date: "2026-09-06", reviewer: "" },
+    { id: "5.5", name: "类似交接问题全面排查清单", desc: "在交底日系统排查其他新旧交接/收口点：二层露台反坎与地铺交接、水景池壁与景石交接、钢柱脚与石材交接、灯具开孔与石材交接等。", ref: "全图纸 / 现场排查", owner: "四方共同", measure: "排查发现交接点共___处，其中需深化处理___处", status: "未复核", action: "逐点确认收口做法并记录于审计日志，形成交接处理明细表", date: "2026-09-06", reviewer: "" }
   ]}
 ];
 
