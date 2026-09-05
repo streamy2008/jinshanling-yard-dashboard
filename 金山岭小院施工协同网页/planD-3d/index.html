@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方案D · 雨落疏荷 — 3D 展示</title>
+<script src="./model-viewer.min.js"></script>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#0b0a09;
+    font-family:'Songti SC','Noto Serif SC',serif}
+  model-viewer{width:100%;height:100%}
+  .panel{position:absolute;top:12px;left:12px;background:rgba(16,14,12,.8);
+    color:#e8dfca;padding:10px 14px;border-radius:12px;border:1px solid rgba(200,180,130,.3);
+    max-width:250px;line-height:1.6;font-size:12px;z-index:5;pointer-events:none}
+  .panel b{color:#d9c391}
+  .hint{position:absolute;top:12px;right:12px;color:#a79a80;font-size:10px;text-align:right;line-height:1.6;z-index:5}
+  .btns{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:5}
+  .btn{background:rgba(28,25,21,.9);color:#e8dfca;border:1px solid rgba(200,180,130,.35);
+    padding:7px 13px;border-radius:999px;font-size:11px;cursor:pointer;font-family:inherit}
+  .btn.on{background:#8a6f3a;color:#fff}
+  #err{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:#ffd9d9;font-size:13px;text-align:center;line-height:2;z-index:9}
+</style>
+</head>
+<body>
+<div id="err"></div>
+<model-viewer id="mv" src="./model.glb" skybox-image="./sky.jpg"
+  poster="./preview.png" alt="方案D 雨落疏荷"
+  shadow-intensity="0.8" exposure="1.05" tone-mapping="aces"
+  camera-controls auto-rotate rotation-per-second="14deg"
+  camera-orbit="30deg 60deg 5.6m">
+</model-viewer>
+<div class="panel"><b>方案 D · 雨落疏荷</b><br><small>中国黑 2800×1500×400 · 顶部溢流镜面 · 5处出水点 · 静水镜面≥60%</small></div>
+<div class="hint">拖拽旋转 · 滚轮缩放</div>
+<div class="btns">
+  <button class="btn on" id="bRot">自动旋转</button>
+  <button class="btn" id="bTop">俯视</button>
+  <button class="btn" id="b45">45°</button>
+  <button class="btn" id="bEye">平视</button>
+</div>
+<script>
+const mv=document.getElementById('mv');
+window.addEventListener('error',e=>{const d=document.getElementById('err');d.style.display='flex';
+  d.textContent='资源加载失败：'+(e.message||e.type)+'（请确认已联网或检查文件）';});
+mv.addEventListener('load',()=>{document.getElementById('err').style.display='none';});
+mv.addEventListener('error',e=>{const d=document.getElementById('err');d.style.display='flex';
+  d.textContent='模型加载失败：请确认 model.glb 与 sky.jpg 与本页同目录';});
+b=id=>document.getElementById(id);
+b('bRot').onclick=e=>{mv.autoRotate=!mv.autoRotate;e.target.classList.toggle('on',mv.autoRotate)};
+b('bTop').onclick=()=>mv.cameraOrbit='0deg 88deg auto';
+b('b45').onclick=()=>mv.cameraOrbit='35deg 55deg auto';
+b('bEye').onclick=()=>mv.cameraOrbit='0deg 15deg auto';
+</script>
+</body>
+</html>
