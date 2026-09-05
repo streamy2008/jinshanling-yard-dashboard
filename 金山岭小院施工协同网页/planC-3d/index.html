@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>方案 C · 远山入水 — 自然随形独石 3D</title>
+<title>方案 C · 远山入水 — 碎石铺底 3D</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -35,11 +35,11 @@
   <div class="ui-panel p-4 rounded-2xl max-w-md pointer-events-auto shadow-2xl">
     <div class="flex items-center gap-2 mb-1.5">
       <span class="badge-tag text-[10px] px-2.5 py-0.5 rounded-full">方案 C · 远山入水</span>
-      <span class="text-xs text-[#A39B90]">自然随形独石形态</span>
+      <span class="text-xs text-[#A39B90]">3~5cm 碎石铺底 · 无模拟植物</span>
     </div>
-    <h1 class="text-base font-bold text-[#F4F1EA]">天然随形野趣墨石 · 倒影静池</h1>
+    <h1 class="text-base font-bold text-[#F4F1EA]">3~5cm 自然碎石基底 · 墨石水镜</h1>
     <p class="text-xs text-[#A39B90] mt-1 leading-relaxed">
-      打破规整方形限制，采用天然山石自然开剥的有机弧形边界。石体高低厚薄随形而就，顶面微倾斜做极致黑镜抛光，倒映上方松枝天光。
+      池底铺设 3~5cm 自然灰色颗粒碎石。取消植物干涉，突出随形天然墨石的高光镜面与纯粹极简山水意境。
     </p>
   </div>
 
@@ -58,7 +58,7 @@
 
 <script>
 let scene, camera, renderer, controls;
-let waterMesh, stoneMesh, treeGroup, isFlowing = true, isNight = false;
+let waterMesh, stoneMesh, isFlowing = true, isNight = false;
 let clock = new THREE.Clock();
 
 function init() {
@@ -86,8 +86,7 @@ function init() {
   controls.target.set(0, 0.2, 0);
 
   setupLighting();
-  buildEnvironment();
-  buildNaturalTreesAbove();
+  buildEnvironmentWithGravel(); // 3~5cm 碎石铺底
   buildFreeformStoneC();
 
   window.addEventListener('resize', onWindowResize);
@@ -110,7 +109,8 @@ function setupLighting() {
   scene.add(fillLight);
 }
 
-function generateStoneBumpMap() {
+// 生成 3~5cm 碎石粒径凹凸法线贴图
+function generateGravelNormalMap() {
   const canvas = document.createElement('canvas');
   canvas.width = 512;
   canvas.height = 512;
@@ -122,8 +122,8 @@ function generateStoneBumpMap() {
   const data = imgData.data;
 
   for (let i = 0; i < data.length; i += 4) {
-    const nx = (Math.random() - 0.5) * 45;
-    const ny = (Math.random() - 0.5) * 45;
+    const nx = (Math.random() - 0.5) * 120; // 增强 3~5cm 碎石凸起法线
+    const ny = (Math.random() - 0.5) * 120;
     data[i] = 128 + nx;
     data[i + 1] = 128 + ny;
     data[i + 2] = 255;
@@ -133,17 +133,42 @@ function generateStoneBumpMap() {
   const texture = new THREE.CanvasTexture(canvas);
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(3, 2);
+  texture.repeat.set(12, 12);
   return texture;
 }
 
-function buildEnvironment() {
+function buildEnvironmentWithGravel() {
+  const gravelTexture = generateGravelNormalMap();
+
+  // 1. 3~5cm 灰褐色天然碎石池底
   const poolGeo = new THREE.CylinderGeometry(2.4, 2.5, 0.2, 64);
-  const poolMat = new THREE.MeshStandardMaterial({ color: 0x121110, roughness: 0.4, metalness: 0.8 });
+  const poolMat = new THREE.MeshStandardMaterial({
+    color: 0x22201d,
+    roughness: 0.85,
+    normalMap: gravelTexture,
+    normalScale: new THREE.Vector2(0.8, 0.8)
+  });
   const pool = new THREE.Mesh(poolGeo, poolMat);
   pool.position.y = -0.1;
   scene.add(pool);
 
+  // 实物 3~5cm 散落碎石颗粒实体 (Pool底散落颗粒)
+  const gravelGroup = new THREE.Group();
+  const pebbleMat = new THREE.MeshStandardMaterial({ color: 0x2a2825, roughness: 0.8 });
+  for (let i = 0; i < 120; i++) {
+    let angle = Math.random() * Math.PI * 2;
+    let rad = 0.8 + Math.random() * 1.5;
+    let gx = Math.cos(angle) * rad;
+    let gz = Math.sin(angle) * rad;
+    let size = 0.03 + Math.random() * 0.02; // 3cm ~ 5cm
+    const pebble = new THREE.Mesh(new THREE.DodecahedronGeometry(size, 1), pebbleMat);
+    pebble.position.set(gx, -0.01 + Math.random() * 0.015, gz);
+    pebble.rotation.set(Math.random(), Math.random(), Math.random());
+    gravelGroup.add(pebble);
+  }
+  scene.add(gravelGroup);
+
+  // 2. 浅水池水面
   const poolWaterGeo = new THREE.CylinderGeometry(2.35, 2.35, 0.05, 64);
   const poolWaterMat = new THREE.MeshPhysicalMaterial({
     color: 0x080f14, roughness: 0.02, metalness: 0.9, transmission: 0.6, transparent: true, opacity: 0.85
@@ -152,8 +177,11 @@ function buildEnvironment() {
   poolWater.position.y = 0.01;
   scene.add(poolWater);
 
+  // 3. 周边地面碎石铺地
   const groundGeo = new THREE.PlaneGeometry(20, 20);
-  const groundMat = new THREE.MeshStandardMaterial({ color: 0x1a1816, roughness: 0.9 });
+  const groundMat = new THREE.MeshStandardMaterial({
+    color: 0x1a1816, roughness: 0.9, normalMap: gravelTexture, normalScale: new THREE.Vector2(0.5, 0.5)
+  });
   const ground = new THREE.Mesh(groundGeo, groundMat);
   ground.rotation.x = -Math.PI / 2;
   ground.position.y = -0.2;
@@ -161,69 +189,31 @@ function buildEnvironment() {
   scene.add(ground);
 }
 
-function buildNaturalTreesAbove() {
-  treeGroup = new THREE.Group();
-  const branchMat = new THREE.MeshStandardMaterial({ color: 0x2b2219, roughness: 0.8 });
-  const leafMat = new THREE.MeshStandardMaterial({ color: 0x3d4e34, roughness: 0.6 });
-
-  const trunkGeo = new THREE.CylinderGeometry(0.06, 0.12, 3.5, 12);
-  const trunk = new THREE.Mesh(trunkGeo, branchMat);
-  trunk.position.set(-1.8, 1.8, -1.2);
-  trunk.rotation.z = -Math.PI / 6;
-  trunk.rotation.x = Math.PI / 8;
-  trunk.castShadow = true;
-  treeGroup.add(trunk);
-
-  for (let i = 0; i < 7; i++) {
-    const subBranch = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.05, 1.2, 8), branchMat);
-    subBranch.position.set(-1.2 + i * 0.25, 2.5 + Math.sin(i) * 0.2, -0.6 + (i % 2) * 0.4);
-    subBranch.rotation.z = -Math.PI / 4 + (i % 3) * 0.1;
-    subBranch.castShadow = true;
-    treeGroup.add(subBranch);
-
-    const leaves = new THREE.Mesh(new THREE.DodecahedronGeometry(0.35 + Math.random() * 0.2, 1), leafMat);
-    leaves.position.set(-1.0 + i * 0.35, 2.7 + Math.sin(i) * 0.3, -0.5 + (i % 3) * 0.3);
-    leaves.scale.set(1.2, 0.6, 1.0);
-    leaves.castShadow = true;
-    treeGroup.add(leaves);
-  }
-  scene.add(treeGroup);
-}
-
-// 构建彻底打破方形、自然随形的野趣原石 (Organic Cylinder/Extrude-based Freeform Stone)
 function buildFreeformStoneC() {
   const group = new THREE.Group();
-  const bumpTexture = generateStoneBumpMap();
 
-  // 1. 使用极细分的圆柱网格作为基础，塑造成天然平卧的椭圆自然原石
   const stoneGeo = new THREE.CylinderGeometry(1.35, 1.45, 0.38, 128, 32, false);
   const pos = stoneGeo.attributes.position;
 
-  // 2. 施加强烈的非对称极坐标拉伸与自然野趣凹凸变形
   for (let i = 0; i < pos.count; i++) {
     let x = pos.getX(i);
     let y = pos.getY(i);
     let z = pos.getZ(i);
 
-    // 计算极坐标角度 theta 与半径 r
     let angle = Math.atan2(z, x);
     let radiusScale = 1.0 + Math.sin(angle * 3.0) * 0.18 + Math.cos(angle * 5.0) * 0.08;
 
-    // 非对称拉伸：长向约 2.6m~2.9m，宽向约 1.3m~1.6m
     if (Math.abs(Math.cos(angle)) > 0.3) {
       x *= 1.8 * radiusScale;
     } else {
       z *= 0.95 * radiusScale;
     }
 
-    // 顶面微倾斜与自然低洼：靠墙后沿略高，前沿微倾，方便水向池中自然滴落
     if (y > 0.15) {
-      let slope = -z * 0.025; // 缓坡倾斜
+      let slope = -z * 0.025;
       let organicDepression = Math.sin(x * 2.5) * Math.cos(z * 3.0) * 0.012;
       y = 0.19 + slope + organicDepression;
-    } 
-    // 侧边天然风化剥落与粗糙角质感
-    else {
+    } else {
       let crag = (Math.sin(y * 25.0 + angle * 8.0) * 0.03) + (Math.random() - 0.5) * 0.02;
       x += Math.cos(angle) * crag;
       z += Math.sin(angle) * crag;
@@ -238,8 +228,6 @@ function buildFreeformStoneC() {
   const stoneMat = new THREE.MeshPhysicalMaterial({
     color: 0x0a0a0a,
     roughness: 0.03,
-    normalMap: bumpTexture,
-    normalScale: new THREE.Vector2(0.25, 0.25),
     clearcoat: 0.95,
     clearcoatRoughness: 0.02,
     reflectivity: 0.95
@@ -250,7 +238,7 @@ function buildFreeformStoneC() {
   stoneMesh.receiveShadow = true;
   group.add(stoneMesh);
 
-  // 顶面自然平铺的水膜 (与随形原石轮廓贴合)
+  // 顶面极薄水膜
   const waterGeo = new THREE.CylinderGeometry(1.32, 1.32, 0.01, 128);
   const wPos = waterGeo.attributes.position;
   for (let i = 0; i < wPos.count; i++) {
@@ -305,10 +293,6 @@ function animate() {
     waterMesh.geometry.attributes.position.needsUpdate = true;
   } else if (waterMesh) {
     waterMesh.material.opacity = 0.0;
-  }
-
-  if (treeGroup) {
-    treeGroup.rotation.z = Math.sin(elapsed * 0.8) * 0.01;
   }
 
   controls.update();
