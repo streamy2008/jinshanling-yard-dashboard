@@ -16,8 +16,8 @@
     font-family: 'Noto Serif SC', serif; overflow: hidden;
   }
   .ui-panel {
-    background: rgba(18, 16, 14, 0.88);
-    border: 1px solid rgba(197, 160, 89, 0.35);
+    background: rgba(18, 16, 14, 0.90);
+    border: 1px solid rgba(120, 110, 95, 0.3);
     backdrop-filter: blur(14px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   }
@@ -221,7 +221,7 @@ function buildNaturalStoneD() {
   // 5 处自然涌水点盖板 (同纹天然小圆石)
   springCenters.forEach(pt => {
     const capGeo = new THREE.CylinderGeometry(0.045, 0.05, 0.012, 32);
-    const capMat = new THREE.MeshStandardMaterial({ color: 0x221e1a, roughness: 0.5 });
+    const capMat = new THREE.MeshStandardMaterial({ color: 0x121212, roughness: 0.3, metalness: 0.1 });
     const cap = new THREE.Mesh(capGeo, capMat);
     cap.position.set(pt.x, 0.406, pt.z);
     group.add(cap);
@@ -324,7 +324,7 @@ function toggleDayNight() {
     mainSun.intensity = 2.4;
     fillLight.color.setHex(0x7892b5);
     btn.innerText = "☀️ 晨曦阳光";
-    btn.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#C5A059] text-black";
+    btn.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#3A3530] text-[#E8DFCA] border border-[#554D45]";
   }
 }
 
