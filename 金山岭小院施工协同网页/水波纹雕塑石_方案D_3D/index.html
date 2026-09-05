@@ -3,226 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>方案D · 雨落疏荷 — 3D 可视</title>
+<title>方案D · 雨落疏荷 — 3D 真实渲染</title>
+<script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 <style>
-  html,body{margin:0;height:100%;overflow:hidden;background:#0c0b0a;
-    font-family:'Songti SC','Noto Serif SC',serif;}
-  #c{display:block;width:100%;height:100%}
-  .panel{position:absolute;top:14px;left:14px;background:rgba(18,16,14,.82);
-    color:#e8dfca;padding:14px 18px;border-radius:12px;border:1px solid rgba(200,180,130,.25);
-    max-width:250px;backdrop-filter:blur(4px);line-height:1.7;font-size:13px}
-  .panel b{color:#d9c391;letter-spacing:2px;font-size:14px}
-  .panel small{color:#9a8d74;font-size:11px}
-  .btns{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
-    display:flex;gap:10px}
-  .btn{background:rgba(30,27,24,.85);color:#e8dfca;border:1px solid rgba(200,180,130,.35);
-    padding:8px 16px;border-radius:999px;font-size:12px;letter-spacing:1px;cursor:pointer;
-    font-family:inherit;backdrop-filter:blur(4px)}
+  html,body{margin:0;height:100%;overflow:hidden;background:#0b0a09;
+    font-family:'Songti SC','Noto Serif SC',serif}
+  model-viewer{width:100%;height:100%;--poster-color:#0b0a09}
+  .panel{position:absolute;top:14px;left:14px;background:rgba(16,14,12,.78);
+    color:#e8dfca;padding:12px 16px;border-radius:12px;border:1px solid rgba(200,180,130,.3);
+    max-width:260px;backdrop-filter:blur(5px);line-height:1.7;font-size:13px;z-index:5}
+  .panel b{color:#d9c391;letter-spacing:2px}
+  .panel small{color:#9a8d74}
+  .btns{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:5}
+  .btn{background:rgba(28,25,21,.85);color:#e8dfca;border:1px solid rgba(200,180,130,.35);
+    padding:8px 15px;border-radius:999px;font-size:12px;letter-spacing:1px;cursor:pointer;font-family:inherit}
   .btn.on{background:#8a6f3a;color:#fff;border-color:#c9a95f}
-  .hint{position:absolute;top:14px;right:14px;color:#8a7d64;font-size:11px;text-align:right;line-height:1.6}
-  .legend{position:absolute;bottom:70px;left:50%;transform:translateX(-50%);color:#8a7d64;font-size:11px}
+  .hint{position:absolute;top:14px;right:14px;color:#a79a80;font-size:11px;text-align:right;line-height:1.7;z-index:5}
+  .notice{position:absolute;bottom:66px;left:50%;transform:translateX(-50%);color:#8a7d64;font-size:11px;white-space:nowrap}
 </style>
 </head>
 <body>
-<canvas id="c"></canvas>
+<model-viewer id="mv" src="方案D_雨落疏荷.glb" skybox-image="sky.jpg"
+  alt="方案D 雨落疏荷 中国黑水波纹雕塑石"
+  shadow-intensity="0.8" exposure="1.05" tone-mapping="aces"
+  camera-controls auto-rotate rotation-per-second="12deg"
+  camera-orbit="32deg 68deg 5.6m" min-camera-orbit="auto 20deg auto"
+  field-of-view="38deg">
+</model-viewer>
 
-<div id="errbox"></div>
 <div class="panel">
   <b>方案 D · 雨落疏荷</b><br>
   <small>中国黑水波纹雕塑石 2800×1500×400 · 顶部溢流镜面</small><br>
-  <span id="info">5 处出水点 · 涟漪环散落交错 · 静水镜面 ≥60%</span>
+  <span>5 处出水点 · 涟漪环散落 · 静水镜面 ≥60%</span>
 </div>
-
-<div class="hint">拖拽旋转 · 滚轮缩放<br>右键平移</div>
-
-<div class="legend" id="legend">涟漪环 3~4 圈 · 环宽 2~4mm · 浅刻 2~3mm · 环顶抛光 ≥80°</div>
-
+<div class="hint">拖拽旋转 · 滚轮缩放<br>双击复位 · 手机支持触控+AR</div>
+<div class="notice">涟漪环 3~4 圈 · 环宽2~4mm · 浅刻2~3mm · 环顶抛光≥80°</div>
 <div class="btns">
-  <button class="btn on" id="btnFlow">💧 水流动画</button>
-  <button class="btn" id="btnWater">🌊 水面</button>
-  <button class="btn" id="btnAuto">🔄 自动旋转</button>
+  <button class="btn on" id="btnRot">🔄 自动旋转</button>
+  <button class="btn" id="btnTop">⬇ 俯视</button>
+  <button class="btn" id="btnLevel">🌊 平视</button>
+  <button class="btn" id="btn45">⛰ 45°</button>
 </div>
 
-<script>window.onerror=function(m,s,l){var e=document.getElementById('errbox');e.style.display='block';e.textContent='ERR: '+m+'\n'+s+':'+l;};
-window.addEventListener('unhandledrejection',function(ev){var e=document.getElementById('errbox');e.style.display='block';e.textContent='PROMISE: '+ev.reason;});</script>
-<script src="three.min.js"></script>
-<script src="OrbitControls.js"></script>
 <script>
-const W=2800/1000, D=1500/1000, H=0.4;   // 2.8m × 1.5m × 0.4m
-const ripples=[   // 5 出水点（中心x,中心y 俯视归一 -1.4..1.4, -0.75..0.75）
-  {x:0.0,  z:0.10,  n:4, r0:0.16, dr:0.12},   // 主点 中前
-  {x:-0.95,z:0.45,  n:3, r0:0.12, dr:0.11},
-  {x:0.90, z:-0.50, n:3, r0:0.12, dr:0.11},
-  {x:-0.75,z:-0.52, n:3, r0:0.09, dr:0.10},
-  {x:0.62, z:0.55,  n:3, r0:0.09, dr:0.10},
-];
-const ORIGIN=new THREE.Vector3(0,0,0);
-let scene,camera,renderer,controls;
-let stone,rippleGrp=[],waterPlane,envMesh;
-let animFlow=true,showWater=true,autoRot=false,t=0;
-
-init(); animate();
-function init(){
-  scene=new THREE.Scene();
-  scene.background=new THREE.Color(0x0c0b0a);
-  // 柔和雾境
-  scene.fog=new THREE.Fog(0x0c0b0a, 8, 22);
-
-  camera=new THREE.PerspectiveCamera(42,W/D,0.1,60);
-  camera.position.set(3.4,2.5,3.8);
-
-  renderer=new THREE.WebGLRenderer({canvas:document.getElementById('c'),antialias:true});
-  renderer.setSize(innerWidth,innerHeight);
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-  renderer.shadowMap.enabled=true;
-  renderer.toneMapping=THREE.ACESFilmicToneMapping;
-
-  controls=new THREE.OrbitControls(camera,renderer.domElement);
-  controls.target.set(0,0,0); controls.enableDamping=true;
-  controls.minDistance=1.5; controls.maxDistance=12;
-
-  lights();
-  envGradient();
-  stone=buildStone();
-  scene.add(stone);
-  buildRipples();
-  buildWater();
-  buildBase();
-  decorate();
-
-  addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;
-    camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
-  document.getElementById('btnFlow').onclick=e=>{animFlow=!animFlow;e.target.classList.toggle('on',animFlow)};
-  document.getElementById('btnWater').onclick=e=>{showWater=!showWater;waterPlane.visible=showWater;e.target.classList.toggle('on',showWater)};
-  document.getElementById('btnAuto').onclick=e=>{autoRot=!autoRot;e.target.classList.toggle('on',autoRot)};
-  // 首帧同步渲染（确保非动画环境下也能看到画面）
-  try{ renderer.render(scene,camera); }catch(e){}
-  // WebGL 不可用诊断
-  var gl=renderer.getContext(); 
-  if(!gl||gl.isContextLost()){ var eb=document.getElementById('errbox'); eb.style.display='block';
-    eb.textContent='WebGL 不可用：此环境未开启 GPU/SwiftShader'; }
-}
-function lights(){
-  const amb=new THREE.AmbientLight(0x8b8a86,0.55); scene.add(amb);
-  const d1=new THREE.DirectionalLight(0xfff2dd,1.35);
-  d1.position.set(5,8,4); scene.add(d1);
-  const d2=new THREE.DirectionalLight(0x9db4ff,0.5);
-  d2.position.set(-4,3,-5); scene.add(d2);
-  const rim=new THREE.DirectionalLight(0xffffff,0.35);
-  rim.position.set(-2,6,6); scene.add(rim);
-  // 补环境反射用的暗半球
-  scene.add(new THREE.HemisphereLight(0x3a362f,0x0b0a09,0.5));
-}
-function envGradient(){
-  // 伪天空：大球内壁渐变
-  const geo=new THREE.SphereGeometry(30,32,16);
-  const mat=new THREE.ShaderMaterial({side:THREE.BackSide,depthWrite:false,
-    uniforms:{top:{value:new THREE.Color(0x0e1318)},mid:{value:new THREE.Color(0x27221c)},bot:{value:new THREE.Color(0x0a0908)}},
-    vertexShader:`varying vec3 vp;void main(){vp=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
-    fragmentShader:`varying vec3 vp;uniform vec3 top,mid,bot;
-      void main(){float h=normalize(vp).y;vec3 c= h>0.15? mix(mid,top,smoothstep(0.15,0.7,h)) : mix(bot,mid,smoothstep(-0.2,0.15,h));
-      gl_FragColor=vec4(c,1.);}`});
-  envMesh=new THREE.Mesh(geo,mat); scene.add(envMesh);
-}
-function stoneMaterial(){
-  return new THREE.MeshPhysicalMaterial({
-    color:0x0d0d0c,roughness:0.14,metalness:0.55,clearcoat:1,clearcoatRoughness:0.06,
-    envMapIntensity:1.1});
-}
-function buildStone(){
-  const g=new THREE.Group();
-  const body=new THREE.Mesh(new THREE.BoxGeometry(W,H,D),stoneMaterial());
-  body.position.y=H/2; body.castShadow=body.receiveShadow=true; g.add(body);
-  // 石沿圆角视觉：四条边加细镜面条
-  return g;
-}
-function buildRipples(){
-  ripples.forEach((rp,gi)=>{
-    const grp=new THREE.Group();
-    for(let i=0;i<rp.n;i++){
-      const rr=rp.r0+i*rp.dr;
-      const geo=new THREE.RingGeometry(rr,rr+0.006,64);
-      // 椭圆化
-      const m=new THREE.MeshBasicMaterial({color:0xcfc6b4,transparent:true,opacity:0.55,
-        side:THREE.DoubleSide});
-      const ring=new THREE.Mesh(geo,m);
-      ring.position.set(rp.x,H+0.0015,rp.z);
-      ring.rotation.x=-Math.PI/2;
-      ring.scale.set(1,1,0.62);   // 俯视椭圆：沿长向拉长(z=深度0.62)
-      grp.add(ring);
-    }
-    // 出水小石盖板
-    const cap=new THREE.Mesh(new THREE.CylinderGeometry(0.035,0.04,0.008,20),
-      new THREE.MeshStandardMaterial({color:0x8f8a7e,roughness:0.5,metalness:0.1}));
-    cap.position.set(rp.x,H+0.006,rp.z); cap.rotation.x=0; grp.add(cap);
-    // 缓涌水柱(半透明)
-    const jet=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,0.05,10,1,true),
-      new THREE.MeshBasicMaterial({color:0xbfe3ee,transparent:true,opacity:0.5}));
-    jet.position.set(rp.x,H+0.035,rp.z); jet.visible=false; grp.add(jet);
-    grp.userData={rp,rings:grp.children.filter(c=>c.geometry.type==='RingGeometry'),jet,baseOp:0.55};
-    scene.add(grp); rippleGrp.push(grp);
-  });
-}
-function buildWater(){
-  // 极薄水面镜（覆盖石顶+溢流到池）
-  const geo=new THREE.PlaneGeometry(W*1.06,D*1.06);
-  const mat=new THREE.MeshPhysicalMaterial({color:0x1a2126,roughness:0.02,metalness:0.1,
-    transparent:true,opacity:0.62,envMapIntensity:1.4});
-  waterPlane=new THREE.Mesh(geo,mat);
-  waterPlane.rotation.x=-Math.PI/2;
-  waterPlane.position.set(0,H+0.0045,0);
-  waterPlane.renderOrder=2;
-  scene.add(waterPlane);
-}
-function buildBase(){
-  // 深色水池底（略大于石）
-  const pool=new THREE.Mesh(new THREE.PlaneGeometry(W*2.4,D*2.2),
-    new THREE.MeshPhysicalMaterial({color:0x0a0f12,roughness:0.05,metalness:0.2,envMapIntensity:1.2}));
-  pool.rotation.x=-Math.PI/2; pool.position.y=-0.012; pool.receiveShadow=true;
-  scene.add(pool);
-  // 池周黑色卵石带（环石一圈圆环）
-  const peb=new THREE.Mesh(new THREE.RingGeometry(W*0.72,D*0.86,W*1.22,D*1.14,48),
-    new THREE.MeshStandardMaterial({color:0x171512,roughness:0.9}));
-  peb.rotation.x=-Math.PI/2; peb.position.y=-0.006; scene.add(peb);
-  // 周边深灰碎石地面
-  const grd=new THREE.Mesh(new THREE.PlaneGeometry(40,40),
-    new THREE.MeshStandardMaterial({color:0x23201b,roughness:1}));
-  grd.rotation.x=-Math.PI/2; grd.position.y=-0.02; grd.receiveShadow=true;
-  scene.add(grd);
-}
-function decorate(){
-  // 远方山影（低多边形）
-  const hillMat=new THREE.MeshStandardMaterial({color:0x1b1917,roughness:1,flatShading:true});
-  const hill=new THREE.Mesh(new THREE.ConeGeometry(3.2,1.6,7),hillMat);
-  hill.position.set(-7,0.8,-7); scene.add(hill);
-  const hill2=new THREE.Mesh(new THREE.ConeGeometry(2.4,1.2,7),hillMat);
-  hill2.position.set(-9.5,0.6,-5.5); scene.add(hill2);
-  const hill3=new THREE.Mesh(new THREE.ConeGeometry(2.8,1.4,7),hillMat);
-  hill3.position.set(6,0.7,-8); scene.add(hill3);
-}
-function animate(){
-  requestAnimationFrame(animate);
-  t+=0.016;
-  // 涟漪环呼吸动画（水流动）
-  rippleGrp.forEach(grp=>{
-    const {rings,rp}=grp.userData;
-    const ph=animFlow? (Math.sin(t*2+rings.length)*0.5+0.5):0.5;
-    rings.forEach((ring,i)=>{
-      const phase=(i*0.6+t*1.6)%1;
-      const grow=animFlow? (1+phase*0.06):1;
-      const op=0.3+0.5*Math.abs(Math.sin(t*1.4+i));
-      ring.material.opacity=op;
-      ring.scale.set(grow*1,grow*1,0.62*grow);
-      ring.position.y=H+0.0015+0.001*Math.sin(t*3+i);
-    });
-    if(grp.userData.jet) grp.userData.jet.visible=animFlow&&(Math.sin(t*2)>-0.2);
-  });
-  // 水面微光
-  if(waterPlane){waterPlane.material.opacity=showWater?0.62+0.04*Math.sin(t*1.2):0;}
-  if(autoRot){camera.position.x=3.6*Math.cos(t*0.12);camera.position.z=3.6*Math.sin(t*0.12);camera.lookAt(0,0,0);}
-  controls.update();
-  renderer.render(scene,camera);
-}
+const mv=document.getElementById('mv');
+const btn=id=>document.getElementById(id);
+btn('btnRot').onclick=e=>{mv.autoRotate=!mv.autoRotate;e.target.classList.toggle('on',mv.autoRotate)};
+btn('btnTop').onclick=()=>{mv.cameraOrbit='0deg 88deg auto';mv.fieldOfView='38deg'};
+btn('btnLevel').onclick=()=>{mv.cameraOrbit='0deg 18deg auto';mv.fieldOfView='42deg'};
+btn('btn45').onclick=()=>{mv.cameraOrbit='35deg 55deg auto';mv.fieldOfView='38deg'};
 </script>
 </body>
 </html>
