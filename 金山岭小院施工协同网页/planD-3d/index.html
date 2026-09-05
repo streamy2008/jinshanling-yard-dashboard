@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>方案 D · 雨落疏荷 — 有机自然山石 3D</title>
+<title>方案 D · 雨落疏荷 — 单处隐藏涌泉 3D</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -35,11 +35,11 @@
   <div class="ui-panel p-4 rounded-2xl max-w-md pointer-events-auto shadow-2xl">
     <div class="flex items-center gap-2 mb-1.5">
       <span class="badge-tag text-[10px] px-2.5 py-0.5 rounded-full">方案 D · 雨落疏荷</span>
-      <span class="text-xs text-[#A39B90]">有机自然涌泉 (无硬线)</span>
+      <span class="text-xs text-[#A39B90]">单处隐藏涌水</span>
     </div>
-    <h1 class="text-base font-bold text-[#F4F1EA]">天然花岗岩石肌 · 涌泉水面扩散</h1>
+    <h1 class="text-base font-bold text-[#F4F1EA]">天然石坑隐蔽出水 · 单点涟漪</h1>
     <p class="text-xs text-[#A39B90] mt-1 leading-relaxed">
-      摒弃硬刻管槽与金属线条。石头侧面为开裂斧劈风化造型，顶面5处隐藏出水点自然向上缓缓涌水，水体波纹在墨石表面柔和漫延扩散。
+      取消所有多余喷口与外露盖板。仅在石头天然凹陷内设一处隐蔽出水点，微弱水流如泉眼般向上自然涌出，并在平整墨石面层层漾开。
     </p>
   </div>
 
@@ -52,22 +52,17 @@
 
 <!-- Bottom Floating Controls -->
 <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3 ui-panel px-4 py-2.5 rounded-full">
-  <button onclick="toggleFlowSpeed()" id="btnFlowSpeed" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#3A3530] text-[#E8DFCA] border border-[#554D45]">💧 水流状态: 自然缓涌</button>
+  <button onclick="toggleFlowSpeed()" id="btnFlowSpeed" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#3A3530] text-[#E8DFCA] border border-[#554D45]">💧 泉水状态: 自然微涌</button>
   <button onclick="toggleDayNight()" id="btnLight" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#2A2725] text-[#E0DAD0]">🌙 月夜光影</button>
 </div>
 
 <script>
 let scene, camera, renderer, controls;
-let waterMesh, springDots = [], flowSpeed = 1.0, isNight = false;
+let waterMesh, flowSpeed = 1.0, isNight = false;
 let clock = new THREE.Clock();
 
-const springCenters = [
-  { x: 0.0, z: 0.1, radius: 0.55 },
-  { x: -0.9, z: -0.38, radius: 0.40 },
-  { x: 0.85, z: -0.28, radius: 0.45 },
-  { x: -0.65, z: 0.42, radius: 0.35 },
-  { x: 0.68, z: 0.48, radius: 0.38 }
-];
+// 仅保留中央一处单点隐蔽涌泉出水
+const singleSpring = { x: 0.1, z: 0.0 };
 
 function init() {
   const container = document.getElementById('canvas-container');
@@ -171,7 +166,6 @@ function buildNaturalStoneD() {
   const group = new THREE.Group();
   const bumpTexture = generateStoneBumpMap();
 
-  // 纯自然不规则造型：去除硬轮廓与硬割槽
   const stoneGeo = new THREE.BoxGeometry(2.8, 0.4, 1.5, 128, 32, 64);
   const pos = stoneGeo.attributes.position;
 
@@ -181,19 +175,17 @@ function buildNaturalStoneD() {
     let z = pos.getZ(i);
 
     if (y > 0.18) {
-      // 5处出水点周围自然微低洼沉降，顺应水向外缓流
-      let dipSum = 0;
-      springCenters.forEach(pt => {
-        let dx = x - pt.x;
-        let dz = z - pt.z;
-        let dist = Math.sqrt(dx * dx + dz * dz);
-        if (dist < 0.6) {
-          dipSum += Math.cos(dist * Math.PI / 0.6) * 0.008;
-        }
-      });
+      // 仅在中央一处单点做极微小的隐蔽低洼，隐藏出水点
+      let dx = x - singleSpring.x;
+      let dz = z - singleSpring.z;
+      let dist = Math.sqrt(dx * dx + dz * dz);
+      let dip = 0;
+      if (dist < 0.4) {
+        dip = Math.cos(dist * Math.PI / 0.4) * 0.006;
+      }
 
-      let organicNoise = (Math.sin(x * 4.5) * Math.cos(z * 4.5)) * 0.005;
-      pos.setY(i, 0.2 - dipSum + organicNoise);
+      let organicNoise = (Math.sin(x * 4.5) * Math.cos(z * 4.5)) * 0.004;
+      pos.setY(i, 0.2 - dip + organicNoise);
     } else {
       let crag = (Math.sin(y * 20.0 + x * 3.5) * 0.022) + (Math.cos(z * 4.0) * 0.015);
       if (Math.abs(x) > 1.3) pos.setX(i, x + crag);
@@ -217,17 +209,7 @@ function buildNaturalStoneD() {
   stone.receiveShadow = true;
   group.add(stone);
 
-  // 5处自然石口隐藏涌水盖板 (天然中国黑石材同质感)
-  springCenters.forEach(pt => {
-    const capGeo = new THREE.CylinderGeometry(0.045, 0.05, 0.012, 32);
-    const capMat = new THREE.MeshStandardMaterial({ color: 0x121212, roughness: 0.3 });
-    const cap = new THREE.Mesh(capGeo, capMat);
-    cap.position.set(pt.x, 0.406, pt.z);
-    group.add(cap);
-    springDots.push(cap);
-  });
-
-  // 动态自然柔和水面网格 (纯流体动态起伏，去除任何硬线条线框)
+  // 动态自然柔和水面网格 (没有任何外露金属或石盖板，完全隐蔽)
   const waterGeo = new THREE.PlaneGeometry(2.76, 1.46, 128, 64);
   const waterMat = new THREE.MeshPhysicalMaterial({
     color: 0x0a1826,
@@ -250,36 +232,28 @@ function animate() {
   requestAnimationFrame(animate);
   const elapsed = clock.getElapsedTime() * flowSpeed;
 
-  // 纯自然流体物理演算：涌泉缓涌与同心水浪相干衰减漫延 (纯柔和波浪，无几何线条)
+  // 仅从中央单一隐蔽出水点向外荡开淡雅的同心微波
   if (waterMesh) {
     const pos = waterMesh.geometry.attributes.position;
     for (let i = 0; i < pos.count; i++) {
       let u = pos.getX(i);
       let v = pos.getY(i);
+
+      let dx = u - singleSpring.x;
+      let dy = v - (-singleSpring.z);
+      let dist = Math.sqrt(dx * dx + dy * dy);
+
       let waveZ = 0;
+      if (dist < 1.4) {
+        // 单点柔和同心衰减波
+        waveZ = Math.sin(dist * 14.0 - elapsed * 3.5) * Math.exp(-dist * 1.5) * 0.003;
+      }
 
-      springCenters.forEach((pt, sIdx) => {
-        let dx = u - pt.x;
-        let dy = v - (-pt.z);
-        let dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < 1.2) {
-          // 纯流体波动方程：平滑衰减的正弦水面微波
-          let wave = Math.sin(dist * 16.0 - elapsed * 4.0 + sIdx) * Math.exp(-dist * 1.8) * 0.0035;
-          waveZ += wave;
-        }
-      });
-
-      waveZ += Math.sin(u * 3.0 + elapsed * 1.2) * 0.0008;
       pos.setZ(i, waveZ);
     }
     waterMesh.geometry.computeVertexNormals();
     waterMesh.geometry.attributes.position.needsUpdate = true;
   }
-
-  springDots.forEach((dot, idx) => {
-    dot.position.y = 0.406 + Math.sin(elapsed * 2.5 + idx) * 0.001;
-  });
 
   controls.update();
   renderer.render(scene, camera);
@@ -294,13 +268,13 @@ function resetCam(type) {
 function toggleFlowSpeed() {
   if (flowSpeed === 1.0) {
     flowSpeed = 0.3;
-    document.getElementById('btnFlowSpeed').innerText = "💧 水流流速: 静流漫漫";
+    document.getElementById('btnFlowSpeed').innerText = "💧 泉水状态: 缓水微动";
   } else if (flowSpeed === 0.3) {
     flowSpeed = 0.0;
-    document.getElementById('btnFlowSpeed').innerText = "🌊 水流流速: 静止镜面";
+    document.getElementById('btnFlowSpeed').innerText = "🌊 泉水状态: 静止镜面";
   } else {
     flowSpeed = 1.0;
-    document.getElementById('btnFlowSpeed').innerText = "💧 水流流速: 自然缓涌";
+    document.getElementById('btnFlowSpeed').innerText = "💧 泉水状态: 自然微涌";
   }
 }
 
