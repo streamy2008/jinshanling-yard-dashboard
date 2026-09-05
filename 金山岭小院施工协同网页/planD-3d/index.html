@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>方案 D · 雨落疏荷 — 动态自然流水与涟漪 3D</title>
+<title>方案 D · 雨落疏荷 — 有机自然山石 3D</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -16,13 +16,13 @@
     font-family: 'Noto Serif SC', serif; overflow: hidden;
   }
   .ui-panel {
-    background: rgba(18, 16, 14, 0.90);
-    border: 1px solid rgba(120, 110, 95, 0.3);
+    background: rgba(18, 16, 14, 0.88);
+    border: 1px solid rgba(120, 110, 95, 0.35);
     backdrop-filter: blur(14px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   }
-  .gold-tag {
-    background: #C5A059; color: #1C1A19; font-weight: 700;
+  .badge-tag {
+    background: #3A3530; color: #E8DFCA; font-weight: 600; border: 1px solid #554D45;
   }
 </style>
 </head>
@@ -34,31 +34,31 @@
 <div class="absolute top-4 left-4 right-4 z-20 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 pointer-events-none">
   <div class="ui-panel p-4 rounded-2xl max-w-md pointer-events-auto shadow-2xl">
     <div class="flex items-center gap-2 mb-1.5">
-      <span class="gold-tag text-[10px] px-2 py-0.5 rounded-full">方案 D · 雨落疏荷</span>
-      <span class="text-xs text-[#A39B90]">自然动态流水模拟</span>
+      <span class="badge-tag text-[10px] px-2.5 py-0.5 rounded-full">方案 D · 雨落疏荷</span>
+      <span class="text-xs text-[#A39B90]">有机自然涌泉 (无硬线)</span>
     </div>
-    <h1 class="text-base font-bold text-[#F4F1EA]">中国黑自然原石 · 涌泉水纹扩散</h1>
+    <h1 class="text-base font-bold text-[#F4F1EA]">天然花岗岩石肌 · 涌泉水面扩散</h1>
     <p class="text-xs text-[#A39B90] mt-1 leading-relaxed">
-      规格：2800×1500×400mm ｜ 特征：不规则自然开裂粗糙侧边，5处出水点缓缓涌水，水膜贴着石面自然层流蔓延并向外漾开交错涟漪。
+      摒弃硬刻管槽与金属线条。石头侧面为开裂斧劈风化造型，顶面5处隐藏出水点自然向上缓缓涌水，水体波纹在墨石表面柔和漫延扩散。
     </p>
   </div>
 
   <div class="ui-panel p-3 rounded-2xl flex gap-2 pointer-events-auto">
-    <button onclick="resetCam('top')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2A2725] text-[#E0DAD0] hover:bg-[#C5A059] hover:text-black transition">俯视视角</button>
-    <button onclick="resetCam('front')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2A2725] text-[#E0DAD0] hover:bg-[#C5A059] hover:text-black transition">正面视效</button>
-    <button onclick="resetCam('iso')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2A2725] text-[#E0DAD0] hover:bg-[#C5A059] hover:text-black transition">透视全景</button>
+    <button onclick="resetCam('top')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2A2725] text-[#E0DAD0] hover:bg-[#3A3530] transition">俯视视角</button>
+    <button onclick="resetCam('front')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2A2725] text-[#E0DAD0] hover:bg-[#3A3530] transition">正面视效</button>
+    <button onclick="resetCam('iso')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2A2725] text-[#E0DAD0] hover:bg-[#3A3530] transition">透视全景</button>
   </div>
 </div>
 
 <!-- Bottom Floating Controls -->
 <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3 ui-panel px-4 py-2.5 rounded-full">
-  <button onclick="toggleFlowSpeed()" id="btnFlowSpeed" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#C5A059] text-black">💧 水流流速: 自然缓涌</button>
-  <button onclick="toggleDayNight()" id="btnLight" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#2A2725] text-[#E0DAD0]">🌙 夜景光影</button>
+  <button onclick="toggleFlowSpeed()" id="btnFlowSpeed" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#3A3530] text-[#E8DFCA] border border-[#554D45]">💧 水流状态: 自然缓涌</button>
+  <button onclick="toggleDayNight()" id="btnLight" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#2A2725] text-[#E0DAD0]">🌙 月夜光影</button>
 </div>
 
 <script>
 let scene, camera, renderer, controls;
-let waterMesh, rippleWaveMesh, springDots = [], flowSpeed = 1.0, isNight = false;
+let waterMesh, springDots = [], flowSpeed = 1.0, isNight = false;
 let clock = new THREE.Clock();
 
 const springCenters = [
@@ -117,7 +117,6 @@ function setupLighting() {
   scene.add(fillLight);
 }
 
-// 模拟花岗岩法线
 function generateStoneBumpMap() {
   const canvas = document.createElement('canvas');
   canvas.width = 512;
@@ -172,8 +171,8 @@ function buildNaturalStoneD() {
   const group = new THREE.Group();
   const bumpTexture = generateStoneBumpMap();
 
-  // 不规则天然石体网格
-  const stoneGeo = new THREE.BoxGeometry(2.8, 0.4, 1.5, 96, 24, 48);
+  // 纯自然不规则造型：去除硬轮廓与硬割槽
+  const stoneGeo = new THREE.BoxGeometry(2.8, 0.4, 1.5, 128, 32, 64);
   const pos = stoneGeo.attributes.position;
 
   for (let i = 0; i < pos.count; i++) {
@@ -182,7 +181,7 @@ function buildNaturalStoneD() {
     let z = pos.getZ(i);
 
     if (y > 0.18) {
-      // 5处出水点周围自然微低洼，顺应水向外缓流
+      // 5处出水点周围自然微低洼沉降，顺应水向外缓流
       let dipSum = 0;
       springCenters.forEach(pt => {
         let dx = x - pt.x;
@@ -193,10 +192,10 @@ function buildNaturalStoneD() {
         }
       });
 
-      let noise = (Math.sin(x * 5.0) * Math.cos(z * 5.0)) * 0.004;
-      pos.setY(i, 0.2 - dipSum + noise);
+      let organicNoise = (Math.sin(x * 4.5) * Math.cos(z * 4.5)) * 0.005;
+      pos.setY(i, 0.2 - dipSum + organicNoise);
     } else {
-      let crag = (Math.sin(y * 22.0 + x * 4.0) * 0.018) + (Math.random() - 0.5) * 0.012;
+      let crag = (Math.sin(y * 20.0 + x * 3.5) * 0.022) + (Math.cos(z * 4.0) * 0.015);
       if (Math.abs(x) > 1.3) pos.setX(i, x + crag);
       if (Math.abs(z) > 0.7) pos.setZ(i, z + crag);
     }
@@ -205,11 +204,11 @@ function buildNaturalStoneD() {
 
   const stoneMat = new THREE.MeshPhysicalMaterial({
     color: 0x0c0c0c,
-    roughness: 0.12,
+    roughness: 0.10,
     normalMap: bumpTexture,
     normalScale: new THREE.Vector2(0.3, 0.3),
     clearcoat: 0.9,
-    clearcoatRoughness: 0.05,
+    clearcoatRoughness: 0.03,
     reflectivity: 0.9
   });
   const stone = new THREE.Mesh(stoneGeo, stoneMat);
@@ -218,17 +217,17 @@ function buildNaturalStoneD() {
   stone.receiveShadow = true;
   group.add(stone);
 
-  // 5 处自然涌水点盖板 (同纹天然小圆石)
+  // 5处自然石口隐藏涌水盖板 (天然中国黑石材同质感)
   springCenters.forEach(pt => {
     const capGeo = new THREE.CylinderGeometry(0.045, 0.05, 0.012, 32);
-    const capMat = new THREE.MeshStandardMaterial({ color: 0x121212, roughness: 0.3, metalness: 0.1 });
+    const capMat = new THREE.MeshStandardMaterial({ color: 0x121212, roughness: 0.3 });
     const cap = new THREE.Mesh(capGeo, capMat);
     cap.position.set(pt.x, 0.406, pt.z);
     group.add(cap);
     springDots.push(cap);
   });
 
-  // 动态自然水面网格 (包含波纹起伏顶点)
+  // 动态自然柔和水面网格 (纯流体动态起伏，去除任何硬线条线框)
   const waterGeo = new THREE.PlaneGeometry(2.76, 1.46, 128, 64);
   const waterMat = new THREE.MeshPhysicalMaterial({
     color: 0x0a1826,
@@ -251,12 +250,12 @@ function animate() {
   requestAnimationFrame(animate);
   const elapsed = clock.getElapsedTime() * flowSpeed;
 
-  // 真实水波纹物理波动演算：5处涌泉点向外扩散同心正弦波并自然相干交错
+  // 纯自然流体物理演算：涌泉缓涌与同心水浪相干衰减漫延 (纯柔和波浪，无几何线条)
   if (waterMesh) {
     const pos = waterMesh.geometry.attributes.position;
     for (let i = 0; i < pos.count; i++) {
       let u = pos.getX(i);
-      let v = pos.getY(i); // PlaneGeometry 旋转后 Y 对应 Z 轴
+      let v = pos.getY(i);
       let waveZ = 0;
 
       springCenters.forEach((pt, sIdx) => {
@@ -265,23 +264,21 @@ function animate() {
         let dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < 1.2) {
-          // 向外传播的水波涟漪方程
-          let wave = Math.sin(dist * 18.0 - elapsed * 4.5 + sIdx) * Math.exp(-dist * 1.8) * 0.0035;
+          // 纯流体波动方程：平滑衰减的正弦水面微波
+          let wave = Math.sin(dist * 16.0 - elapsed * 4.0 + sIdx) * Math.exp(-dist * 1.8) * 0.0035;
           waveZ += wave;
         }
       });
 
-      // 叠加整体微小层流漫流感
-      waveZ += Math.sin(u * 3.0 + elapsed * 1.5) * 0.0008;
+      waveZ += Math.sin(u * 3.0 + elapsed * 1.2) * 0.0008;
       pos.setZ(i, waveZ);
     }
     waterMesh.geometry.computeVertexNormals();
     waterMesh.geometry.attributes.position.needsUpdate = true;
   }
 
-  // 涌水点盖板水柱脉动
   springDots.forEach((dot, idx) => {
-    dot.position.y = 0.406 + Math.sin(elapsed * 3.0 + idx) * 0.0012;
+    dot.position.y = 0.406 + Math.sin(elapsed * 2.5 + idx) * 0.001;
   });
 
   controls.update();
@@ -317,14 +314,12 @@ function toggleDayNight() {
     scene.background.setHex(0x040404);
     mainSun.intensity = 0.3;
     fillLight.color.setHex(0x1a2b4c);
-    btn.innerText = "🌙 夜景光影";
-    btn.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#2A2725] text-[#E0DAD0]";
+    btn.innerText = "🌙 月夜光影";
   } else {
     scene.background.setHex(0x0a0908);
     mainSun.intensity = 2.4;
     fillLight.color.setHex(0x7892b5);
     btn.innerText = "☀️ 晨曦阳光";
-    btn.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#3A3530] text-[#E8DFCA] border border-[#554D45]";
   }
 }
 

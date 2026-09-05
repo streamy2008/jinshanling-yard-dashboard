@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>方案 C · 远山入水 — 自然不规则石体与镜面倒影 3D</title>
+<title>方案 C · 远山入水 — 有机自然山石 3D</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -17,12 +17,12 @@
   }
   .ui-panel {
     background: rgba(18, 16, 14, 0.88);
-    border: 1px solid rgba(197, 160, 89, 0.35);
+    border: 1px solid rgba(120, 110, 95, 0.35);
     backdrop-filter: blur(14px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   }
-  .gold-tag {
-    background: #C5A059; color: #1C1A19; font-weight: 700;
+  .badge-tag {
+    background: #3A3530; color: #E8DFCA; font-weight: 600; border: 1px solid #554D45;
   }
 </style>
 </head>
@@ -34,31 +34,31 @@
 <div class="absolute top-4 left-4 right-4 z-20 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 pointer-events-none">
   <div class="ui-panel p-4 rounded-2xl max-w-md pointer-events-auto shadow-2xl">
     <div class="flex items-center gap-2 mb-1.5">
-      <span class="gold-tag text-[10px] px-2 py-0.5 rounded-full">方案 C · 远山入水</span>
-      <span class="text-xs text-[#A39B90]">自然不规则造型 · 树影镜面倒影</span>
+      <span class="badge-tag text-[10px] px-2.5 py-0.5 rounded-full">方案 C · 远山入水</span>
+      <span class="text-xs text-[#A39B90]">有机自然山石 (无硬线)</span>
     </div>
-    <h1 class="text-base font-bold text-[#F4F1EA]">中国黑自然原石 · 静水树影倒影</h1>
+    <h1 class="text-base font-bold text-[#F4F1EA]">天然墨石凹凸肌理 · 倒影清池</h1>
     <p class="text-xs text-[#A39B90] mt-1 leading-relaxed">
-      规格：2800×1500×400mm ｜ 材质：取消金线，采用多微段自然浅槽与极高抛光(光泽度≥90°)。在无流动水时，整块石面犹如清澈黑镜，清晰倒映上方树枝与周围山景。
+      摒弃一切机械切削硬线条。石头本体呈天然野趣开裂造型，顶面做高抛光平整镜面，上方倒映树影；水贴石缓慢漫过无人工痕迹。
     </p>
   </div>
 
   <div class="ui-panel p-3 rounded-2xl flex gap-2 pointer-events-auto">
-    <button onclick="resetCam('top')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2A2725] text-[#E0DAD0] hover:bg-[#C5A059] hover:text-black transition">俯视视角</button>
-    <button onclick="resetCam('front')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2A2725] text-[#E0DAD0] hover:bg-[#C5A059] hover:text-black transition">正面视效</button>
-    <button onclick="resetCam('iso')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2A2725] text-[#E0DAD0] hover:bg-[#C5A059] hover:text-black transition">透视全景</button>
+    <button onclick="resetCam('top')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2A2725] text-[#E0DAD0] hover:bg-[#3A3530] transition">俯视视角</button>
+    <button onclick="resetCam('front')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2A2725] text-[#E0DAD0] hover:bg-[#3A3530] transition">正面视效</button>
+    <button onclick="resetCam('iso')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2A2725] text-[#E0DAD0] hover:bg-[#3A3530] transition">透视全景</button>
   </div>
 </div>
 
 <!-- Bottom Floating Controls -->
 <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3 ui-panel px-4 py-2.5 rounded-full">
-  <button onclick="toggleWaterFlow()" id="btnFlow" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#2A2725] text-[#E0DAD0]">🌊 流水状态: 关 (纯镜面模式)</button>
-  <button onclick="toggleDayNight()" id="btnLight" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#C5A059] text-black">☀️ 晨曦阳光</button>
+  <button onclick="toggleWaterFlow()" id="btnFlow" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#3A3530] text-[#E8DFCA] border border-[#554D45]">🌊 水状态: 自然微波漫流</button>
+  <button onclick="toggleDayNight()" id="btnLight" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#2A2725] text-[#E0DAD0]">🌙 月夜光影</button>
 </div>
 
 <script>
 let scene, camera, renderer, controls;
-let waterMesh, stoneMesh, treeGroup, isFlowing = false, isNight = false;
+let waterMesh, stoneMesh, treeGroup, isFlowing = true, isNight = false;
 let clock = new THREE.Clock();
 
 function init() {
@@ -77,7 +77,7 @@ function init() {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.25;
+  renderer.toneMappingExposure = 1.2;
   container.appendChild(renderer.domElement);
 
   controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -87,48 +87,45 @@ function init() {
 
   setupLighting();
   buildEnvironment();
-  buildNaturalTreesAbove(); // 上方倒影树木与树枝
-  buildNaturalStoneC();
+  buildNaturalTreesAbove();
+  buildOrganicStoneC();
 
   window.addEventListener('resize', onWindowResize);
   animate();
 }
 
 function setupLighting() {
-  const ambientLight = new THREE.AmbientLight(0xdbe4ff, 0.7);
+  const ambientLight = new THREE.AmbientLight(0xdbe4ff, 0.6);
   ambientLight.name = "ambient";
   scene.add(ambientLight);
 
-  const mainSun = new THREE.DirectionalLight(0xfff5ea, 2.5);
+  const mainSun = new THREE.DirectionalLight(0xfff5ea, 2.2);
   mainSun.position.set(6, 9, 5);
   mainSun.castShadow = true;
-  mainSun.shadow.mapSize.width = 2048;
-  mainSun.shadow.mapSize.height = 2048;
   mainSun.name = "mainSun";
   scene.add(mainSun);
 
-  const fillLight = new THREE.DirectionalLight(0x7892b5, 1.0);
+  const fillLight = new THREE.DirectionalLight(0x7892b5, 0.9);
   fillLight.position.set(-5, 4, -4);
   fillLight.name = "fillLight";
   scene.add(fillLight);
 }
 
-// 模拟石侧粗糙自然面与顶面高镜面的组合纹理
-function generateStoneBumpMap() {
+function generateOrganicBumpMap() {
   const canvas = document.createElement('canvas');
   canvas.width = 512;
   canvas.height = 512;
   const ctx = canvas.getContext('2d');
-
   ctx.fillStyle = 'rgb(128, 128, 255)';
   ctx.fillRect(0, 0, 512, 512);
 
   const imgData = ctx.getImageData(0, 0, 512, 512);
   const data = imgData.data;
 
+  // 生成非均匀自然的石糙微粒
   for (let i = 0; i < data.length; i += 4) {
-    const nx = (Math.random() - 0.5) * 40;
-    const ny = (Math.random() - 0.5) * 40;
+    const nx = (Math.random() - 0.5) * 45;
+    const ny = (Math.random() - 0.5) * 45;
     data[i] = 128 + nx;
     data[i + 1] = 128 + ny;
     data[i + 2] = 255;
@@ -166,15 +163,11 @@ function buildEnvironment() {
   scene.add(ground);
 }
 
-// 在上方搭建可倒影的自然松树与树枝悬臂 (高位树木)
 function buildNaturalTreesAbove() {
   treeGroup = new THREE.Group();
-
-  // 1. 悬挑树枝 (斜伸到石顶正上方，专门提供镜面倒影)
   const branchMat = new THREE.MeshStandardMaterial({ color: 0x2b2219, roughness: 0.8 });
   const leafMat = new THREE.MeshStandardMaterial({ color: 0x3d4e34, roughness: 0.6 });
 
-  // 主干
   const trunkGeo = new THREE.CylinderGeometry(0.06, 0.12, 3.5, 12);
   const trunk = new THREE.Mesh(trunkGeo, branchMat);
   trunk.position.set(-1.8, 1.8, -1.2);
@@ -183,7 +176,6 @@ function buildNaturalTreesAbove() {
   trunk.castShadow = true;
   treeGroup.add(trunk);
 
-  // 伸出的繁密树枝与树叶
   for (let i = 0; i < 7; i++) {
     const subBranch = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.05, 1.2, 8), branchMat);
     subBranch.position.set(-1.2 + i * 0.25, 2.5 + Math.sin(i) * 0.2, -0.6 + (i % 2) * 0.4);
@@ -191,23 +183,21 @@ function buildNaturalTreesAbove() {
     subBranch.castShadow = true;
     treeGroup.add(subBranch);
 
-    // 树叶簇 (倒影在石面上)
     const leaves = new THREE.Mesh(new THREE.DodecahedronGeometry(0.35 + Math.random() * 0.2, 1), leafMat);
     leaves.position.set(-1.0 + i * 0.35, 2.7 + Math.sin(i) * 0.3, -0.5 + (i % 3) * 0.3);
     leaves.scale.set(1.2, 0.6, 1.0);
     leaves.castShadow = true;
     treeGroup.add(leaves);
   }
-
   scene.add(treeGroup);
 }
 
-function buildNaturalStoneC() {
+function buildOrganicStoneC() {
   const group = new THREE.Group();
-  const bumpTexture = generateStoneBumpMap();
+  const bumpTexture = generateOrganicBumpMap();
 
-  // 完全不规则自然的石头本体：多度高度扰动与开裂侧面
-  const stoneGeo = new THREE.BoxGeometry(2.8, 0.4, 1.5, 96, 24, 48);
+  // 完全彻底去硬线条的凹凸不规则野趣天然石体
+  const stoneGeo = new THREE.BoxGeometry(2.8, 0.4, 1.5, 128, 32, 64);
   const pos = stoneGeo.attributes.position;
 
   for (let i = 0; i < pos.count; i++) {
@@ -215,59 +205,49 @@ function buildNaturalStoneC() {
     let y = pos.getY(i);
     let z = pos.getZ(i);
 
-    // 顶面：总体极度平整以保证镜面反射，仅在边缘与山脊线有微起伏
+    // 顶面：摒弃机械切槽，仅保留山石自然微缓起伏
     if (y > 0.18) {
-      // 4道自然天然山脊浅凹槽 (非金线，仅凹凸高差)
-      let ridge1 = Math.sin((x + 0.8) * 4.0) * 0.008;
-      let ridge2 = Math.cos((z + 0.2) * 3.5) * 0.005;
-      
-      // 保持中央绝大部分区域极端平整（镜面区域）
-      let centerDist = Math.sqrt(x * x + z * z);
-      let flatness = Math.max(0, 1.0 - centerDist / 1.8);
-      
-      let organicNoise = (Math.sin(x * 6.0) * Math.cos(z * 6.0)) * 0.006 * (1.0 - flatness);
-      pos.setY(i, 0.2 + ridge1 + ridge2 + organicNoise);
-    } 
-    // 自然石边开裂剥落感 (侧边不规则)
-    else {
-      let sideCrag = (Math.sin(y * 20.0 + x * 5.0) * 0.02) + (Math.random() - 0.5) * 0.015;
-      if (Math.abs(x) > 1.3) pos.setX(i, x + sideCrag);
-      if (Math.abs(z) > 0.7) pos.setZ(i, z + sideCrag);
+      let hillNoise = Math.sin(x * 2.2) * Math.cos(z * 2.5) * 0.022;
+      let fineNoise = (Math.sin(x * 7.0) * Math.sin(z * 7.0)) * 0.005;
+      pos.setY(i, 0.2 + hillNoise + fineNoise);
+    } else {
+      // 侧面与底部：不规则破裂开削造型
+      let crag = (Math.sin(y * 18.0 + x * 3.5) * 0.025) + (Math.cos(z * 4.0) * 0.018);
+      if (Math.abs(x) > 1.3) pos.setX(i, x + crag);
+      if (Math.abs(z) > 0.7) pos.setZ(i, z + crag);
     }
   }
   stoneGeo.computeVertexNormals();
 
-  // 取消金线！采用极致黑镜面 PBR 材质，能够清晰倒映上方树枝
   const stoneMat = new THREE.MeshPhysicalMaterial({
-    color: 0x0a0a0a,          // 纯粹墨黑
-    roughness: 0.02,          // 极度光滑 (光泽度 ≥95°)
-    metalness: 0.1,
-    clearcoat: 1.0,           // 极致双层清漆
-    clearcoatRoughness: 0.01,
-    reflectivity: 1.0,        // 100% 高反射倒影
-    bumpMap: bumpTexture,
-    bumpScale: 0.002
+    color: 0x0a0a0a,
+    roughness: 0.03,
+    normalMap: bumpTexture,
+    normalScale: new THREE.Vector2(0.2, 0.2),
+    clearcoat: 0.9,
+    clearcoatRoughness: 0.02,
+    reflectivity: 0.95
   });
-
   stoneMesh = new THREE.Mesh(stoneGeo, stoneMat);
   stoneMesh.position.y = 0.2;
   stoneMesh.castShadow = true;
   stoneMesh.receiveShadow = true;
   group.add(stoneMesh);
 
-  // 顶面极薄水膜 (开水时提供极微弱的流动波纹；关水时隐藏，暴露纯石材黑镜)
-  const waterGeo = new THREE.PlaneGeometry(2.76, 1.46, 64, 32);
+  // 顶面连续自然流体动态水面（非规整管槽，纯水体物理起伏）
+  const waterGeo = new THREE.PlaneGeometry(2.76, 1.46, 128, 64);
   const waterMat = new THREE.MeshPhysicalMaterial({
-    color: 0x0c1622,
+    color: 0x0c1824,
     roughness: 0.01,
-    transmission: 0.9,
+    transmission: 0.85,
     transparent: true,
-    opacity: 0.0,             // 默认关闭水流，暴露纯镜面石材倒影
-    clearcoat: 1.0
+    opacity: 0.65,
+    clearcoat: 1.0,
+    reflectivity: 0.95
   });
   waterMesh = new THREE.Mesh(waterGeo, waterMat);
   waterMesh.rotation.x = -Math.PI / 2;
-  waterMesh.position.y = 0.403;
+  waterMesh.position.y = 0.412;
   group.add(waterMesh);
 
   scene.add(group);
@@ -277,17 +257,29 @@ function animate() {
   requestAnimationFrame(animate);
   const elapsed = clock.getElapsedTime();
 
-  // 当开水时，极微弱的静压薄水漫过黑镜面；关水时平静如纯镜倒影
-  if (isFlowing && waterMesh) {
-    waterMesh.material.opacity = 0.65;
-    waterMesh.position.y = 0.403 + Math.sin(elapsed * 2.0) * 0.0012;
-  } else if (waterMesh) {
-    waterMesh.material.opacity = 0.0;
+  // 自然动态微风水面漫流（物理流体无规则正弦相干演算）
+  if (waterMesh) {
+    const pos = waterMesh.geometry.attributes.position;
+    for (let i = 0; i < pos.count; i++) {
+      let u = pos.getX(i);
+      let v = pos.getY(i);
+
+      if (isFlowing) {
+        // 软和的微风缓流折射
+        let w1 = Math.sin(u * 4.0 - elapsed * 2.0) * 0.002;
+        let w2 = Math.cos(v * 5.0 + elapsed * 1.5) * 0.0015;
+        let w3 = Math.sin((u + v) * 3.0 - elapsed * 1.2) * 0.001;
+        pos.setZ(i, w1 + w2 + w3);
+      } else {
+        pos.setZ(i, 0); // 静流纯镜面
+      }
+    }
+    waterMesh.geometry.computeVertexNormals();
+    waterMesh.geometry.attributes.position.needsUpdate = true;
   }
 
-  // 悬挂树枝微风轻轻拂动 (增强倒影晃动感)
   if (treeGroup) {
-    treeGroup.rotation.z = Math.sin(elapsed * 0.8) * 0.012;
+    treeGroup.rotation.z = Math.sin(elapsed * 0.8) * 0.01;
   }
 
   controls.update();
@@ -304,11 +296,9 @@ function toggleWaterFlow() {
   isFlowing = !isFlowing;
   const btn = document.getElementById('btnFlow');
   if (isFlowing) {
-    btn.innerText = "💧 流水状态: 开 (微水薄膜)";
-    btn.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#C5A059] text-black";
+    btn.innerText = "🌊 水状态: 自然微风漫流";
   } else {
-    btn.innerText = "🌊 流水状态: 关 (纯黑镜倒影)";
-    btn.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#2A2725] text-[#E0DAD0]";
+    btn.innerText = "🌊 水状态: 关 (纯黑镜倒影)";
   }
 }
 
@@ -320,16 +310,14 @@ function toggleDayNight() {
 
   if (isNight) {
     scene.background.setHex(0x040404);
-    mainSun.intensity = 0.2;
+    mainSun.intensity = 0.3;
     fillLight.color.setHex(0x1a2b4c);
-    btn.innerText = "🌙 月夜冷光";
-    btn.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#2A2725] text-[#E0DAD0]";
+    btn.innerText = "🌙 月夜光影";
   } else {
     scene.background.setHex(0x0a0908);
-    mainSun.intensity = 2.5;
+    mainSun.intensity = 2.2;
     fillLight.color.setHex(0x7892b5);
     btn.innerText = "☀️ 晨曦阳光";
-    btn.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#C5A059] text-black";
   }
 }
 
