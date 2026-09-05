@@ -3,74 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>方案 C · 远山入水 — 原生 3D 渲染控制</title>
+<title>阿那亚金山岭庭院水景 — Impeccable 顶级三维视觉大样</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
-  body { margin: 0; background: #080706; color: #E8DFCA; font-family: 'Noto Serif SC', serif; overflow: hidden; }
-  .ui-panel { background: rgba(18, 16, 14, 0.88); border: 1px solid rgba(197, 160, 89, 0.35); backdrop-filter: blur(12px); }
-  .gold-badge { background: #C5A059; color: #1C1917; font-weight: 700; }
+  
+  body {
+    margin: 0; background: #080706; color: #E8DFCA;
+    font-family: 'Noto Serif SC', serif; overflow: hidden;
+  }
+  .impeccable-panel {
+    background: rgba(16, 14, 12, 0.92);
+    border: 1px solid rgba(197, 160, 89, 0.4);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.8);
+  }
+  .gold-badge {
+    background: #C5A059; color: #1C1917; font-weight: 700;
+  }
+  .ctrl-btn {
+    background: rgba(28,25,23,0.9); color: #e8dfca;
+    border: 1px solid rgba(197,160,89,0.35); transition: all 0.25s ease;
+  }
+  .ctrl-btn:hover {
+    background: #C5A059; color: #1C1917; font-weight: 700;
+  }
 </style>
 </head>
 <body>
 
 <div id="canvas-container" class="w-full h-screen"></div>
 
+<!-- Top Control Header (Impeccable Design System) -->
 <div class="absolute top-4 left-4 right-4 z-20 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 pointer-events-none">
-  <div class="ui-panel p-4 rounded-2xl max-w-md pointer-events-auto shadow-2xl">
+  <div class="impeccable-panel p-4 rounded-2xl max-w-md pointer-events-auto">
     <div class="flex items-center gap-2 mb-1.5">
-      <span class="gold-badge text-[10px] px-2.5 py-0.5 rounded-full">方案 C · 远山入水</span>
-      <span class="text-xs text-[#A39B90]">原生 WebGL/Three.js 3D 渲染</span>
+      <span class="gold-badge text-[10px] px-2.5 py-0.5 rounded-full">Impeccable 极简设计</span>
+      <span class="text-xs text-[#A39B90]">无植物纯硬质空间 1:1 重构</span>
     </div>
-    <h1 class="text-base font-bold text-[#F4F1EA]">照片 1:1 实景三维重建 · 高低双石跌水</h1>
-    <p class="text-xs text-[#A39B90] mt-1 leading-relaxed">完全去除对 Web Component 的依赖，采用原生 Three.js Canvas 直接渲染</p>
+    <h1 class="text-base font-bold text-[#F4F1EA]">花格红砖墙 · 黑镜立柱 · 跌水天然石</h1>
+    <p class="text-xs text-[#A39B90] mt-1 leading-relaxed">
+      采用程序化 PBR 烧结红砖与中国黑花岗岩法线贴图。水从左侧高石缓缓流出（可调流速），斜向跌落至下石与浅池，形成同心涟漪或平置静水黑镜。
+    </p>
   </div>
 
-  <div class="ui-panel p-3 rounded-2xl flex gap-2 pointer-events-auto shadow-2xl">
-    <button onclick="resetCam('photo')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#C5A059] text-black">📷 实景视角</button>
-    <button onclick="resetCam('top')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2A2725] text-[#E0DAD0] hover:bg-[#3A3530] transition">俯视视角</button>
-    <button onclick="resetCam('iso')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2A2725] text-[#E0DAD0] hover:bg-[#3A3530] transition">透视视角</button>
+  <div class="impeccable-panel p-2.5 rounded-2xl flex gap-2 pointer-events-auto">
+    <button onclick="resetCam('photo')" class="ctrl-btn px-3 py-1.5 rounded-xl text-xs font-semibold">📷 照片实景视角</button>
+    <button onclick="resetCam('top')" class="ctrl-btn px-3 py-1.5 rounded-xl text-xs font-semibold">俯视视角</button>
+    <button onclick="resetCam('iso')" class="ctrl-btn px-3 py-1.5 rounded-xl text-xs font-semibold">透视视角</button>
   </div>
 </div>
 
-<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3 ui-panel px-4 py-2.5 rounded-full shadow-2xl">
-  <button onclick="toggleWaterFlow()" id="btnFlow" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#C5A059] text-black">💧 跌水漫流: 开</button>
-  <button onclick="toggleDayNight()" id="btnLight" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#2A2725] text-[#E0DAD0]">🌙 夜景模式</button>
+<!-- Bottom Floating Controls -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3 impeccable-panel px-4 py-2.5 rounded-full">
+  <button onclick="toggleFlowSpeed()" id="btnSpeed" class="px-4 py-1.5 rounded-full text-xs font-bold bg-[#C5A059] text-black shadow">💧 跌水流速: 自然跌水</button>
+  <button onclick="toggleDayNight()" id="btnLight" class="px-4 py-1.5 rounded-full text-xs font-bold bg-[#2A2725] text-[#E0DAD0] border border-[#44403C]">🌙 月夜冷光模式</button>
 </div>
 
 <script>
 let scene, camera, renderer, controls;
-let waterMesh, waterfallMesh, isFlowing = true, isNight = false;
+let waterMesh, waterfallMesh, flowSpeed = 1.0, isNight = false;
 let clock = new THREE.Clock();
 
 function init() {
   const container = document.getElementById('canvas-container');
+  
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x080706);
-  scene.fog = new THREE.FogExp2(0x080706, 0.05);
+  scene.fog = new THREE.FogExp2(0x080706, 0.04);
 
   camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
-  camera.position.set(-0.8, 1.6, 4.2);
+  camera.position.set(-0.6, 1.5, 4.4);
 
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.25;
+  renderer.toneMappingExposure = 1.35;
   container.appendChild(renderer.domElement);
 
   controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.05;
-  controls.target.set(0.4, 0.85, 0);
+  controls.target.set(0.3, 0.85, 0);
 
   setupLighting();
-  buildBrickWall();
-  buildPoolAndGravel();
-  buildStonesAndWaterfalls();
+  buildBrickWallPBR();       // 1. 红砖墙与花格
+  buildPoolAndGravelPBR();   // 2. 3~5cm 碎石池底
+  buildStonesAndWaterfallsPBR(); // 3. 逼真中国黑与高低双石
 
   window.addEventListener('resize', onWindowResize);
   animate();
@@ -80,59 +105,134 @@ function setupLighting() {
   const ambientLight = new THREE.AmbientLight(0xdbe4ff, 0.7);
   scene.add(ambientLight);
 
-  const mainSun = new THREE.DirectionalLight(0xfff5ea, 2.5);
-  mainSun.position.set(5, 8, 4);
+  const mainSun = new THREE.DirectionalLight(0xfff3e6, 2.8);
+  mainSun.position.set(5, 9, 6);
   mainSun.castShadow = true;
+  mainSun.shadow.mapSize.width = 2048;
+  mainSun.shadow.mapSize.height = 2048;
+  mainSun.shadow.bias = -0.0005;
   mainSun.name = "mainSun";
   scene.add(mainSun);
 
-  const fillLight = new THREE.DirectionalLight(0x7892b5, 1.0);
-  fillLight.position.set(-5, 4, -2);
+  const fillLight = new THREE.DirectionalLight(0x7892b5, 1.2);
+  fillLight.position.set(-6, 5, -3);
   fillLight.name = "fillLight";
   scene.add(fillLight);
+
+  const rimLight = new THREE.PointLight(0xc5a059, 1.2, 8);
+  rimLight.position.set(0, 1.8, 1);
+  scene.add(rimLight);
 }
 
-function buildBrickWall() {
-  const wallGroup = new THREE.Group();
-  const brickMat = new THREE.MeshStandardMaterial({ color: 0x8b3a2b, roughness: 0.8, metalness: 0.1 });
-  const brickW = 0.24, brickH = 0.10, brickD = 0.12;
+function generateBrickNormalMap() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512; canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = 'rgb(128, 128, 255)'; ctx.fillRect(0,0,512,512);
 
-  for (let y = 0; y < 20; y++) {
+  const imgData = ctx.getImageData(0, 0, 512, 512);
+  const data = imgData.data;
+
+  for (let i = 0; i < data.length; i += 4) {
+    let x = (i / 4) % 512;
+    let y = Math.floor((i / 4) / 512);
+    let nx = (Math.random() - 0.5) * 80;
+    let ny = (Math.random() - 0.5) * 80;
+    
+    if (y % 32 < 4 || x % 64 < 4) {
+      nx = -40; ny = -40;
+    }
+    data[i] = 128 + nx;
+    data[i + 1] = 128 + ny;
+    data[i + 2] = 255;
+  }
+  ctx.putImageData(imgData, 0, 0);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping; texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(4, 3);
+  return texture;
+}
+
+function generateGraniteNormalMap() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512; canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = 'rgb(128, 128, 255)'; ctx.fillRect(0,0,512,512);
+
+  const imgData = ctx.getImageData(0, 0, 512, 512);
+  const data = imgData.data;
+
+  for (let i = 0; i < data.length; i += 4) {
+    let nx = (Math.random() - 0.5) * 70;
+    let ny = (Math.random() - 0.5) * 70;
+    data[i] = 128 + nx;
+    data[i + 1] = 128 + ny;
+    data[i + 2] = 255;
+  }
+  ctx.putImageData(imgData, 0, 0);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping; texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(2, 2);
+  return texture;
+}
+
+function buildBrickWallPBR() {
+  const wallGroup = new THREE.Group();
+  const brickNormal = generateBrickNormalMap();
+
+  const brickMat = new THREE.MeshStandardMaterial({
+    color: 0x9c3f2d,
+    roughness: 0.75,
+    metalness: 0.05,
+    normalMap: brickNormal,
+    normalScale: new THREE.Vector2(0.6, 0.6)
+  });
+
+  const wallW = 6.8, wallH = 2.4, brickW = 0.24, brickH = 0.10, brickD = 0.12;
+
+  for (let y = 0; y < 21; y++) {
     for (let x = -14; x < 14; x++) {
-      if (y >= 6 && y <= 13 && (x + y) % 3 === 0 && x > -9 && x < 11) continue;
+      if (y >= 6 && y <= 14 && (x + y) % 3 === 0 && x > -9 && x < 11) {
+        continue;
+      }
       const brickGeo = new THREE.BoxGeometry(brickW, brickH, brickD);
       const brick = new THREE.Mesh(brickGeo, brickMat);
       let offsetX = (y % 2 === 0) ? 0 : brickW / 2;
-      brick.position.set(x * (brickW + 0.008) + offsetX, y * (brickH + 0.008), -1.2);
-      brick.castShadow = brick.receiveShadow = true;
+      brick.position.set(x * (brickW + 0.008) + offsetX, y * (brickH + 0.008), -1.1);
+      brick.castShadow = true;
+      brick.receiveShadow = true;
       wallGroup.add(brick);
     }
   }
 
-  const leftWallMat = new THREE.MeshStandardMaterial({ color: 0x5c2b20, roughness: 0.7 });
-  const leftWall = new THREE.Mesh(new THREE.BoxGeometry(0.2, 3.0, 3.0), leftWallMat);
-  leftWall.position.set(-2.8, 1.5, 0.2);
+  const leftWallMat = new THREE.MeshStandardMaterial({ color: 0x54261c, roughness: 0.65, metalness: 0.3 });
+  const leftWall = new THREE.Mesh(new THREE.BoxGeometry(0.2, 3.2, 3.2), leftWallMat);
+  leftWall.position.set(-2.8, 1.5, 0.3);
   wallGroup.add(leftWall);
 
   scene.add(wallGroup);
 }
 
-function buildPoolAndGravel() {
+function buildPoolAndGravelPBR() {
   const poolGroup = new THREE.Group();
+  const graniteNormal = generateGraniteNormalMap();
 
-  const poolWaterGeo = new THREE.CylinderGeometry(2.6, 2.7, 0.1, 64);
+  const poolWaterGeo = new THREE.CylinderGeometry(2.5, 2.5, 0.06, 64);
   const poolWaterMat = new THREE.MeshPhysicalMaterial({
-    color: 0x08121a, roughness: 0.01, metalness: 0.9, transmission: 0.7, transparent: true, opacity: 0.85
+    color: 0x07111a, roughness: 0.01, metalness: 0.95,
+    transmission: 0.7, transparent: true, opacity: 0.88, clearcoat: 1.0
   });
   waterMesh = new THREE.Mesh(poolWaterGeo, poolWaterMat);
-  waterMesh.position.set(0.2, 0.05, 0.2);
+  waterMesh.position.set(0.2, 0.04, 0.2);
   poolGroup.add(waterMesh);
 
-  const pebbleMat = new THREE.MeshStandardMaterial({ color: 0x2a2825, roughness: 0.85 });
-  for (let i = 0; i < 120; i++) {
+  const pebbleMat = new THREE.MeshStandardMaterial({ color: 0x2e2a26, roughness: 0.85 });
+  for (let i = 0; i < 180; i++) {
     let angle = Math.random() * Math.PI * 2;
-    let rad = 0.5 + Math.random() * 2.0;
-    let size = 0.03 + Math.random() * 0.02;
+    let rad = 0.6 + Math.random() * 2.0;
+    let size = 0.025 + Math.random() * 0.025;
     const pebble = new THREE.Mesh(new THREE.DodecahedronGeometry(size, 1), pebbleMat);
     pebble.position.set(0.2 + Math.cos(angle) * rad, 0.01, 0.2 + Math.sin(angle) * rad);
     pebble.rotation.set(Math.random(), Math.random(), Math.random());
@@ -140,7 +240,9 @@ function buildPoolAndGravel() {
   }
 
   const groundGeo = new THREE.PlaneGeometry(20, 20);
-  const groundMat = new THREE.MeshStandardMaterial({ color: 0x181614, roughness: 0.9 });
+  const groundMat = new THREE.MeshStandardMaterial({
+    color: 0x181614, roughness: 0.9, normalMap: graniteNormal, normalScale: new THREE.Vector2(0.4, 0.4)
+  });
   const ground = new THREE.Mesh(groundGeo, groundMat);
   ground.rotation.x = -Math.PI / 2;
   ground.position.y = 0.0;
@@ -150,43 +252,71 @@ function buildPoolAndGravel() {
   scene.add(poolGroup);
 }
 
-function buildStonesAndWaterfalls() {
+function buildStonesAndWaterfallsPBR() {
   const stoneGroup = new THREE.Group();
+  const graniteNormal = generateGraniteNormalMap();
 
-  const stoneMat = new THREE.MeshPhysicalMaterial({
-    color: 0x121212, roughness: 0.15, metalness: 0.1, clearcoat: 0.9, clearcoatRoughness: 0.05
+  const naturalStoneMat = new THREE.MeshPhysicalMaterial({
+    color: 0x121212,
+    roughness: 0.22,
+    metalness: 0.15,
+    clearcoat: 0.85,
+    clearcoatRoughness: 0.08,
+    reflectivity: 0.9,
+    normalMap: graniteNormal,
+    normalScale: new THREE.Vector2(0.35, 0.35)
   });
 
-  // 左高石
-  const highStoneGeo = new THREE.DodecahedronGeometry(0.75, 2);
-  highStoneGeo.scale(1.25, 1.45, 0.9);
-  const highStone = new THREE.Mesh(highStoneGeo, stoneMat);
+  // A. 左侧高石
+  const highStoneGeo = new THREE.DodecahedronGeometry(0.78, 3);
+  const posA = highStoneGeo.attributes.position;
+  for (let i = 0; i < posA.count; i++) {
+    let x = posA.getX(i), y = posA.getY(i), z = posA.getZ(i);
+    let noise = (Math.sin(x * 6.0) * Math.cos(z * 6.0)) * 0.04;
+    posA.setX(i, x * 1.25 + noise);
+    posA.setY(i, y * 1.45 + noise);
+    posA.setZ(i, z * 0.9 + noise);
+  }
+  highStoneGeo.computeVertexNormals();
+
+  const highStone = new THREE.Mesh(highStoneGeo, naturalStoneMat);
   highStone.position.set(-1.35, 0.72, 0.1);
   highStone.castShadow = true;
   stoneGroup.add(highStone);
 
-  // 右下卧石
-  const lowStoneGeo = new THREE.DodecahedronGeometry(0.92, 2);
-  lowStoneGeo.scale(1.65, 0.75, 1.1);
-  const lowStone = new THREE.Mesh(lowStoneGeo, stoneMat);
+  // B. 右侧下卧巨石
+  const lowStoneGeo = new THREE.DodecahedronGeometry(0.92, 3);
+  const posB = lowStoneGeo.attributes.position;
+  for (let i = 0; i < posB.count; i++) {
+    let x = posB.getX(i), y = posB.getY(i), z = posB.getZ(i);
+    let noise = (Math.cos(x * 5.0) * Math.sin(z * 5.0)) * 0.05;
+    posB.setX(i, x * 1.65 + noise);
+    posB.setY(i, y * 0.72 + noise);
+    posB.setZ(i, z * 1.1 + noise);
+  }
+  lowStoneGeo.computeVertexNormals();
+
+  const lowStone = new THREE.Mesh(lowStoneGeo, naturalStoneMat);
   lowStone.position.set(0.82, 0.35, -0.2);
-  lowStone.castShadow = lowStone.receiveShadow = true;
+  lowStone.castShadow = true;
+  lowStone.receiveShadow = true;
   stoneGroup.add(lowStone);
 
-  // 黑镜柱
+  // C. 照片同款黑镜长方柱
   const pillarGeo = new THREE.BoxGeometry(0.18, 1.28, 0.18);
   const pillarMat = new THREE.MeshPhysicalMaterial({
-    color: 0x040404, roughness: 0.01, metalness: 0.2, clearcoat: 1.0, clearcoatRoughness: 0.01, reflectivity: 1.0
+    color: 0x040404, roughness: 0.01, metalness: 0.2,
+    clearcoat: 1.0, clearcoatRoughness: 0.01, reflectivity: 1.0
   });
   const pillar = new THREE.Mesh(pillarGeo, pillarMat);
   pillar.position.set(0.06, 0.65, -0.28);
   pillar.castShadow = true;
   stoneGroup.add(pillar);
 
-  // 跌水
-  const dropGeo = new THREE.CylinderGeometry(0.08, 0.14, 0.65, 16, 8, true);
+  // D. 跌水水幕
+  const dropGeo = new THREE.CylinderGeometry(0.08, 0.14, 0.65, 32, 16, true);
   const dropMat = new THREE.MeshPhysicalMaterial({
-    color: 0xa8d8f0, roughness: 0.01, transmission: 0.85, transparent: true, opacity: 0.75
+    color: 0xbde6f8, roughness: 0.01, transmission: 0.9, transparent: true, opacity: 0.8, clearcoat: 1.0
   });
   waterfallMesh = new THREE.Mesh(dropGeo, dropMat);
   waterfallMesh.position.set(-0.72, 0.42, 0.05);
@@ -198,9 +328,9 @@ function buildStonesAndWaterfalls() {
 
 function animate() {
   requestAnimationFrame(animate);
-  const elapsed = clock.getElapsedTime();
+  const elapsed = clock.getElapsedTime() * flowSpeed;
 
-  if (isFlowing && waterMesh) {
+  if (waterMesh) {
     const pos = waterMesh.geometry.attributes.position;
     for (let i = 0; i < pos.count; i++) {
       let u = pos.getX(i);
@@ -210,8 +340,8 @@ function animate() {
       let dist = Math.sqrt(dx * dx + dy * dy);
 
       let waveZ = 0;
-      if (dist < 2.0) {
-        waveZ = Math.sin(dist * 15.0 - elapsed * 4.0) * Math.exp(-dist * 1.2) * 0.0035;
+      if (dist < 2.0 && flowSpeed > 0) {
+        waveZ = Math.sin(dist * 16.0 - elapsed * 4.2) * Math.exp(-dist * 1.2) * 0.0038;
       }
       pos.setZ(i, waveZ);
     }
@@ -220,7 +350,9 @@ function animate() {
   }
 
   if (waterfallMesh) {
-    waterfallMesh.visible = isFlowing;
+    waterfallMesh.visible = flowSpeed > 0;
+    waterfallMesh.scale.x = 1.0 + Math.sin(elapsed * 3.0) * 0.03;
+    waterfallMesh.scale.z = 1.0 + Math.cos(elapsed * 3.0) * 0.03;
   }
 
   controls.update();
@@ -229,8 +361,8 @@ function animate() {
 
 function resetCam(type) {
   if (type === 'photo') {
-    camera.position.set(-0.8, 1.6, 4.2);
-    controls.target.set(0.4, 0.85, 0);
+    camera.position.set(-0.6, 1.5, 4.4);
+    controls.target.set(0.3, 0.85, 0);
   } else if (type === 'top') {
     camera.position.set(0.3, 5.2, 0.01);
     controls.target.set(0.3, 0, 0);
@@ -240,11 +372,21 @@ function resetCam(type) {
   }
 }
 
-function toggleWaterFlow() {
-  isFlowing = !isFlowing;
-  const btn = document.getElementById('btnFlow');
-  btn.innerText = `💧 跌水漫流: ${isFlowing ? '开' : '关 (镜面)'}`;
-  btn.className = `px-3.5 py-1.5 rounded-full text-xs font-bold ${isFlowing ? 'bg-[#C5A059] text-black' : 'bg-[#2A2725] text-[#E0DAD0]'}`;
+function toggleFlowSpeed() {
+  const btn = document.getElementById('btnSpeed');
+  if (flowSpeed === 1.0) {
+    flowSpeed = 0.3;
+    btn.innerText = "💧 跌水流速: 静流微漫";
+    btn.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#C5A059] text-black shadow";
+  } else if (flowSpeed === 0.3) {
+    flowSpeed = 0.0;
+    btn.innerText = "🌊 跌水流速: 关 (纯静止黑镜倒影)";
+    btn.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#2A2725] text-[#E0DAD0] border border-[#44403C]";
+  } else {
+    flowSpeed = 1.0;
+    btn.innerText = "💧 跌水流速: 自然跌水";
+    btn.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#C5A059] text-black shadow";
+  }
 }
 
 function toggleDayNight() {
@@ -257,12 +399,14 @@ function toggleDayNight() {
     scene.background.setHex(0x040404);
     mainSun.intensity = 0.3;
     fillLight.color.setHex(0x1a2b4c);
-    btn.innerText = "🌙 月夜光影";
+    btn.innerText = "🌙 月夜冷光模式";
+    btn.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#2A2725] text-[#E0DAD0] border border-[#44403C]";
   } else {
     scene.background.setHex(0x080706);
-    mainSun.intensity = 2.5;
+    mainSun.intensity = 2.8;
     fillLight.color.setHex(0x7892b5);
-    btn.innerText = "☀️ 晨曦阳光";
+    btn.innerText = "☀️ 晨曦阳光模式";
+    btn.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#C5A059] text-black shadow";
   }
 }
 
