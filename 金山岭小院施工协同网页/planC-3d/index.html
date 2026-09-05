@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>方案 C · 远山入水 — 隐藏式溢流水镜 3D</title>
+<title>方案 C · 远山入水 — 自然随形独石 3D</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -35,11 +35,11 @@
   <div class="ui-panel p-4 rounded-2xl max-w-md pointer-events-auto shadow-2xl">
     <div class="flex items-center gap-2 mb-1.5">
       <span class="badge-tag text-[10px] px-2.5 py-0.5 rounded-full">方案 C · 远山入水</span>
-      <span class="text-xs text-[#A39B90]">单处隐藏出水</span>
+      <span class="text-xs text-[#A39B90]">自然随形独石形态</span>
     </div>
-    <h1 class="text-base font-bold text-[#F4F1EA]">后沿缝隙隐藏溢流 · 墨石静水镜</h1>
+    <h1 class="text-base font-bold text-[#F4F1EA]">天然随形野趣墨石 · 倒影静池</h1>
     <p class="text-xs text-[#A39B90] mt-1 leading-relaxed">
-      无任何外露出水孔或开槽。出水管完全隐蔽于靠墙后沿缝隙内部，静压平稳溢出，顺着自然野趣石面形成无声均匀薄水膜，倒映天空树影。
+      打破规整方形限制，采用天然山石自然开剥的有机弧形边界。石体高低厚薄随形而就，顶面微倾斜做极致黑镜抛光，倒映上方松枝天光。
     </p>
   </div>
 
@@ -52,7 +52,7 @@
 
 <!-- Bottom Floating Controls -->
 <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3 ui-panel px-4 py-2.5 rounded-full">
-  <button onclick="toggleWaterFlow()" id="btnFlow" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#3A3530] text-[#E8DFCA] border border-[#554D45]">🌊 水状态: 自然溢流漫水</button>
+  <button onclick="toggleWaterFlow()" id="btnFlow" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#3A3530] text-[#E8DFCA] border border-[#554D45]">🌊 水状态: 自然微漫水膜</button>
   <button onclick="toggleDayNight()" id="btnLight" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#2A2725] text-[#E0DAD0]">🌙 月夜光影</button>
 </div>
 
@@ -88,7 +88,7 @@ function init() {
   setupLighting();
   buildEnvironment();
   buildNaturalTreesAbove();
-  buildOrganicStoneC();
+  buildFreeformStoneC();
 
   window.addEventListener('resize', onWindowResize);
   animate();
@@ -110,7 +110,7 @@ function setupLighting() {
   scene.add(fillLight);
 }
 
-function generateOrganicBumpMap() {
+function generateStoneBumpMap() {
   const canvas = document.createElement('canvas');
   canvas.width = 512;
   canvas.height = 512;
@@ -190,28 +190,48 @@ function buildNaturalTreesAbove() {
   scene.add(treeGroup);
 }
 
-function buildOrganicStoneC() {
+// 构建彻底打破方形、自然随形的野趣原石 (Organic Cylinder/Extrude-based Freeform Stone)
+function buildFreeformStoneC() {
   const group = new THREE.Group();
-  const bumpTexture = generateOrganicBumpMap();
+  const bumpTexture = generateStoneBumpMap();
 
-  const stoneGeo = new THREE.BoxGeometry(2.8, 0.4, 1.5, 128, 32, 64);
+  // 1. 使用极细分的圆柱网格作为基础，塑造成天然平卧的椭圆自然原石
+  const stoneGeo = new THREE.CylinderGeometry(1.35, 1.45, 0.38, 128, 32, false);
   const pos = stoneGeo.attributes.position;
 
+  // 2. 施加强烈的非对称极坐标拉伸与自然野趣凹凸变形
   for (let i = 0; i < pos.count; i++) {
     let x = pos.getX(i);
     let y = pos.getY(i);
     let z = pos.getZ(i);
 
-    if (y > 0.18) {
-      // 靠墙后沿设极轻浅的蓄水低洼，顺坡向前方漫流
-      let rearSlope = (z + 0.75) * 0.006;
-      let organicNoise = (Math.sin(x * 4.0) * Math.cos(z * 4.0)) * 0.004;
-      pos.setY(i, 0.2 - rearSlope + organicNoise);
+    // 计算极坐标角度 theta 与半径 r
+    let angle = Math.atan2(z, x);
+    let radiusScale = 1.0 + Math.sin(angle * 3.0) * 0.18 + Math.cos(angle * 5.0) * 0.08;
+
+    // 非对称拉伸：长向约 2.6m~2.9m，宽向约 1.3m~1.6m
+    if (Math.abs(Math.cos(angle)) > 0.3) {
+      x *= 1.8 * radiusScale;
     } else {
-      let crag = (Math.sin(y * 18.0 + x * 3.5) * 0.025) + (Math.cos(z * 4.0) * 0.018);
-      if (Math.abs(x) > 1.3) pos.setX(i, x + crag);
-      if (Math.abs(z) > 0.7) pos.setZ(i, z + crag);
+      z *= 0.95 * radiusScale;
     }
+
+    // 顶面微倾斜与自然低洼：靠墙后沿略高，前沿微倾，方便水向池中自然滴落
+    if (y > 0.15) {
+      let slope = -z * 0.025; // 缓坡倾斜
+      let organicDepression = Math.sin(x * 2.5) * Math.cos(z * 3.0) * 0.012;
+      y = 0.19 + slope + organicDepression;
+    } 
+    // 侧边天然风化剥落与粗糙角质感
+    else {
+      let crag = (Math.sin(y * 25.0 + angle * 8.0) * 0.03) + (Math.random() - 0.5) * 0.02;
+      x += Math.cos(angle) * crag;
+      z += Math.sin(angle) * crag;
+    }
+
+    pos.setX(i, x);
+    pos.setY(i, y);
+    pos.setZ(i, z);
   }
   stoneGeo.computeVertexNormals();
 
@@ -219,26 +239,36 @@ function buildOrganicStoneC() {
     color: 0x0a0a0a,
     roughness: 0.03,
     normalMap: bumpTexture,
-    normalScale: new THREE.Vector2(0.2, 0.2),
-    clearcoat: 0.9,
+    normalScale: new THREE.Vector2(0.25, 0.25),
+    clearcoat: 0.95,
     clearcoatRoughness: 0.02,
     reflectivity: 0.95
   });
   stoneMesh = new THREE.Mesh(stoneGeo, stoneMat);
-  stoneMesh.position.y = 0.2;
+  stoneMesh.position.y = 0.19;
   stoneMesh.castShadow = true;
   stoneMesh.receiveShadow = true;
   group.add(stoneMesh);
 
-  // 后沿隐蔽出水槽/缝隙 (表面完全无盖板或开孔，隐于石体后沿)
-  const hiddenOverflowGeo = new THREE.BoxGeometry(2.6, 0.02, 0.04);
-  const hiddenOverflowMat = new THREE.MeshStandardMaterial({ color: 0x0a0a0a, roughness: 0.2 });
-  const hiddenOverflow = new THREE.Mesh(hiddenOverflowGeo, hiddenOverflowMat);
-  hiddenOverflow.position.set(0, 0.402, -0.72);
-  group.add(hiddenOverflow);
+  // 顶面自然平铺的水膜 (与随形原石轮廓贴合)
+  const waterGeo = new THREE.CylinderGeometry(1.32, 1.32, 0.01, 128);
+  const wPos = waterGeo.attributes.position;
+  for (let i = 0; i < wPos.count; i++) {
+    let x = wPos.getX(i);
+    let y = wPos.getY(i);
+    let z = wPos.getZ(i);
+    let angle = Math.atan2(z, x);
+    let radiusScale = 1.0 + Math.sin(angle * 3.0) * 0.18 + Math.cos(angle * 5.0) * 0.08;
+    if (Math.abs(Math.cos(angle)) > 0.3) {
+      x *= 1.78 * radiusScale;
+    } else {
+      z *= 0.93 * radiusScale;
+    }
+    wPos.setX(i, x);
+    wPos.setZ(i, z);
+  }
+  waterGeo.computeVertexNormals();
 
-  // 顶面流体水面
-  const waterGeo = new THREE.PlaneGeometry(2.76, 1.46, 128, 64);
   const waterMat = new THREE.MeshPhysicalMaterial({
     color: 0x0c1824,
     roughness: 0.01,
@@ -249,8 +279,7 @@ function buildOrganicStoneC() {
     reflectivity: 0.95
   });
   waterMesh = new THREE.Mesh(waterGeo, waterMat);
-  waterMesh.rotation.x = -Math.PI / 2;
-  waterMesh.position.y = 0.412;
+  waterMesh.position.y = 0.385;
   group.add(waterMesh);
 
   scene.add(group);
@@ -260,24 +289,22 @@ function animate() {
   requestAnimationFrame(animate);
   const elapsed = clock.getElapsedTime();
 
-  // 水从后沿隐藏缝隙溢出向前方单向缓流
-  if (waterMesh) {
+  if (isFlowing && waterMesh) {
+    waterMesh.material.opacity = 0.65;
     const pos = waterMesh.geometry.attributes.position;
     for (let i = 0; i < pos.count; i++) {
       let u = pos.getX(i);
-      let v = pos.getY(i);
-
-      if (isFlowing) {
-        // 单向自后向前的均匀流体波纹
-        let w1 = Math.sin(v * 6.0 - elapsed * 2.2) * 0.0018;
-        let w2 = Math.cos((u + v) * 3.5 - elapsed * 1.5) * 0.0012;
-        pos.setZ(i, w1 + w2);
-      } else {
-        pos.setZ(i, 0); // 关水纯镜面
+      let v = pos.getZ(i);
+      if (pos.getY(i) > 0) {
+        let w1 = Math.sin(v * 5.0 - elapsed * 2.2) * 0.0015;
+        let w2 = Math.cos((u + v) * 3.0 - elapsed * 1.5) * 0.001;
+        pos.setY(i, 0.005 + w1 + w2);
       }
     }
     waterMesh.geometry.computeVertexNormals();
     waterMesh.geometry.attributes.position.needsUpdate = true;
+  } else if (waterMesh) {
+    waterMesh.material.opacity = 0.0;
   }
 
   if (treeGroup) {
@@ -298,7 +325,7 @@ function toggleWaterFlow() {
   isFlowing = !isFlowing;
   const btn = document.getElementById('btnFlow');
   if (isFlowing) {
-    btn.innerText = "🌊 水状态: 自然溢流漫水";
+    btn.innerText = "🌊 水状态: 自然微漫水膜";
   } else {
     btn.innerText = "🌊 水状态: 关 (纯黑镜倒影)";
   }
